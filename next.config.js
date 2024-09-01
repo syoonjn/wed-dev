@@ -6,6 +6,8 @@ const repoName = 'wed-dev'; // GitHub 리포지토리 이름으로 변경하세�
 
 module.exports = {
     output: 'export',
-    basePath: isProd ? `/${repoName}` : '',
-    assetPrefix: isProd ? `/${repoName}/` : '',
+    basePath: `/${repoName}`,
+    assetPrefix: `/${repoName}`,
+    // basePath: isProd ? `/${repoName}` : '',
+    // assetPrefix: isProd ? `/${repoName}/` : '',
 };
