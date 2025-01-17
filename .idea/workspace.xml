@@ -26,7 +26,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/hexa/bsms-api-master",
+    "last_opened_file_path": "D:/coding/wed-dev/public/wed-dev",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -36,6 +36,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\coding\wed-dev\public\wed-dev" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -46,7 +51,7 @@
       <updated>1725195078273</updated>
       <workItem from="1725195079337" duration="1285000" />
       <workItem from="1727702169006" duration="14000" />
-      <workItem from="1737108938209" duration="5150000" />
+      <workItem from="1737108938209" duration="5413000" />
     </task>
     <servers />
   </component>
