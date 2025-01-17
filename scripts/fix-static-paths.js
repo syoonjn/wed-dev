@@ -5,7 +5,7 @@ const basePath = '/wed-dev'; // basePath에 맞게 설정
 const outDir = path.join(__dirname, '../out');
 
 function moveStaticFiles() {
-    const filesToMove = ['logo.png']; // public 폴더의 정적 파일 이름
+    const filesToMove = ['next.svg', 'vercel.svg']; // public 폴더의 정적 파일 이름
 
     filesToMove.forEach((file) => {
         const oldPath = path.join(outDir, file);
