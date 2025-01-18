@@ -6,21 +6,9 @@ import { basePath } from '../next.config';
 import { Button, DarkThemeToggle } from "flowbite-react";
 import Calendar from "./components/calander";
 
-const pageProps = {
-  ogUrl: 'https://syoonjn.github.io/wed-dev/',
-  ogTitle: '홍길동 & 김테스트 결혼합니다.',
-  ogDesc: 'X월 X일 X요일 낮 X시',
-  ogImage: '/images/sample.webp',
-}
-
 const Home: React.FC = () => {
   return (
     <main className="flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content={pageProps.ogUrl} />
-      <meta property="og:title" content={pageProps.ogTitle} />
-      <meta property="og:description" content={pageProps.ogDesc} />
-      <meta property="og:image" content={pageProps.ogImage} />
     <div className="min-h-screen bg-white dark:text-white flex flex-col items-center justify-center">
       <DarkThemeToggle />
       <header className="w-full max-w-5xl px-4 py-6 dark:text-white text-center">

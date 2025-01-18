@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1800db47-922f-47c3-a6cf-1ebb151ca9f3" name="Changes" comment="flowbite 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +72,7 @@
       <workItem from="1727702169006" duration="14000" />
       <workItem from="1737108938209" duration="12598000" />
       <workItem from="1737167155112" duration="12138000" />
-      <workItem from="1737179698070" duration="3379000" />
+      <workItem from="1737179698070" duration="3668000" />
     </task>
     <task id="LOCAL-00001" summary="flowbite 추가">
       <created>1737170031597</created>

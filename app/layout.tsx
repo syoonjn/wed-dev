@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 
 const pageProps = {
     ogUrl: 'https://syoonjn.github.io/wed-dev/',
-    ogTitle: '홍길동 & 김테스트 결혼합니다.',
+    ogTitle: '황00 & 소00 결혼합니다.',
     ogDesc: 'X월 X일 X요일 낮 X시',
-    ogImage: '/images/sample.webp',
+    ogImage: '/web-dev/images/sample.webp',
 }
 
 console.log('pageProps');
