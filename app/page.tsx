@@ -8,11 +8,32 @@ import { Alert, Button, Card, DarkThemeToggle, Toast, ToastToggle } from "flowbi
 import { basePath } from '@/next.config';
 import { TopButton, KakaoMarker, Calander, GuestBookPage, CountdownTimer } from '@/components';
 import { HiFire } from "react-icons/hi";
+import { motion } from 'framer-motion';
+import useObserver from "./hook/useObserver";
+
+
 const Home: React.FC = () => {
 
+  const { ref, animation } = useObserver();
   const [showToast, setShowToast] = useState(false);
+  const opacityVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+
   return (
     <main className="flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
+    <motion.div
+        ref={ref}
+        initial="hidden"
+        animate={animation}
+        variants={opacityVariants}
+    >
     <div className="min-h-screen bg-white dark:text-white flex flex-col items-center justify-center">
       <DarkThemeToggle />
       <header className="w-full max-w-5xl px-4 py-6 dark:text-white text-center">
@@ -73,6 +94,7 @@ const Home: React.FC = () => {
         <p className="text-sm text-gray-500">@copyright socaeri</p>
       </footer>
     </div>
+      </motion.div>
   </main>
   );
 };

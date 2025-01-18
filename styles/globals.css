@@ -6,10 +6,26 @@ html {
     scroll-behavior: smooth;
 }
 
+/* 초기 상태는 보이지 않게 하고, 아래로 내려둠 */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px); /* 화면 밖으로 내려놓기 */
+    transition: opacity 1s ease, transform 1s ease; /* 1초에 걸쳐 부드럽게 변화 */
+}
+
+/* 화면에 보일 때 애니메이션을 트리거 */
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0); /* 원래 위치로 돌아옴 */
+}
+
+
 .topBtn_wrap {
     position: sticky;
     bottom: 50px;
     float: right;
+    z-index: 9999;
+    right: 8px;
 }
 .topBtn {
     font-size: 3rem;

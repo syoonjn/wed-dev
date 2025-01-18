@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1800db47-922f-47c3-a6cf-1ebb151ca9f3" name="Changes" comment="flowbite 추가" />
+    <list default="true" id="1800db47-922f-47c3-a6cf-1ebb151ca9f3" name="Changes" comment="flowbite 추가">
+      <change afterPath="$PROJECT_DIR$/app/hook/useObserver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,7 +76,7 @@
       <workItem from="1737108938209" duration="12598000" />
       <workItem from="1737167155112" duration="12138000" />
       <workItem from="1737179698070" duration="27932000" />
-      <workItem from="1737212207366" duration="4615000" />
+      <workItem from="1737212207366" duration="6468000" />
     </task>
     <task id="LOCAL-00001" summary="flowbite 추가">
       <created>1737170031597</created>
