@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
-
 const KakaoMarker = () => {
-    const apiKey:string|undefined = process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY
+    const apiKey:string|undefined = process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY;
     const [scriptLoad, setScriptLoad] = useState<boolean>(false);
 
     useEffect(() => {
@@ -17,7 +16,7 @@ const KakaoMarker = () => {
         script.addEventListener("load", () => {
             setScriptLoad(true);
         })
-    }, [])
+    }, []);
 
     return (
         <div>
@@ -26,7 +25,9 @@ const KakaoMarker = () => {
                     center={{ lat: 36.7933843, lng: 127.1045231 }}
                     style={{ width: '400px', height: '400px' }}
                     level={3}>
-                    <MapMarker position={{ lat: 36.7933843, lng: 127.1045231 }}></MapMarker>
+                    <MapMarker
+                        position={{ lat: 36.7933843, lng: 127.1045231 }}
+                    ></MapMarker>
                 </Map>
                 :
                 <div></div>

@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.topBtn_wrap {
+    position: sticky;
+    bottom: 50px;
+    float: right;
+}
+.topBtn {
+    font-size: 3rem;
+    color: #4b5563 !important;
+}

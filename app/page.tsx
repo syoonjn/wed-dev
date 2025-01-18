@@ -4,11 +4,9 @@ import React from "react";
 import Script from 'next/script'
 import { Map } from 'react-kakao-maps-sdk';
 
-import { basePath } from '../next.config';
 import { Button, Card, DarkThemeToggle } from "flowbite-react";
-import Calendar from "./components/calander";
-import KaKaoMarker from "./components/kakaoMarker"
-
+import { basePath } from '@/next.config';
+import { TopButton, KakaoMarker, Calander } from '@/components';
 const Home: React.FC = () => {
   return (
     <main className="flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
@@ -37,11 +35,12 @@ const Home: React.FC = () => {
 
         </div>
 
-        <Calendar/>
+        <Calander/>
 
-        <div className="py-10">
-          <KaKaoMarker />
+        <div className="py-10 flex flex-col items-center justify-center">
+          <KakaoMarker />
         </div>
+        <TopButton/>
       </main>
 
       <footer className="w-full max-w-5xl px-4 py-6 text-center border-t border-gray-200">

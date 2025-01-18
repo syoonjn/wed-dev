@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1800db47-922f-47c3-a6cf-1ebb151ca9f3" name="Changes" comment="flowbite 추가">
-      <change afterPath="$PROJECT_DIR$/app/components/kakaoMarker.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/TopButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/marker-icons.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/marker-wed.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/calander.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Calander.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/kakaoMarker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/KakaoMarker.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +82,7 @@
       <workItem from="1727702169006" duration="14000" />
       <workItem from="1737108938209" duration="12598000" />
       <workItem from="1737167155112" duration="12138000" />
-      <workItem from="1737179698070" duration="9618000" />
+      <workItem from="1737179698070" duration="14719000" />
     </task>
     <task id="LOCAL-00001" summary="flowbite 추가">
       <created>1737170031597</created>
