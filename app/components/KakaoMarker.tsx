@@ -24,7 +24,7 @@ const KakaoMarker = () => {
                 {scriptLoad ?
                     <Map
                         center={{ lat: 36.7933843, lng: 127.1045231 }}
-                        style={{ width: '576px', height: '300px' }}
+                        style={{ width: '400px', height: '300px' }}
                         level={4}>
                         <MapMarker
                             position={{ lat: 36.7933843, lng: 127.1045231 }}

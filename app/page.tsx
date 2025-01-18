@@ -22,7 +22,7 @@ const Home: React.FC = () => {
         </p>
       </header>
 
-      <main className="w-full max-w-3xl px-4 text-center">
+      <main className="w-full max-w-3xl text-center">
         <div className="py-10 border-t border-gray-200">
           <div className="flex flex-col items-center justify-center mb-4">
             <Card
@@ -41,7 +41,7 @@ const Home: React.FC = () => {
           <div className="flex flex-col items-center justify-center mb-4">
             <h1 className="text-2xl font-bold">Wedding Day</h1>
           </div>
-          <div className="py-10 border-t border-gray-200 space-y-6">
+          <div className="py-10 border-t border-gray-200">
             <Calander/>
             <div className="space-y-6">
               <h1 className="text-xl font-bold">Wedding Countdown</h1>
