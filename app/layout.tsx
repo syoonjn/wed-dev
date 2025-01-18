@@ -36,7 +36,8 @@ export default function RootLayout({
         <meta property="og:description" content={pageProps.ogDesc} />
         <meta property="og:image" content={pageProps.ogImage} />
       </head>
-        <body className={pretendard.className}>{children}</body>
+        <body className={pretendard.className}>{children}
+        </body>
       </html>
   );
 }
