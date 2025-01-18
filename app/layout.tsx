@@ -6,6 +6,8 @@ import { ThemeModeScript } from "flowbite-react";
 import localFont from 'next/font/local';
 import { queryClient } from "./lib/react-query";
 import ReactQueryProvider from "./lib/ReactQueryProvider";
+// import { AlertProvider } from "./components/Alert";
+import { AlertProvider } from "./context/AlertContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,7 +40,11 @@ export default function RootLayout({
         <meta property="og:image" content={pageProps.ogImage} />
       </head>
         <body className={pretendard.className}>
-            <ReactQueryProvider>{children}</ReactQueryProvider>
+        <AlertProvider>
+            <ReactQueryProvider>
+                    {children}
+            </ReactQueryProvider>
+        </AlertProvider>
         </body>
       </html>
   );

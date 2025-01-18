@@ -1,13 +1,16 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Script from 'next/script'
 import { Map } from 'react-kakao-maps-sdk';
 
-import { Button, Card, DarkThemeToggle } from "flowbite-react";
+import {Alert, Button, Card, DarkThemeToggle, Toast, ToastToggle } from "flowbite-react";
 import { basePath } from '@/next.config';
 import { TopButton, KakaoMarker, Calander, GuestBookPage } from '@/components';
+import { HiFire } from "react-icons/hi";
 const Home: React.FC = () => {
+
+  const [showToast, setShowToast] = useState(false);
   return (
     <main className="flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
     <div className="min-h-screen bg-white dark:text-white flex flex-col items-center justify-center">
