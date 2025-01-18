@@ -16,7 +16,7 @@ const pageProps = {
     ogUrl: 'https://syoonjn.github.io/wed-dev/',
     ogTitle: '황00 & 소00 결혼합니다.',
     ogDesc: 'X월 X일 X요일 낮 X시',
-    ogImage: '/web-dev/images/sample.webp',
+    ogImage: '/wed-dev/images/sample.webp',
 }
 
 console.log('pageProps');
