@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import '@/styles/globals.css';
+import pretendard from '@/assets/fonts/font';
 import { ThemeModeScript } from "flowbite-react";
+import localFont from 'next/font/local';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +22,7 @@ export default function RootLayout({
       <head>
         <ThemeModeScript />
       </head>
-      <body className={inter.className}>{children}</body>
+        <body className={pretendard.className}>{children}</body>
       </html>
   );
 }

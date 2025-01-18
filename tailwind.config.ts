@@ -9,8 +9,14 @@ const config: Config = {
     flowbite.content(),
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        pretendard: ["var(--font-pretendard)", "sans-serif"],
+        maruburi: ['var(--font-MaruBuri-Bold)', 'sans-serif'], // 커스텀 폰트 추가
+      },
+    },
   },
+
   plugins: [
     flowbite.plugin(),
   ],

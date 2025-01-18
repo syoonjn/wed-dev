@@ -14,7 +14,7 @@ const Home: React.FC = () => {
       <header className="w-full max-w-5xl px-4 py-6 dark:text-white text-center">
         <h1 className="text-5xl font-extrabold tracking-tight mb-4">You're Invited</h1>
         <p className="text-2xl dark:text-white text-gray-600">
-          Celebrate the beginning of a beautiful journey.
+          홍길동, 김테스트 결혼합니다
         </p>
       </header>
 
@@ -27,7 +27,7 @@ const Home: React.FC = () => {
 
         <div className="py-10">
           <Button>
-            RSVP Now
+            테스트
           </Button>
         </div>
       </main>
