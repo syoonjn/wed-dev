@@ -4,8 +4,11 @@ import '@/styles/globals.css';
 import pretendard from '@/assets/fonts/font';
 import { ThemeModeScript } from "flowbite-react";
 import localFont from 'next/font/local';
+import { queryClient } from "./lib/react-query";
+import ReactQueryProvider from "./lib/ReactQueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
   title: "Wedding Page HS",
@@ -18,8 +21,6 @@ const pageProps = {
     ogDesc: 'X월 X일 X요일 낮 X시',
     ogImage: '/wed-dev/images/sample.webp',
 }
-
-console.log('pageProps');
 
 export default function RootLayout({
                                      children,
@@ -36,7 +37,8 @@ export default function RootLayout({
         <meta property="og:description" content={pageProps.ogDesc} />
         <meta property="og:image" content={pageProps.ogImage} />
       </head>
-        <body className={pretendard.className}>{children}
+        <body className={pretendard.className}>
+            <ReactQueryProvider>{children}</ReactQueryProvider>
         </body>
       </html>
   );

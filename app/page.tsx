@@ -6,7 +6,7 @@ import { Map } from 'react-kakao-maps-sdk';
 
 import { Button, Card, DarkThemeToggle } from "flowbite-react";
 import { basePath } from '@/next.config';
-import { TopButton, KakaoMarker, Calander } from '@/components';
+import { TopButton, KakaoMarker, Calander, GuestBookPage } from '@/components';
 const Home: React.FC = () => {
   return (
     <main className="flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
@@ -40,6 +40,7 @@ const Home: React.FC = () => {
         <div className="py-10 flex flex-col items-center justify-center">
           <KakaoMarker />
         </div>
+        <GuestBookPage/>
         <TopButton/>
       </main>
 
