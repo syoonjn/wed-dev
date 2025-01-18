@@ -43,7 +43,7 @@ export default function GuestBookList() {
 
     return (
         <div>
-            <ul className="space-y-4">
+            <ul className="space-y-6">
                 {visibleEntries.map((entry) => (
                     <li
                         key={entry.id}
@@ -51,7 +51,7 @@ export default function GuestBookList() {
                     >
                         {/* 상단: 이름과 날짜 */}
                         <div className="flex justify-between items-center">
-                            <span className="font-bold text-gray-800">{entry.name}</span>
+                            <span className="font-bold text-gray-800">{`From. ${entry.name}`}</span>
                             <span className="text-sm text-gray-500">{formatDateTime(entry.created_at)}</span>
                         </div>
 

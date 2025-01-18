@@ -3,7 +3,7 @@
 import localFont from 'next/font/local';
 
 export const pretendard = localFont({
-    src: "./MaruBuri-Bold.ttf",
+    src: "./MaruBuri-SemiBold.ttf",
     display: "swap",
     weight: "45 920",
     variable: "--font-pretendard",

@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import Script from 'next/script'
 import { Map } from 'react-kakao-maps-sdk';
 
-import {Alert, Button, Card, DarkThemeToggle, Toast, ToastToggle } from "flowbite-react";
+import { Alert, Button, Card, DarkThemeToggle, Toast, ToastToggle } from "flowbite-react";
 import { basePath } from '@/next.config';
-import { TopButton, KakaoMarker, Calander, GuestBookPage } from '@/components';
+import { TopButton, KakaoMarker, Calander, GuestBookPage, CountdownTimer } from '@/components';
 import { HiFire } from "react-icons/hi";
 const Home: React.FC = () => {
 
@@ -35,15 +35,37 @@ const Home: React.FC = () => {
               <p className="font-normal text-gray-700 dark:text-gray-400">축복해 주세요.</p>
             </Card>
           </div>
-
         </div>
 
-        <Calander/>
+        <div className="space-y-6">
+          <div className="flex flex-col items-center justify-center mb-4">
+            <h1 className="text-2xl font-bold">Wedding Day</h1>
+          </div>
+          <div className="py-10 border-t border-gray-200 space-y-6">
+            <Calander/>
+            <div className="space-y-6">
+              <h1 className="text-xl font-bold">Wedding Countdown</h1>
+              <CountdownTimer />
+            </div>
+
+          </div>
+        </div>
 
         <div className="py-10 flex flex-col items-center justify-center">
-          <KakaoMarker />
+          <div className="space-y-6">
+            <h1 className="text-2xl font-bold">오시는길</h1>
+            <div className="py-10 border-t border-gray-200">
+              <KakaoMarker />
+            </div>
+          </div>
         </div>
-        <GuestBookPage/>
+
+        <div className="space-y-6">
+          <h1 className="text-2xl font-bold">방명록</h1>
+          <div className="py-10 border-t border-gray-200">
+             <GuestBookPage/>
+          </div>
+        </div>
         <TopButton/>
       </main>
 

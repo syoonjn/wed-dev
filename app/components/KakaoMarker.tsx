@@ -20,19 +20,21 @@ const KakaoMarker = () => {
 
     return (
         <div>
-            {scriptLoad ?
-                <Map
-                    center={{ lat: 36.7933843, lng: 127.1045231 }}
-                    style={{ width: '400px', height: '400px' }}
-                    level={3}>
-                    <MapMarker
-                        position={{ lat: 36.7933843, lng: 127.1045231 }}
-                    ></MapMarker>
-                </Map>
-                :
-                <div></div>
-            }
+                <div className="flex flex-col items-center justify-center mb-4"></div>
+                {scriptLoad ?
+                    <Map
+                        center={{ lat: 36.7933843, lng: 127.1045231 }}
+                        style={{ width: '576px', height: '300px' }}
+                        level={4}>
+                        <MapMarker
+                            position={{ lat: 36.7933843, lng: 127.1045231 }}
+                        ></MapMarker>
+                    </Map>
+                    :
+                    <div></div>
+                }
         </div>
+
     )
 }
 
