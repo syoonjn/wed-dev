@@ -9,19 +9,26 @@ import Calendar from "./components/calander";
 
 const Home: React.FC = () => {
   return (
-      <main className="flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
+    <main className="flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
     <div className="min-h-screen bg-white dark:text-white flex flex-col items-center justify-center">
       <DarkThemeToggle />
       <header className="w-full max-w-5xl px-4 py-6 dark:text-white text-center">
         <h1 className="text-5xl font-extrabold tracking-tight mb-4">You're Invited</h1>
-        <p className="text-2xl dark:text-white text-gray-600">
-          홍길동, 김테스트 결혼합니다
+        <p className="text-2xl dark:text-white text-gray-600 mb-4">
+          홍길동 & 김테스트
         </p>
       </header>
 
       <main className="w-full max-w-3xl px-4 text-center">
         <div className="py-10 border-t border-gray-200">
-          <h2 className="text-2xl font-semibold mb-4">[Name & Name]</h2>
+          <div className="flex flex-col items-center justify-center mb-4">
+            <Image
+                src="/images/sample.webp"
+                width="500"
+                height="500"
+                alt="sum"
+            />
+          </div>
           <p className="text-lg font-medium text-gray-700">January 17, 2025</p>
           <p className="text-lg font-medium text-gray-700">Seoul, Korea</p>
         </div>
