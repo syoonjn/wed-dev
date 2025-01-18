@@ -4,6 +4,7 @@ import React from "react";
 
 import { basePath } from '../next.config';
 import { Button, DarkThemeToggle } from "flowbite-react";
+import Calendar from "./components/calander";
 
 
 const Home: React.FC = () => {
@@ -24,6 +25,7 @@ const Home: React.FC = () => {
           <p className="text-lg font-medium text-gray-700">January 17, 2025</p>
           <p className="text-lg font-medium text-gray-700">Seoul, Korea</p>
         </div>
+        <Calendar/>
 
         <div className="py-10">
           <Button>
@@ -33,7 +35,7 @@ const Home: React.FC = () => {
       </main>
 
       <footer className="w-full max-w-5xl px-4 py-6 text-center border-t border-gray-200">
-        <p className="text-sm text-gray-500">We look forward to celebrating with you!</p>
+        <p className="text-sm text-gray-500">@copyright socaeri</p>
       </footer>
     </div>
   </main>
