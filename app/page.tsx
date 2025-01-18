@@ -22,7 +22,7 @@ const Home: React.FC = () => {
         </p>
       </header>
 
-      <main className="w-full max-w-3xl text-center">
+      <main className="w-full max-w-2xl text-center">
         <div className="py-10 border-t border-gray-200">
           <div className="flex flex-col items-center justify-center mb-4">
             <Card
