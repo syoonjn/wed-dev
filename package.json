@@ -8,9 +8,15 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next export",
-    "deploy": "next build && gh-pages -d out --dest ."
+    "deploy": "next build && gh-pages -d out --dest .",
+    "build:css": "ts-node tailwind.config.ts",
+    "dev-ts": "concurrently -n NEXT,TS -c magenta,cyan \"next dev -p 1234\" \"yarn ts --watch\"",
+    "ts": "tsc --noEmit --incremental --preserveWatchOutput --pretty"
   },
   "dependencies": {
+    "concurrently": "^9.1.2",
+    "flowbite": "^2.5.2",
+    "flowbite-react": "^0.10.2",
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18"
@@ -19,11 +25,13 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
     "eslint": "^8",
     "eslint-config-next": "14.2.7",
     "gh-pages": "^6.1.1",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "postcss": "^8.5.1",
+    "tailwindcss": "^3.4.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   }
 }
