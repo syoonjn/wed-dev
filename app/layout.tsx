@@ -21,7 +21,7 @@ const { groomFullName, brideFullName } = getCouple();
 
 const pageProps = {
     ogUrl: 'https://syoonjn.github.io/wed-dev/',
-    ogTitle: `${groomFullName} & ${brideFullName} 결혼합니다.'`,
+    ogTitle: `${groomFullName} & ${brideFullName} 결혼합니다.`,
     ogDesc: weddingDate,
     ogImage: '/wed-dev/images/sample.webp',
 }
@@ -38,7 +38,7 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
         <meta property="og:url" content={pageProps.ogUrl} />
         <meta property="og:title" content={pageProps.ogTitle} />
-        <meta property="og:description" content={pageProps.ogDesc} />
+        <meta property="og:description" content={`${pageProps.ogDesc}&nbsp test`} />
         <meta property="og:image" content={pageProps.ogImage} />
       </head>
         <body className={pretendard.className}>
