@@ -1,35 +1,11 @@
 import React, { useState } from "react";
+import {weddingDate} from "../common/wedDate";
+import holidays from '../common/holiday';
 
-const holidays = {
-    "2025-01-01": "신정",
-    "2025-01-27": "임시공휴일",
-    "2025-01-28": "설날연휴",
-    "2025-01-29": "설날",
-    "2025-01-30": "설날연휴",
-    "2025-03-01": "삼일절",
-    "2025-03-03": "대체공휴일",
-    "2025-05-05": "어린이날",
-    "2025-05-06": "대체공휴일",
-    "2025-06-06": "현충일",
-    "2025-08-15": "광복절",
-    "2025-10-03": "개천절",
-    "2025-10-05": "추석연휴",
-    "2025-10-06": "추석",
-    "2025-10-07": "추석연휴",
-    "2025-10-08": "대체공휴일",
-    "2025-10-09": "한글날",
-    "2025-12-25": "성탄절",
-    "2026-01-01": "신정",
-    "2026-02-16": "설날연휴",
-    "2026-02-17": "설날",
-    "2026-02-18": "설날연휴",
-    "2026-05-05": "어린이날",
-    "2026-06-06": "현충일",
-    "2026-08-15": "광복절",
-};
 
 const Calendar = () => {
-    const [currentDate, setCurrentDate] = useState(new Date());
+
+    const [currentDate, setCurrentDate] = useState(new Date(weddingDate));
 
     // 현재 연도와 월
     const year = currentDate.getFullYear();
@@ -61,8 +37,8 @@ const Calendar = () => {
         days.push(i.toString());
     }
 
-    // 오늘 날짜 정보
-    const today = new Date();
+    // 웨딩 날짜 정보
+    const today = new Date(weddingDate);
 
     // 날짜 포맷팅 함수 (공휴일 체크용)
     const formatDate = (day: string) => `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
@@ -70,21 +46,21 @@ const Calendar = () => {
     return (
         <div className="max-w-lg mx-auto p-6 bg-white rounded-lg">
             {/* 헤더 */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-4">
                 <button
-                    className="p-2 bg-gray-200 rounded-full hover:bg-gray-300"
+                    className="p-1 bg-gray-200 rounded-full hover:bg-gray-300"
                     onClick={handlePrevMonth}
                 >
                     &lt;
                 </button>
-                <h2 className="text-3xl font-bold text-gray-800">
+                <h2 className="text-2xl font-bold text-gray-800">
                     {currentDate.toLocaleDateString("ko-KR", {
                         year: "numeric",
                         month: "long",
                     })}
                 </h2>
                 <button
-                    className="p-2 bg-gray-200 rounded-full hover:bg-gray-300"
+                    className="p-1 bg-gray-200 rounded-full hover:bg-gray-300"
                     onClick={handleNextMonth}
                 >
                     &gt;
@@ -92,7 +68,7 @@ const Calendar = () => {
             </div>
 
             {/* 요일 헤더 */}
-            <div className="grid grid-cols-7 text-center text-lg text-gray-500 font-semibold mb-3">
+            <div className="grid grid-cols-7 text-center text-sm text-gray-500 font-semibold mb-2">
                 <div className="text-red-500">일</div>
                 <div>월</div>
                 <div>화</div>
@@ -103,7 +79,7 @@ const Calendar = () => {
             </div>
 
             {/* 날짜 */}
-            <div className="grid grid-cols-7 text-center text-lg">
+            <div className="grid grid-cols-7 text-center text-sm">
                 {days.map((day, index) => {
                     const isToday =
                         day === today.getDate().toString() &&
@@ -114,7 +90,7 @@ const Calendar = () => {
                     return (
                         <div
                             key={index}
-                            className={`p-4 rounded-lg cursor-pointer ${
+                            className={`p-2 rounded cursor-pointer ${
                                 isToday
                                     ? "bg-red-500 text-white font-bold"
                                     : holidayName
@@ -128,12 +104,15 @@ const Calendar = () => {
                             title={holidayName || ""}
                         >
                             {day}
-                            {holidayName && <div className="text-xs mt-1">{holidayName}</div>}
+                            {holidayName && (
+                                <div className="text-[10px] mt-1">{holidayName}</div>
+                            )}
                         </div>
                     );
                 })}
             </div>
         </div>
+
     );
 };
 

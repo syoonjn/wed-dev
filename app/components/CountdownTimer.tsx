@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import getCouple from '../common/name';
+import { targetTime } from '../common/wedDate';
 
 const CountdownTimer: React.FC = () => {
-    // 목표 날짜 설정 (예시로 2025년 1월 1일 설정)
-    const targetDate = new Date('2026-04-04T00:00:00').getTime();
+    const { brideFirstName, groomFirstName } = getCouple();
+
 
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
@@ -14,7 +16,7 @@ const CountdownTimer: React.FC = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             const now = new Date().getTime();
-            const distance = targetDate - now;
+            const distance = targetTime - now;
 
             if (distance <= 0) {
                 clearInterval(interval);
@@ -35,14 +37,14 @@ const CountdownTimer: React.FC = () => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [targetDate]);
+    }, [targetTime]);
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-6"> {/* 전체 간격 약간 줄임 */}
             <div className="countdown-container">
                 <div className="time-box">
                     <span>{timeLeft.days}</span>
-                    <div>Days</div>
+                    <div>Days</div> {/* 색상 및 폰트 수정 */}
                 </div>
                 <div className="separator">:</div>
                 <div className="time-box">
@@ -60,7 +62,9 @@ const CountdownTimer: React.FC = () => {
                     <div>Sec</div>
                 </div>
             </div>
-            <h1 className="text-xl font-bold">00 ♥ 00 의 결혼식이 {timeLeft.days}일 남았습니다</h1>
+            <h1 className="text-lg font-bold text-center">
+                {`${groomFirstName} ❤ ${brideFirstName}의 결혼식이 ${timeLeft.days}일 남았습니다`}
+            </h1>
         </div>
     );
 };
