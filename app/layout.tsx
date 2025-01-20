@@ -39,7 +39,6 @@ export default function RootLayout({
         <meta property="og:url" content={pageProps.ogUrl} />
         <meta property="og:title" content={pageProps.ogTitle} />
         <meta property="og:description" content={`${pageProps.ogDesc}`} />
-        <meta property="og:description" content={`${pageProps.ogDesc} sss`} />
         <meta property="og:image" content={pageProps.ogImage} />
       </head>
         <body className={pretendard.className}>
