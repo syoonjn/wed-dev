@@ -1,17 +1,44 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { fetchGuestBookEntries } from "../lib/api";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import React, { useState } from "react";
+import {checkGuestId, deleteGuestBookRow, fetchGuestBookEntries} from "../lib/api";
 
 export default function GuestBookList() {
+    const queryClient = useQueryClient();
     const [showAll, setShowAll] = useState(false);
+
     const { data, isLoading, error } = useQuery(
         {
             queryKey: ['guestbookEntries'],
             queryFn: () => fetchGuestBookEntries() // Fetch Function
         }
     );
+
+    const { mutate: checkAdmin } = useMutation({
+        mutationFn: async ({ id, password }: { id: number; password: string }) => {
+            return await checkGuestId(id, password);
+
+        },
+        onSuccess: () => {
+            console.log("deleteGuestBookRow success");
+        },
+        onError: () => {
+            console.log("deleteGuestBookRow error");
+        },
+    });
+
+    const deleteMutation = useMutation({
+        mutationFn: async (id: number) => {
+            return await deleteGuestBookRow(id);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["guestbookEntries"] });
+            console.log("삭제 성공!");
+        },
+    });
+
+
 
     if (isLoading) {
         return <p>로딩 중...</p>;
@@ -26,8 +53,22 @@ export default function GuestBookList() {
     }
 
 
-    // 최대 5개의 항목만 표시
-    const visibleEntries = showAll ? data : data.slice(0, 5);
+    // 최대 3개의 항목만 표시
+    const visibleEntries = showAll ? data : data.slice(0, 3);
+
+    //삭제 버튼 event
+    // const handleDelete = (id:number, password:string) => {
+    //     return checkAdmin({id, password});
+    // }
+
+    const handleDelete = async ({ id, password }: { id: number; password: string }) => {
+        try {
+            await checkAdmin({ id, password }); // 비밀번호 확인
+            await deleteMutation.mutateAsync(id); // 삭제 실행
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     function formatDateTime(dateString: string): string {
         const date = new Date(dateString);
@@ -56,12 +97,19 @@ export default function GuestBookList() {
                         </div>
 
                         {/* 중간: 내용 */}
-                        <p className="text-gray-700 mt-2 text-left">{entry.contents}</p>
+                        <p className="text-gray-700 mt-2 text-left">
+                            {entry.contents.split("\n").map((line: string, index: number) => (
+                                <React.Fragment key={index}>
+                                    {line}
+                                    <br />
+                                </React.Fragment>
+                            ))}
+                        </p>
 
                         {/* 하단: 삭제 버튼 */}
                         <div className="flex justify-end mt-4">
                             <button
-                                // onClick={() => handleDelete(entry.id)} // 삭제 이벤트 연결
+                                onClick={() => handleDelete(entry)} // 삭제 이벤트 연결
                                 className="text-sm text-red-500 hover:underline"
                             >
                                 삭제

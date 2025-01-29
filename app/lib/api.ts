@@ -30,10 +30,35 @@ export async function fetchGuestBookEntries() {
     const { data, error } = await supabase
         .from("guestbook")
         .select("*")
-        // .order("id", { ascending: false }); // 최신 항목부터 정렬
+        .order("created_at", { ascending: false });
 
     if (error) {
         throw new Error(error.message);
     }
     return data;
+}
+
+//
+export async function checkGuestId(id: number, password: string) {
+    const { data, error } = await supabase
+        .from("guestbook")
+        .select("password")
+        .eq("id", id)
+        .maybeSingle();
+
+    if (error) throw new Error("ID 조회 실패");
+
+    if(!data) return;
+
+    if (data.password !== password) throw new Error("비밀번호가 일치하지 않습니다.");
+
+    return true; // 비밀번호가 맞다면 true 반환
+}
+
+
+//삭제 로직
+export async function deleteGuestBookRow(id:number) {
+    const numericId = typeof id === "string" ? parseInt(id, 10) : id;
+
+    const { error } = await supabase.from("guestbook").delete().eq("id", numericId);
 }
