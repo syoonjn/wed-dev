@@ -12,6 +12,7 @@ import { motion } from 'framer-motion';
 import useObserver from "./hook/useObserver";
 import getCouple from "./common/name";
 import { formatKoreanDate } from "./common/wedDate";
+import KakaoNavigation from "./components/KakaoNavigation";
 
 
 const Home: React.FC = () => {
@@ -109,6 +110,7 @@ const Home: React.FC = () => {
               <h1 className="font-bold">KTX천안아산역 역사 내 2층 루체홀</h1>
               <h1 className="py-3">충청남도 아산시 배방읍 희망로 100</h1>
               <KakaoMarker />
+              <KakaoNavigation/>
             </div>
           </div>
         </div>
