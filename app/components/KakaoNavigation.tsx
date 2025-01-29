@@ -25,9 +25,9 @@ const KakaoNavigation = () => {
         }
 
         window.Kakao.Navi.start({
-            name: "현대백화점 판교점",
-            x: 127.11205203011632,
-            y: 37.39279717586919,
+            name: "CA웨딩컨벤션",
+            x: 127.1045231,
+            y: 36.7933843,
             coordType: "wgs84",
         });
     };
