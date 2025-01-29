@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
+import { basePath } from "@/next.config";
 
 const KakaoNavigation = () => {
     useEffect(() => {
@@ -20,7 +22,6 @@ const KakaoNavigation = () => {
 
     const startNavigation = () => {
         if (!window.Kakao || !window.Kakao.Navi) {
-            alert("카카오 SDK가 아직 로드되지 않았어요.");
             return;
         }
 
@@ -33,9 +34,55 @@ const KakaoNavigation = () => {
     };
 
     return (
-        <button onClick={startNavigation} style={{ padding: "10px", fontSize: "16px", cursor: "pointer" }}>
-            카카오 내비로 길찾기
-        </button>
+        <div className="flex justify-center items-center p-4 border-t">
+            {/* 네이버 지도 */}
+            <div
+                onClick={startNavigation}
+                className="flex flex-1 justify-center items-center cursor-pointer hover:opacity-80"
+            >
+                <Image
+                    src={`${basePath}/images/kakaomap_basic.png`}
+                    alt="카카오 지도"
+                    width={18}
+                    height={18}
+                />
+                <span className="ml-2 text-sm font-medium text-gray-800">카카오 내비</span>
+            </div>
+
+            {/* 구분선 */}
+            <div className="w-px h-5 bg-gray-300"></div>
+
+            {/* 카카오 내비 */}
+            <div
+                onClick={startNavigation}
+                className="flex flex-1 justify-center items-center cursor-pointer hover:opacity-80"
+            >
+                <Image
+                    src={`${basePath}/images/navermap.webp`}
+                    alt="티맵"
+                    width={18}
+                    height={18}
+                />
+                <span className="ml-2 text-sm font-medium text-gray-800">네이버 지도</span>
+            </div>
+
+            {/* 구분선 */}
+            <div className="w-px h-5 bg-gray-300"></div>
+
+            {/* 티맵 */}
+            <div
+                onClick={startNavigation}
+                className="flex flex-1 justify-center items-center cursor-pointer hover:opacity-80"
+            >
+                <Image
+                    src={`${basePath}/images/tmap.svg`}
+                    alt="네이버 지도"
+                    width={18}
+                    height={18}
+                />
+                <span className="ml-2 text-sm font-medium text-gray-800">티맵</span>
+            </div>
+        </div>
     );
 };
 
