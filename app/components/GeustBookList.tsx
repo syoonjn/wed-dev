@@ -56,10 +56,6 @@ export default function GuestBookList() {
     // 최대 3개의 항목만 표시
     const visibleEntries = showAll ? data : data.slice(0, 3);
 
-    //삭제 버튼 event
-    // const handleDelete = (id:number, password:string) => {
-    //     return checkAdmin({id, password});
-    // }
 
     const handleDelete = async ({ id, password }: { id: number; password: string }) => {
         try {
