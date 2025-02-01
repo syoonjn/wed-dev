@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
-import Script from 'next/script'
+import React, { useState, useEffect } from "react";
+import Script from 'next/script';
 import { Map } from 'react-kakao-maps-sdk';
 
 import { Alert, Button, Card, DarkThemeToggle, Toast, ToastToggle } from "flowbite-react";
 import { basePath } from '@/next.config';
-import { TopButton, KakaoMarker, Calander, GuestBookPage, CountdownTimer } from '@/components';
+import { TopButton, KakaoMarker, Calander, GuestBookPage, CountdownTimer, AccountList } from '@/components';
 import { HiFire } from "react-icons/hi";
 import { motion } from 'framer-motion';
 import useObserver from "./hook/useObserver";
@@ -14,9 +14,7 @@ import getCouple from "./common/name";
 import { formatKoreanDate } from "./common/wedDate";
 import KakaoNavigation from "./components/KakaoNavigation";
 
-
 const Home: React.FC = () => {
-
   const { groomFullName, brideFullName } = getCouple();
   const { ref, animation } = useObserver();
 
@@ -27,111 +25,152 @@ const Home: React.FC = () => {
   const groomFatherName = process.env.NEXT_PUBLIC_GROOM_FATHER_NAME || '';
   const groomName = process.env.NEXT_PUBLIC_GROOM_NAME || '';
 
-  const [showToast, setShowToast] = useState(false);
-  const opacityVariants = {
-    hidden: { opacity: 0 },
+  const [showIntroText, setShowIntroText] = useState(true);
+  const brideGroomText = `${groomFullName} & ${brideFullName}`;
+  const fullText = [brideGroomText, "초대합니다."]; // 배열로 변환
+
+  const [typedText, setTypedText] = useState("");
+  const [lineIndex, setLineIndex] = useState(0); // 현재 출력 중인 줄
+
+  useEffect(() => {
+    let index = 0;
+    let currentText = "";
+
+    const typingInterval = setInterval(() => {
+      if (index < fullText[lineIndex].length) {
+        currentText += fullText[lineIndex][index]; // 한 글자씩 추가
+        setTypedText((prev) => lineIndex === 1 ? prev.split("\n")[0] + "\n" + currentText : currentText);
+        index++;
+      } else {
+        clearInterval(typingInterval);
+        if (lineIndex === 0) {
+          setTimeout(() => {
+            setLineIndex(1); // 다음 줄로 넘어가기
+            setTypedText((prev) => prev + "\n"); // 줄바꿈 추가
+          }, 2500);
+        } else {
+          setTimeout(() => setShowIntroText(false), 2500);
+        }
+      }
+    }, 300);
+
+    return () => clearInterval(typingInterval);
+  }, [lineIndex]);
+
+  const [isTop, setIsTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsTop(window.scrollY === 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  const backgroundVariants = {
+    hidden: { scale: 1.2, opacity: 0 },
     visible: {
+      scale: 1,
       opacity: 1,
-      transition: {
-        duration: 1,
-      },
+      transition: { duration: 5, ease: "easeOut" }, // 5초 동안 유지
     },
   };
 
+  const textVariants = {
+    hidden: { opacity: 0, y: -30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 3, delay: 3 } // 5초 동안 유지, 3초 후 시작
+    },
+  };
+
+  const fadeOutVariants = {
+    hidden: { opacity: 1 },
+    visible: { opacity: 0, transition: { duration: 5 } } // 5초 동안 서서히 사라짐
+  };
+
+
   return (
-    <main className="flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
-    <motion.div
-        ref={ref}
-        initial="hidden"
-        animate={animation}
-        variants={opacityVariants}
-    >
-    <div className="min-h-screen bg-white dark:text-white flex flex-col items-center justify-center">
-      <DarkThemeToggle />
-      <header className="w-full max-w-5xl px-4 py-6 dark:text-white text-center">
-        <h1 className="text-5xl font-extrabold tracking-tight mb-4">You're Invited</h1>
-        <p className="text-2xl dark:text-white text-gray-600 mb-4">
-          {`${groomFullName} & ${brideFullName}`}
-        </p>
-      </header>
+      <main className="relative flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
+        <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={backgroundVariants}
+            className="absolute inset-0 w-full h-full z-[-1]"
+        >
+          <Image
+              src="/images/elegant_wedding_bg.jpg"
+              alt="Elegant Wedding Background"
+              layout="fill"
+              objectFit="cover"
+              className="blur-lg brightness-75"
+          />
+        </motion.div>
 
-      <main className="w-full max-w-2xl text-center">
-        <div className="py-10 border-t border-gray-200">
-          <div className="flex flex-col items-center justify-center mb-4">
-            <Card
-                imgAlt="Wedding Sample Image"
-                imgSrc={`${basePath}/images/sample.webp`}
-                className="max-w-xl text-center"> {/* text-center로 가운데 정렬 유지 */}
-              <p
-                  className="text-gray-700 dark:text-gray-400 text-justify leading-loose mb-6"
-                  style={{ textAlignLast: 'center', lineHeight: '2.5' }}>
-                저희 두 사람, 하나가 되어<br />
-                평생을 함께 걸어 가고자 합니다.<br />
-                자리에 오셔서 새로운 시작을<br />
-                축복해 주세요.
-              </p>
+        {showIntroText && (
+            <motion.div
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={fadeOutVariants}
+                className={`fixed left-1/2 transform -translate-x-1/2 text-center transition-all duration-500 whitespace-pre-line ${
+                    isTop ? "top-1/2 -translate-y-1/2" : "top-0"
+                }`}
+            >
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white drop-shadow-lg">
+                {typedText}
+              </h1>
+            </motion.div>
+        )}
 
-
-              <div className="flex flex-col items-center space-y-4">
-                <div className="flex justify-between w-full max-w-[14rem]">
-                  <span className="font-bold text-gray-900 dark:text-gray-100">{`${groomFatherName} · ${groomMomName} 의`}</span>
-                  <span className="font-normal text-gray-700 dark:text-gray-400">아들</span>
-                  <span className="font-bold text-gray-900 dark:text-gray-100">{groomName}</span>
-                </div>
-
-                <div className="flex justify-between w-full max-w-[14rem]">
-                  <span className="font-bold text-gray-900 dark:text-gray-100">{`${brideFatherName} · ${brideMomName} 의`}</span>
-                  <span className="font-normal text-gray-700 dark:text-gray-400">딸</span>
-                  <span className="font-bold text-gray-900 dark:text-gray-100">{brideName}</span>
-                </div>
+        <motion.div ref={ref} initial="hidden" animate="visible" variants={textVariants}>
+          <div className="min-h-screen bg-white dark:text-white flex flex-col items-center justify-center">
+            <DarkThemeToggle />
+            <header className="w-full max-w-5xl px-4 py-6 text-center">
+              <div className="text-2xl text-gray-600 dark:text-white mb-4">
+                {`${groomFullName} & ${brideFullName}`}
               </div>
-            </Card>
-          </div>
-        </div>
+            </header>
 
-        <div className="space-y-6">
-          <div className="flex flex-col items-center justify-center mb-4">
-            <h1 className="text-2xl font-bold">일정 안내</h1>
+            <main className="w-full max-w-2xl text-center">
+              <div className="py-10 border-t border-gray-200">
+                <Card imgAlt="Wedding Sample Image" imgSrc={`${basePath}/images/sample.webp`} className="max-w-xl text-center">
+                  <div className="text-gray-700 dark:text-gray-400 leading-loose mb-6 text-center">
+                    저희 두 사람, 하나가 되어<br />
+                    평생을 함께 걸어 가고자 합니다.<br />
+                    자리에 오셔서 새로운 시작을 축복해 주세요.
+                  </div>
+                </Card>
+              </div>
+              <div className="py-10 border-t border-gray-200">
+                <h1 className="text-2xl font-bold">일정 안내</h1>
+                <Calander/>
+                <h1 className="text-2xl font-bold">Wedding D-DAY</h1>
+                <CountdownTimer />
+              </div>
+              <div className="py-10 border-t border-gray-200">
+                <h1 className="text-2xl font-bold">오시는길</h1>
+                <KakaoMarker />
+                <KakaoNavigation />
+              </div>
+              <div className="py-10 border-t border-gray-200">
+                <h1 className="text-2xl font-bold">마음 전하실 곳</h1>
+                <AccountList />
+              </div>
+              <div className="py-10 border-t border-gray-200">
+                <h1 className="text-2xl font-bold">방명록</h1>
+                <GuestBookPage />
+              </div>
+              <TopButton/>
+            </main>
+            <footer className="w-full max-w-5xl px-4 py-6 text-center border-t border-gray-200">
+              <p className="text-sm text-gray-500">@copyright socaeri</p>
+            </footer>
           </div>
-          <div className="py-10 border-t border-gray-200">
-            <Calander/>
-            <div className="space-y-6">
-              <h1 className="text-2xl font-bold">Wedding D-DAY</h1>
-              <CountdownTimer />
-            </div>
-
-          </div>
-        </div>
-
-        <div className="py-10 flex flex-col items-center justify-center">
-          <div className="space-y-6">
-            <h1 className="text-2xl font-bold">오시는길</h1>
-            <div className="py-10 border-t border-gray-200">
-              <h1 className="font-bold">KTX천안아산역 역사 내 2층 루체홀</h1>
-              <h1 className="py-3">충청남도 아산시 배방읍 희망로 100</h1>
-              <KakaoMarker />
-              <KakaoNavigation/>
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-6">
-          <h1 className="text-2xl font-bold">방명록</h1>
-          <div className="py-10 border-t border-gray-200">
-             <GuestBookPage/>
-          </div>
-        </div>
-        <TopButton/>
+        </motion.div>
       </main>
-
-      <footer className="w-full max-w-5xl px-4 py-6 text-center border-t border-gray-200">
-        <p className="text-sm text-gray-500">@copyright socaeri</p>
-      </footer>
-    </div>
-      </motion.div>
-  </main>
   );
 };
 
 export default Home;
-

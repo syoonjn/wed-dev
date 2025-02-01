@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1800db47-922f-47c3-a6cf-1ebb151ca9f3" name="Changes" comment="flowbite 추가">
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/AccountList.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/elegant_wedding_bg.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/KakaoMarker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/KakaoMarker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +82,8 @@
       <workItem from="1737212207366" duration="6591000" />
       <workItem from="1737374041600" duration="8638000" />
       <workItem from="1738075941541" duration="96000" />
-      <workItem from="1738132444416" duration="16016000" />
+      <workItem from="1738132444416" duration="16665000" />
+      <workItem from="1738420084990" duration="6228000" />
     </task>
     <task id="LOCAL-00001" summary="flowbite 추가">
       <created>1737170031597</created>
