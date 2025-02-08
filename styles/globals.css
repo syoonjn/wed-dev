@@ -6,6 +6,11 @@ html {
     scroll-behavior: smooth;
 }
 
+input, textarea {
+    text-size-adjust: 100%; /* iOS 확대 방지 */
+    font-size: 16px; /* iOS Safari 확대 방지 */
+}
+
 /* 초기 상태는 보이지 않게 하고, 아래로 내려둠 */
 .scroll-animate {
     opacity: 0;

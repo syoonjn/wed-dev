@@ -48,6 +48,7 @@ export default function GuestBookForm({ closeModal }: GuestBookFormProps) {
                     onChange={(e) => setName(e.target.value)}
                     required
                     className="mt-1 w-full"
+                    autoFocus={false}
                 />
             </div>
             <div>
@@ -59,6 +60,7 @@ export default function GuestBookForm({ closeModal }: GuestBookFormProps) {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     className="mt-1 w-full"
+                    autoFocus={false}
                 />
             </div>
             <div>
@@ -71,6 +73,7 @@ export default function GuestBookForm({ closeModal }: GuestBookFormProps) {
                     required
                     rows={3}
                     className="mt-1 w-full"
+                    autoFocus={false}
                 />
             </div>
             <Button type="submit" className="w-full bg-[#42382F] text-white">
