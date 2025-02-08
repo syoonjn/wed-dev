@@ -8,7 +8,6 @@ import { Alert, Button, Card, DarkThemeToggle, Toast, ToastToggle } from "flowbi
 import { basePath } from '@/next.config';
 import { TopButton, KakaoMarker, Calander, GuestBookPage, CountdownTimer, AccountList } from '@/components';
 import { HiFire } from "react-icons/hi";
-import { motion } from 'framer-motion';
 import useObserver from "./hook/useObserver";
 import getCouple from "./common/name";
 import { formatKoreanDate } from "./common/wedDate";
@@ -16,7 +15,7 @@ import KakaoNavigation from "./components/KakaoNavigation";
 
 const Home: React.FC = () => {
   const { groomFullName, brideFullName } = getCouple();
-  const { ref, animation } = useObserver();
+  const { ref } = useObserver();
 
   const brideName = process.env.NEXT_PUBLIC_BRIDE_NAME || '';
   const brideMomName = process.env.NEXT_PUBLIC_BRIDE_MOM_NAME || '';
@@ -27,10 +26,10 @@ const Home: React.FC = () => {
 
   const [showIntroText, setShowIntroText] = useState(true);
   const brideGroomText = `${groomFullName} & ${brideFullName}`;
-  const fullText = [brideGroomText, "초대합니다."]; // 배열로 변환
+  const fullText = [brideGroomText, "초대합니다."];
 
   const [typedText, setTypedText] = useState("");
-  const [lineIndex, setLineIndex] = useState(0); // 현재 출력 중인 줄
+  const [lineIndex, setLineIndex] = useState(0);
 
   useEffect(() => {
     let index = 0;
@@ -38,15 +37,15 @@ const Home: React.FC = () => {
 
     const typingInterval = setInterval(() => {
       if (index < fullText[lineIndex].length) {
-        currentText += fullText[lineIndex][index]; // 한 글자씩 추가
+        currentText += fullText[lineIndex][index];
         setTypedText((prev) => lineIndex === 1 ? prev.split("\n")[0] + "\n" + currentText : currentText);
         index++;
       } else {
         clearInterval(typingInterval);
         if (lineIndex === 0) {
           setTimeout(() => {
-            setLineIndex(1); // 다음 줄로 넘어가기
-            setTypedText((prev) => prev + "\n"); // 줄바꿈 추가
+            setLineIndex(1);
+            setTypedText((prev) => prev + "\n");
           }, 2500);
         } else {
           setTimeout(() => setShowIntroText(false), 2500);
@@ -67,38 +66,10 @@ const Home: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const backgroundVariants = {
-    hidden: { scale: 1.2, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: { duration: 5, ease: "easeOut" }, // 5초 동안 유지
-    },
-  };
-
-  const textVariants = {
-    hidden: { opacity: 0, y: -30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 3, delay: 3 } // 5초 동안 유지, 3초 후 시작
-    },
-  };
-
-  const fadeOutVariants = {
-    hidden: { opacity: 1 },
-    visible: { opacity: 0, transition: { duration: 5 } } // 5초 동안 서서히 사라짐
-  };
-
 
   return (
       <main className="relative flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
-        <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={backgroundVariants}
-            className="absolute inset-0 z-[-1] size-full"
-        >
+        <div className="absolute inset-0 z-[-1] size-full">
           <Image
               src={`${basePath}/images/elegant_wedding_bg.jpg`}
               alt="Elegant Wedding Background"
@@ -106,25 +77,19 @@ const Home: React.FC = () => {
               objectFit="cover"
               className="blur-lg brightness-75"
           />
-        </motion.div>
+        </div>
 
         {showIntroText && (
-            <motion.div
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={fadeOutVariants}
-                className={`fixed left-1/2 -translate-x-1/2 whitespace-pre-line text-center transition-all duration-500${
-                    isTop ? "top-1/2 -translate-y-1/2" : "top-0"
-                }`}
-            >
+            <div className={`fixed left-1/2 -translate-x-1/2 whitespace-pre-line text-center transition-all duration-500${
+                isTop ? "top-1/2 -translate-y-1/2" : "top-0"
+            }`}>
               <h1 className="text-xl font-bold text-gray-900 drop-shadow-lg dark:text-white">
                 {typedText}
               </h1>
-            </motion.div>
+            </div>
         )}
 
-        <motion.div ref={ref} initial="hidden" animate="visible" variants={textVariants}>
+        <div ref={ref}>
           <div className="flex min-h-screen flex-col items-center justify-center bg-white dark:text-white">
             <DarkThemeToggle />
             <header className="w-full max-w-5xl px-4 py-6 text-center">
@@ -168,7 +133,7 @@ const Home: React.FC = () => {
               <p className="text-sm text-gray-500">@copyright socaeri</p>
             </footer>
           </div>
-        </motion.div>
+        </div>
       </main>
   );
 };
