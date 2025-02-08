@@ -19,6 +19,13 @@ html {
     transform: translateY(0); /* 원래 위치로 돌아옴 */
 }
 
+.modal-content {
+    height: auto !important;
+    max-height: 90vh !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
 
 .topBtn_wrap {
     position: sticky;

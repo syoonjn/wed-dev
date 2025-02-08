@@ -100,7 +100,7 @@ const Home: React.FC = () => {
             className="absolute inset-0 z-[-1] size-full"
         >
           <Image
-              src="/images/elegant_wedding_bg.jpg"
+              src={`${basePath}/images/elegant_wedding_bg.jpg`}
               alt="Elegant Wedding Background"
               layout="fill"
               objectFit="cover"
