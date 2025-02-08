@@ -10,5 +10,10 @@
       "callees": ["twMerge", "createTheme"],
       "classRegex": "^(class(Name)|theme)?$"
     }
+  },
+  "rules": {
+    "prettier/prettier": "warn",
+    "no-unused-vars": "warn",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
