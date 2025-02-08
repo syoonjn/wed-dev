@@ -1,16 +1,10 @@
-//{
-//  "extends": "next/core-web-vitals",
-//  "rules": {
-//    "react/no-unescaped-entities": "off"
-//  }
-//}
-
 {
   "extends": [
     "next/core-web-vitals",
     "plugin:tailwindcss/recommended",
     "prettier"
   ],
+  "plugins": ["tailwindcss"],
   "settings": {
     "tailwindcss": {
       "callees": ["twMerge", "createTheme"],

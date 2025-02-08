@@ -38,7 +38,7 @@ export default function GuestBookForm({ closeModal }: GuestBookFormProps) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 bg-white p-6 rounded-lg">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-lg bg-white p-6">
             <div>
                 <Label htmlFor="name" value="성함 *" className="block text-gray-700" />
                 <TextInput
@@ -73,7 +73,7 @@ export default function GuestBookForm({ closeModal }: GuestBookFormProps) {
                     className="mt-1 w-full"
                 />
             </div>
-            <Button type="submit" className="bg-[#42382F] text-white w-full">
+            <Button type="submit" className="w-full bg-[#42382F] text-white">
                 축하 메시지 보내기
             </Button>
         </form>

@@ -44,11 +44,11 @@ const Calendar = () => {
     const formatDate = (day: string) => `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
     return (
-        <div className="max-w-lg mx-auto p-6 bg-white rounded-lg">
+        <div className="mx-auto max-w-lg rounded-lg bg-white p-6">
             {/* 헤더 */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="mb-4 flex items-center justify-between">
                 <button
-                    className="p-1 bg-gray-200 rounded-full hover:bg-gray-300"
+                    className="rounded-full bg-gray-200 p-1 hover:bg-gray-300"
                     onClick={handlePrevMonth}
                 >
                     &lt;
@@ -60,7 +60,7 @@ const Calendar = () => {
                     })}
                 </h2>
                 <button
-                    className="p-1 bg-gray-200 rounded-full hover:bg-gray-300"
+                    className="rounded-full bg-gray-200 p-1 hover:bg-gray-300"
                     onClick={handleNextMonth}
                 >
                     &gt;
@@ -68,7 +68,7 @@ const Calendar = () => {
             </div>
 
             {/* 요일 헤더 */}
-            <div className="grid grid-cols-7 text-center text-sm text-gray-500 font-semibold mb-2">
+            <div className="mb-2 grid grid-cols-7 text-center text-sm font-semibold text-gray-500">
                 <div className="text-red-500">일</div>
                 <div>월</div>
                 <div>화</div>
@@ -90,11 +90,11 @@ const Calendar = () => {
                     return (
                         <div
                             key={index}
-                            className={`p-2 rounded cursor-pointer ${
+                            className={`cursor-pointer rounded p-2 ${
                                 isToday
-                                    ? "bg-red-500 text-white font-bold"
+                                    ? "bg-red-500 font-bold text-white"
                                     : holidayName
-                                        ? "bg-red-100 text-red-500 font-semibold"
+                                        ? "bg-red-100 font-semibold text-red-500"
                                         : "text-gray-800"
                             } ${
                                 index % 7 === 0 ? "text-red-500" : "" /* 일요일 색상 */
@@ -105,7 +105,7 @@ const Calendar = () => {
                         >
                             {day}
                             {holidayName && (
-                                <div className="text-[10px] mt-1">{holidayName}</div>
+                                <div className="mt-1 text-[10px]">{holidayName}</div>
                             )}
                         </div>
                     );

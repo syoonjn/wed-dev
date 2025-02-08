@@ -34,14 +34,14 @@ export default function AccountList() {
     };
 
     return (
-        <Accordion className="w-full max-w-[400px] mx-auto">
+        <Accordion className="mx-auto w-full max-w-[400px]">
             <Accordion.Panel>
                 <Accordion.Title>신랑측 계좌번호</Accordion.Title>
                 <Accordion.Content>
                     {accounts.groom.map((acc, index) => (
                         <div
                             key={index}
-                            className="p-4 border border-gray-200 rounded-lg mb-2 flex justify-between items-center"
+                            className="mb-2 flex items-center justify-between rounded-lg border border-gray-200 p-4"
                         >
                             <div>
                                 <p className="font-semibold">
@@ -50,7 +50,7 @@ export default function AccountList() {
                                 <p className="text-sm text-gray-500">{acc.name}</p>
                             </div>
                             <button
-                                className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-md text-sm"
+                                className="flex items-center gap-1 rounded-md bg-gray-100 px-2 py-1 text-sm"
                                 onClick={() => handleCopy(acc.account)}
                             >
                                 <Clipboard size={16} />
@@ -67,7 +67,7 @@ export default function AccountList() {
                     {accounts.bride.map((acc, index) => (
                         <div
                             key={index}
-                            className="p-4 border border-gray-200 rounded-lg mb-2 flex justify-between items-center"
+                            className="mb-2 flex items-center justify-between rounded-lg border border-gray-200 p-4"
                         >
                             <div>
                                 <p className="font-semibold">
@@ -76,7 +76,7 @@ export default function AccountList() {
                                 <p className="text-sm text-gray-500">{acc.name}</p>
                             </div>
                             <button
-                                className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-md text-sm"
+                                className="flex items-center gap-1 rounded-md bg-gray-100 px-2 py-1 text-sm"
                                 onClick={() => handleCopy(acc.account)}
                             >
                                 <Clipboard size={16} />

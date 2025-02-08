@@ -36,16 +36,16 @@ export default function GuestBookList() {
     };
 
     return (
-        <div className="p-4 bg-gray-100 min-h-screen flex flex-col items-center">
+        <div className="flex min-h-screen flex-col items-center bg-gray-100 p-4">
             <ul className="w-full max-w-3xl space-y-4">
                 {visibleEntries.map((entry) => (
-                    <li key={entry.id} className="flex justify-start items-start space-x-3">
-                        <FaUserCircle className="text-gray-400 text-5xl" />
-                        <div className="relative w-full max-w-2xl p-4 rounded-2xl shadow-md bg-white border border-gray-300 mx-auto">
-                            <div className="text-base font-bold text-gray-700 mb-1 text-left">{entry.name}</div>
-                            <p className="text-gray-800 text-sm bg-gray-100 p-4 rounded-lg w-full text-left min-h-[30px] max-h-[90px] overflow-y-auto whitespace-pre-line">{entry.contents}</p>
-                            <div className="text-xs text-gray-400 mt-2 text-right">{formatDateTime(entry.created_at)}</div>
-                            <button onClick={() => deleteMutation.mutate(entry.id)} className="absolute top-2 right-4 text-gray-400 hover:text-red-500 text-lg">✖</button>
+                    <li key={entry.id} className="flex items-start justify-start space-x-3">
+                        <FaUserCircle className="text-5xl text-gray-400" />
+                        <div className="relative mx-auto w-full max-w-2xl rounded-2xl border border-gray-300 bg-white p-4 shadow-md">
+                            <div className="mb-1 text-left text-base font-bold text-gray-700">{entry.name}</div>
+                            <p className="max-h-[90px] min-h-[30px] w-full overflow-y-auto whitespace-pre-line rounded-lg bg-gray-100 p-4 text-left text-sm text-gray-800">{entry.contents}</p>
+                            <div className="mt-2 text-right text-xs text-gray-400">{formatDateTime(entry.created_at)}</div>
+                            <button onClick={() => deleteMutation.mutate(entry.id)} className="absolute right-4 top-2 text-lg text-gray-400 hover:text-red-500">✖</button>
                         </div>
                     </li>
                 ))}

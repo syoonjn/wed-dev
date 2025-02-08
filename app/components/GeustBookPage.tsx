@@ -11,10 +11,10 @@ export default function GuestBookPage() {
         <div className="mb-4 text-center">
             {/* 모달을 여는 버튼 */}
             <Button
-                className="bg-[#42382F] text-white px-6 py-3 rounded-lg flex items-center gap-2 mx-auto mb-8"
+                className="mx-auto mb-8 flex items-center gap-2 rounded-lg bg-[#42382F] px-6 py-3 text-white"
                 onClick={() => setOpenModal(true)}
             >
-                <HiMail className="w-5 h-5" />
+                <HiMail className="size-5" />
                 축하 메시지 작성하기
             </Button>
 
@@ -23,7 +23,7 @@ export default function GuestBookPage() {
                 show={openModal}
                 onClose={() => setOpenModal(false)}
             >
-                <Modal.Header className="text-lg font-semibold text-center">
+                <Modal.Header className="text-center text-lg font-semibold">
                     축하 메시지 작성하기
                 </Modal.Header>
                 <Modal.Body>

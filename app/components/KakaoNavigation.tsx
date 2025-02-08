@@ -34,11 +34,11 @@ const KakaoNavigation = () => {
     };
 
     return (
-        <div className="flex justify-center items-center p-4 border-t">
+        <div className="flex items-center justify-center border-t p-4">
             {/* 네이버 지도 */}
             <div
                 onClick={startNavigation}
-                className="flex flex-1 justify-center items-center cursor-pointer hover:opacity-80"
+                className="flex flex-1 cursor-pointer items-center justify-center hover:opacity-80"
             >
                 <Image
                     src={`${basePath}/images/kakaomap_basic.png`}
@@ -50,12 +50,12 @@ const KakaoNavigation = () => {
             </div>
 
             {/* 구분선 */}
-            <div className="w-px h-5 bg-gray-300"></div>
+            <div className="h-5 w-px bg-gray-300"></div>
 
             {/* 카카오 내비 */}
             <div
                 onClick={startNavigation}
-                className="flex flex-1 justify-center items-center cursor-pointer hover:opacity-80"
+                className="flex flex-1 cursor-pointer items-center justify-center hover:opacity-80"
             >
                 <Image
                     src={`${basePath}/images/navermap.webp`}
@@ -67,12 +67,12 @@ const KakaoNavigation = () => {
             </div>
 
             {/* 구분선 */}
-            <div className="w-px h-5 bg-gray-300"></div>
+            <div className="h-5 w-px bg-gray-300"></div>
 
             {/* 티맵 */}
             <div
                 onClick={startNavigation}
-                className="flex flex-1 justify-center items-center cursor-pointer hover:opacity-80"
+                className="flex flex-1 cursor-pointer items-center justify-center hover:opacity-80"
             >
                 <Image
                     src={`${basePath}/images/tmap.svg`}

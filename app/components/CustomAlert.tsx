@@ -10,22 +10,22 @@ export default function CustomAlert({
     type?: "success" | "info" | "warning" | "error";
 }) {
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
             {/* 배경: Alert보다 낮은 z-index 설정 */}
             <div
-                className="fixed inset-0 bg-black opacity-50 z-40"
+                className="fixed inset-0 z-40 bg-black opacity-50"
                 onClick={onClose} // 배경 클릭으로 닫히도록 설정
             ></div>
             {/* Alert: 배경보다 높은 z-index 설정 */}
             <div
-                className={`relative z-50 w-96 border p-4 rounded-lg shadow-lg text-center ${
+                className={`relative z-50 w-96 rounded-lg border p-4 text-center shadow-lg ${
                     type === "success"
-                        ? "bg-green-100 text-green-800 border-green-400"
+                        ? "border-green-400 bg-green-100 text-green-800"
                         : type === "info"
-                            ? "bg-blue-100 text-blue-800 border-blue-400"
+                            ? "border-blue-400 bg-blue-100 text-blue-800"
                             : type === "warning"
-                                ? "bg-yellow-100 text-yellow-800 border-yellow-400"
-                                : "bg-red-100 text-red-800 border-red-400"
+                                ? "border-yellow-400 bg-yellow-100 text-yellow-800"
+                                : "border-red-400 bg-red-100 text-red-800"
                 }`}
             >
                 <p className="mb-4">{message}</p>

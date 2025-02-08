@@ -19,7 +19,7 @@ const KakaoMarker = () => {
     }, []);
 
     return (
-        <div className="flex flex-col items-center justify-center w-full mt-4">
+        <div className="mt-4 flex w-full flex-col items-center justify-center">
             {scriptLoad ? (
                 <Map
                     center={{ lat: 36.7933843, lng: 127.1045231 }}
@@ -29,7 +29,7 @@ const KakaoMarker = () => {
                     <MapMarker position={{ lat: 36.7933843, lng: 127.1045231 }} />
                 </Map>
             ) : (
-                <div className="w-full max-w-[500px] h-[300px] bg-gray-300 flex items-center justify-center">
+                <div className="flex h-[300px] w-full max-w-[500px] items-center justify-center bg-gray-300">
                     <p>지도를 불러오는 중...</p>
                 </div>
             )}

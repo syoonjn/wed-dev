@@ -9,7 +9,6 @@ export const getCouple = () => {
     const brideFullName = process.env.NEXT_PUBLIC_BRIDE_NAME || '';
     const brideFirstName = brideFullName.toString().substring(1);
 
-
     return { brideFullName, groomFullName, brideFirstName, groomFirstName };
 };
 export default getCouple;

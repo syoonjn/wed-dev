@@ -17,8 +17,8 @@ type InvitationProps = {
 // InvitationPage 컴포넌트
 const InvitationPage = ({ name = 'test', date = 'date', location = 'location' }: InvitationProps) => {
     return (
-        <main className="flex flex-col items-center justify-center min-h-screen bg-pink-50">
-            <div className="text-center p-8 bg-white rounded-lg shadow-lg max-w-md">
+        <main className="flex min-h-screen flex-col items-center justify-center bg-pink-50">
+            <div className="max-w-md rounded-lg bg-white p-8 text-center shadow-lg">
                 <h1 className="text-4xl font-bold text-pink-600">
                     You're Invited, {name}!
                 </h1>

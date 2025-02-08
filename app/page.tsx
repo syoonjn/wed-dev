@@ -97,7 +97,7 @@ const Home: React.FC = () => {
             initial="hidden"
             animate="visible"
             variants={backgroundVariants}
-            className="absolute inset-0 w-full h-full z-[-1]"
+            className="absolute inset-0 z-[-1] size-full"
         >
           <Image
               src="/images/elegant_wedding_bg.jpg"
@@ -114,29 +114,29 @@ const Home: React.FC = () => {
                 animate="visible"
                 exit="hidden"
                 variants={fadeOutVariants}
-                className={`fixed left-1/2 transform -translate-x-1/2 text-center transition-all duration-500 whitespace-pre-line ${
+                className={`fixed left-1/2 -translate-x-1/2 whitespace-pre-line text-center transition-all duration-500${
                     isTop ? "top-1/2 -translate-y-1/2" : "top-0"
                 }`}
             >
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white drop-shadow-lg">
+              <h1 className="text-xl font-bold text-gray-900 drop-shadow-lg dark:text-white">
                 {typedText}
               </h1>
             </motion.div>
         )}
 
         <motion.div ref={ref} initial="hidden" animate="visible" variants={textVariants}>
-          <div className="min-h-screen bg-white dark:text-white flex flex-col items-center justify-center">
+          <div className="flex min-h-screen flex-col items-center justify-center bg-white dark:text-white">
             <DarkThemeToggle />
             <header className="w-full max-w-5xl px-4 py-6 text-center">
-              <div className="text-2xl text-gray-600 dark:text-white mb-4">
+              <div className="mb-4 text-2xl text-gray-600 dark:text-white">
                 {`${groomFullName} & ${brideFullName}`}
               </div>
             </header>
 
             <main className="w-full max-w-2xl text-center">
-              <div className="py-10 border-t border-gray-200">
+              <div className="border-t border-gray-200 py-10">
                 <Card imgAlt="Wedding Sample Image" imgSrc={`${basePath}/images/sample.webp`} className="max-w-xl text-center">
-                  <div className="text-gray-700 dark:text-gray-400 leading-loose mb-6 text-center">
+                  <div className="mb-6 text-center leading-loose text-gray-700 dark:text-gray-400">
                     저희 두 사람, 하나가 되어<br />
                     평생을 함께 걸어 가고자 합니다.<br />
                     자리에 오셔서 새로운 시작을 축복해 주세요.
@@ -144,27 +144,27 @@ const Home: React.FC = () => {
                 </Card>
               </div>
               <div className="py-10">
-                <h1 className="text-2xl font-bold mb-10">일정 안내</h1>
+                <h1 className="mb-10 text-2xl font-bold">일정 안내</h1>
                 <Calander/>
-                <h1 className="text-2xl font-bold mb-10">Wedding D-DAY</h1>
+                <h1 className="mb-10 text-2xl font-bold">Wedding D-DAY</h1>
                 <CountdownTimer />
               </div>
-              <div className="py-10 border-t border-gray-200">
-                <h1 className="text-2xl font-bold mb-10">오시는길</h1>
+              <div className="border-t border-gray-200 py-10">
+                <h1 className="mb-10 text-2xl font-bold">오시는길</h1>
                 <KakaoMarker />
                 <KakaoNavigation />
               </div>
-              <div className="py-10 border-t border-gray-200">
-                <h1 className="text-2xl font-bold mb-10">마음 전하실 곳</h1>
+              <div className="border-t border-gray-200 py-10">
+                <h1 className="mb-10 text-2xl font-bold">마음 전하실 곳</h1>
                 <AccountList />
               </div>
-              <div className="py-10 border-t border-gray-200">
-                <h1 className="text-2xl font-bold mb-10">방명록</h1>
+              <div className="border-t border-gray-200 py-10">
+                <h1 className="mb-10 text-2xl font-bold">방명록</h1>
                 <GuestBookPage />
               </div>
               <TopButton/>
             </main>
-            <footer className="w-full max-w-5xl px-4 py-6 text-center border-t border-gray-200">
+            <footer className="w-full max-w-5xl border-t border-gray-200 px-4 py-6 text-center">
               <p className="text-sm text-gray-500">@copyright socaeri</p>
             </footer>
           </div>

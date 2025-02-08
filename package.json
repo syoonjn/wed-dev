@@ -6,12 +6,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "export": "next export",
     "deploy": "next build && gh-pages -d out --dest .",
     "build:css": "ts-node tailwind.config.ts",
     "dev-ts": "concurrently -n NEXT,TS -c magenta,cyan \"next dev -p 1234\" \"yarn ts --watch\"",
-    "ts": "tsc --noEmit --incremental --preserveWatchOutput --pretty"
+    "ts": "tsc --noEmit --incremental --preserveWatchOutput --pretty",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.47.16",
@@ -33,9 +45,13 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8",
+    "eslint": "^8.57.1",
     "eslint-config-next": "14.2.7",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-tailwindcss": "^3.18.0",
     "gh-pages": "^6.1.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
     "ts-node": "^10.9.2",
