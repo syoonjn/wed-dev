@@ -35,6 +35,7 @@ export default function RootLayout({
       <html lang="en">
       <head>
         <ThemeModeScript />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
         <meta property="og:type" content="website" />
         <meta property="og:url" content={pageProps.ogUrl} />
         <meta property="og:title" content={pageProps.ogTitle} />
