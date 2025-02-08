@@ -34,7 +34,7 @@ export default function AccountList() {
     };
 
     return (
-        <Accordion className="w-full">
+        <Accordion className="w-full max-w-[400px] mx-auto">
             <Accordion.Panel>
                 <Accordion.Title>신랑측 계좌번호</Accordion.Title>
                 <Accordion.Content>

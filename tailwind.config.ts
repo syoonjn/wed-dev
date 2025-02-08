@@ -12,7 +12,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         pretendard: ["var(--font-pretendard)", "sans-serif"],
-        maruburi: ['var(--font-MaruBuri-Regular)', 'sans-serif'], // 커스텀 폰트 추가
+        maruburi: ['var(--font-MaruBuri-SemiBold)', 'sans-serif'], // 커스텀 폰트 추가
       },
     },
   },

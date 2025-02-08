@@ -143,23 +143,23 @@ const Home: React.FC = () => {
                   </div>
                 </Card>
               </div>
-              <div className="py-10 border-t border-gray-200">
-                <h1 className="text-2xl font-bold">일정 안내</h1>
+              <div className="py-10">
+                <h1 className="text-2xl font-bold mb-10">일정 안내</h1>
                 <Calander/>
-                <h1 className="text-2xl font-bold">Wedding D-DAY</h1>
+                <h1 className="text-2xl font-bold mb-10">Wedding D-DAY</h1>
                 <CountdownTimer />
               </div>
               <div className="py-10 border-t border-gray-200">
-                <h1 className="text-2xl font-bold">오시는길</h1>
+                <h1 className="text-2xl font-bold mb-10">오시는길</h1>
                 <KakaoMarker />
                 <KakaoNavigation />
               </div>
               <div className="py-10 border-t border-gray-200">
-                <h1 className="text-2xl font-bold">마음 전하실 곳</h1>
+                <h1 className="text-2xl font-bold mb-10">마음 전하실 곳</h1>
                 <AccountList />
               </div>
               <div className="py-10 border-t border-gray-200">
-                <h1 className="text-2xl font-bold">방명록</h1>
+                <h1 className="text-2xl font-bold mb-10">방명록</h1>
                 <GuestBookPage />
               </div>
               <TopButton/>
