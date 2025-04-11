@@ -1,4 +1,4 @@
-export const holidays = {
+export const holidays: Record<string, string> = {
     "2025-01-01": "신정",
     "2025-01-27": "임시공휴일",
     "2025-01-28": "설날연휴",
