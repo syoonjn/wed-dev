@@ -38,7 +38,7 @@ const KakaoNavigation = () => {
         const lng = 127.1047214; // 목적지 경도
         const name = encodeURIComponent("CA웨딩컨벤션");
         // const appUrl = `nmap://route/public?dlat=${lat}&dlng=${lng}&dname=${name}`;
-        const appUrl = `nmap://route/walk?dlat=${lat}&dlng=${lng}&dname=${name}&appname=myweb.app`;
+        const appUrl = `nmap://route/car?dlat=${lat}&dlng=${lng}&dname=${name}&appname=myweb.app`;
 
         const webUrl = `https://map.naver.com/v5/directions/-/-/${lng},${lat},${name},PLACE_POI/-?c=15.00,0,0,0,dh`;
 
