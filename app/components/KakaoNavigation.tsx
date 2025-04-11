@@ -50,10 +50,23 @@ const KakaoNavigation = () => {
         }, 1500);
     };
 
-    const handleClick2 = () => {
-        const naverApp = 'nmap://route/car?slat=37.4640070&slng=126.9522394&sname=%EC%84%9C%EC%9A%B8%EB%8C%80%ED%95%99%EA%B5%90&dlat=37.5209436&dlng=127.1230074&dname=%EC%98%AC%EB%A6%BC%ED%94%BD%EA%B3%B5%EC%9B%90&appname=https://syoonjn.github.io/wed-dev/';
-        window.location.href = naverApp;
-    }
+    const openTmapNavigation = () => {
+        const lat = 36.7935047; // 목적지 위도
+        const lng = 127.1047214; // 목적지 경도
+        const name = encodeURIComponent("CA웨딩컨벤션");
+
+        // T map 앱 네비게이션 실행 URL
+        const appUrl = `tmap://route?goalx=${lng}&goaly=${lat}&goalname=${name}&navType=1`;
+
+        // fallback: 앱이 없을 경우
+        const webUrl = `https://www.tmap.co.kr/tmap2/mobile/main.do`;
+
+        window.location.href = appUrl;
+
+        setTimeout(() => {
+            window.location.href = webUrl;
+        }, 1500);
+    };
 
 
     return (
@@ -94,7 +107,7 @@ const KakaoNavigation = () => {
 
             {/* 티맵 */}
             <div
-                onClick={handleClick2}
+                onClick={openTmapNavigation}
                 className="flex flex-1 cursor-pointer items-center justify-center hover:opacity-80"
             >
                 <Image
