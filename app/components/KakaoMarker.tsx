@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { Map, MapMarker, ZoomControl } from "react-kakao-maps-sdk";
 
 const KakaoMarker = () => {
     const apiKey:string|undefined = process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY;
@@ -16,7 +16,9 @@ const KakaoMarker = () => {
         script.addEventListener("load", () => {
             setScriptLoad(true);
         })
+
     }, []);
+
 
     return (
         <div className="mt-4 flex w-full flex-col items-center justify-center">
@@ -25,8 +27,11 @@ const KakaoMarker = () => {
                     center={{ lat: 36.7933843, lng: 127.1045231 }}
                     style={{ width: '100%', maxWidth: '500px', height: '300px', borderRadius: '10px' }}
                     level={4}
+                    draggable={false}
                 >
-                    <MapMarker position={{ lat: 36.7933843, lng: 127.1045231 }} />
+                    <ZoomControl position={kakao.maps.ControlPosition && kakao.maps.ControlPosition.RIGHT} />
+                    <MapMarker position={{ lat: 36.7933843, lng: 127.1045231 }}
+                    />
                 </Map>
             ) : (
                 <div className="flex h-[300px] w-full max-w-[500px] items-center justify-center bg-gray-300">
