@@ -1,11 +1,12 @@
 'use client';
 
 import { useCookies } from "react-cookie";
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import getCouple from "@/app/common/name";
 import { Accordion } from "flowbite-react";
 import { basePath } from "@/next.config";
 import Image from "next/image";
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 export default function AttendanceModal() {
     const { groomFullName, brideFullName } = getCouple();
@@ -26,17 +27,20 @@ export default function AttendanceModal() {
     }, [cookies]);
 
     // 모달 열릴 때 body 스크롤 막기
+    const modalRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
-        if (showImageModal || showModal) {
-            document.body.style.overflow = 'hidden';
+        const target = modalRef.current;
+        if (!target) return;
+
+        if (showModal || showImageModal) {
+            disableBodyScroll(target);
         } else {
-            document.body.style.overflow = 'auto';
+            enableBodyScroll(target);
         }
 
-        return () => {
-            document.body.style.overflow = 'auto'; // 컴포넌트 unmount 시 복원
-        };
-    }, [showImageModal, showModal]);
+        return () => enableBodyScroll(target); // 언마운트 시 복구
+    }, [showModal, showImageModal]);
 
 
     const handleHideToday = () => {
@@ -57,7 +61,7 @@ export default function AttendanceModal() {
     if (!ready || !showModal) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4">
+        <div ref={modalRef} className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4">
             <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg">
                 <div className="flex justify-end">
                     <button
