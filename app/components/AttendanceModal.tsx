@@ -15,8 +15,6 @@ export default function AttendanceModal() {
     const [hideToday, setHideToday] = useState(false);
     const [showImageModal, setShowImageModal] = useState(false);
 
-
-
     useEffect(() => {
         const hide = cookies["hide-attendance-modal"];
         if (hide) {
@@ -26,6 +24,20 @@ export default function AttendanceModal() {
         }
         setReady(true); // 쿠키 확인 완료
     }, [cookies]);
+
+    // 모달 열릴 때 body 스크롤 막기
+    useEffect(() => {
+        if (showImageModal || showModal) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto'; // 컴포넌트 unmount 시 복원
+        };
+    }, [showImageModal, showModal]);
+
 
     const handleHideToday = () => {
         const expire = new Date();
