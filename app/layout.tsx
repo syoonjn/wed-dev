@@ -6,6 +6,7 @@ import { ThemeModeScript } from "flowbite-react";
 import localFont from 'next/font/local';
 import { queryClient } from "./lib/react-query";
 import ReactQueryProvider from "./lib/ReactQueryProvider";
+import ClientCookiesProvider from './lib/ClientCookiesProvider';
 import { AlertProvider } from "./context/AlertContext";
 import getCouple from "./common/name";
 import { formatKoreanDate } from "./common/wedDate";
@@ -26,11 +27,7 @@ const pageProps = {
     ogImage: '/wed-dev/images/sample.webp',
 }
 
-export default function RootLayout({
-                                     children,
-                                   }: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
       <html lang="en">
       <head>
@@ -45,7 +42,9 @@ export default function RootLayout({
         <body className={pretendard.className}>
         <AlertProvider>
             <ReactQueryProvider>
+                <ClientCookiesProvider>
                     {children}
+                </ClientCookiesProvider>
             </ReactQueryProvider>
         </AlertProvider>
         </body>

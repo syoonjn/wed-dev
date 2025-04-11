@@ -6,7 +6,15 @@ import { Map } from 'react-kakao-maps-sdk';
 
 import { Alert, Button, Card, DarkThemeToggle, Toast, ToastToggle } from "flowbite-react";
 import { basePath } from '@/next.config';
-import { TopButton, KakaoMarker, Calander, GuestBookPage, CountdownTimer, AccountList } from '@/components';
+import {
+  TopButton,
+  KakaoMarker,
+  Calander,
+  GuestBookPage,
+  CountdownTimer,
+  AccountList,
+  AttendanceModal
+} from '@/components';
 import useObserver from "./hook/useObserver";
 import getCouple from "./common/name";
 import { formatKoreanDate } from "./common/wedDate";
@@ -83,7 +91,7 @@ const Home: React.FC = () => {
                 </div>
 
               </div>
-
+              <AttendanceModal/>
           <div className="py-10">
                 <h1 className="mb-10 text-2xl font-bold">일정 안내</h1>
                 <Calander/>
