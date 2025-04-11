@@ -7,7 +7,6 @@ import { Map } from 'react-kakao-maps-sdk';
 import { Alert, Button, Card, DarkThemeToggle, Toast, ToastToggle } from "flowbite-react";
 import { basePath } from '@/next.config';
 import { TopButton, KakaoMarker, Calander, GuestBookPage, CountdownTimer, AccountList } from '@/components';
-import { HiFire } from "react-icons/hi";
 import useObserver from "./hook/useObserver";
 import getCouple from "./common/name";
 import { formatKoreanDate } from "./common/wedDate";
@@ -15,7 +14,6 @@ import KakaoNavigation from "./components/KakaoNavigation";
 
 const Home: React.FC = () => {
   const { groomFullName, brideFullName } = getCouple();
-  const { ref } = useObserver();
 
   const brideName = process.env.NEXT_PUBLIC_BRIDE_NAME || '';
   const brideMomName = process.env.NEXT_PUBLIC_BRIDE_MOM_NAME || '';
@@ -30,88 +28,65 @@ const Home: React.FC = () => {
 
   const [typedText, setTypedText] = useState("");
   const [lineIndex, setLineIndex] = useState(0);
-
-  useEffect(() => {
-    let index = 0;
-    let currentText = "";
-
-    const typingInterval = setInterval(() => {
-      if (index < fullText[lineIndex].length) {
-        currentText += fullText[lineIndex][index];
-        setTypedText((prev) => lineIndex === 1 ? prev.split("\n")[0] + "\n" + currentText : currentText);
-        index++;
-      } else {
-        clearInterval(typingInterval);
-        if (lineIndex === 0) {
-          setTimeout(() => {
-            setLineIndex(1);
-            setTypedText((prev) => prev + "\n");
-          }, 2500);
-        } else {
-          setTimeout(() => setShowIntroText(false), 2500);
-        }
-      }
-    }, 300);
-
-    return () => clearInterval(typingInterval);
-  }, [lineIndex]);
-
   const [isTop, setIsTop] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsTop(window.scrollY === 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
       <main className="relative flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
-        <div className="absolute inset-0 z-[-1] size-full">
-          <Image
-              src={`${basePath}/images/elegant_wedding_bg.jpg`}
-              alt="Elegant Wedding Background"
-              layout="fill"
-              objectFit="cover"
-              className="blur-lg brightness-75"
-          />
-        </div>
-
-        {showIntroText && (
-            <div className={`fixed left-1/2 -translate-x-1/2 whitespace-pre-line text-center transition-all duration-500${
-                isTop ? "top-1/2 -translate-y-1/2" : "top-0"
-            }`}>
-              <h1 className="text-xl font-bold text-gray-900 drop-shadow-lg dark:text-white">
-                {typedText}
-              </h1>
-            </div>
-        )}
-
-        <div ref={ref}>
+        <div>
           <div className="flex min-h-screen flex-col items-center justify-center bg-white dark:text-white">
-            <DarkThemeToggle />
-            <header className="w-full max-w-5xl px-4 py-6 text-center">
-              <div className="mb-4 text-2xl text-gray-600 dark:text-white">
-                {`${groomFullName} & ${brideFullName}`}
-              </div>
-            </header>
-
             <main className="w-full max-w-2xl text-center">
-              <div className="border-t border-gray-200 py-10">
-                <Card imgAlt="Wedding Sample Image" imgSrc={`${basePath}/images/sample.webp`} className="max-w-xl text-center">
-                  <div className="mb-6 text-center leading-loose text-gray-700 dark:text-gray-400">
-                    저희 두 사람, 하나가 되어<br />
-                    평생을 함께 걸어 가고자 합니다.<br />
-                    자리에 오셔서 새로운 시작을 축복해 주세요.
-                  </div>
-                </Card>
+              <div className="border-t border-gray-200 py-10 text-center text-[#3d3d3d]">
+                  {/* 날짜 */}
+              <div className="mb-1 text-[20px] tracking-widest sm:text-[22px] font-light">26 | 03 | 28</div>
+              <div className="mb-6 text-xs tracking-[0.25em] text-gray-400 sm:text-sm">SATURDAY</div>
+
+                  {/* 이미지 */}
+                <Image
+                    src={`${basePath}/images/sample.webp`}
+                    alt="티맵"
+                    layout="responsive"
+                    width={500}
+                    height={500}
+                    sizes="(max-width: 768px) 80vw, 300px"
+                    className="mx-auto mb-6 w-full max-w-[300px] rounded"
+                />
+
+
+                {/* 이름 */}
+              <div className="mb-2 text-lg font-[500] tracking-wider text-gray-800">
+                {`${groomFullName}  ｜  ${brideFullName}`}
               </div>
-              <div className="py-10">
+
+                  {/* 장소, 날짜 */}
+                <div className="mb-8 text-sm sm:text-base text-[#3d3d3d] tracking-wide space-y-2">
+                  <p>2026년 3월 28일 토요일 오후 1시</p>
+                  <p>CA웨딩컨벤션 루체홀</p>
+                </div>
+
+
+                {/* 초대 문구 */}
+                <p className="text-base font-semibold text-[#744936] mb-6">
+                  소중한 분들을 초대합니다
+                </p>
+
+                <div className="mx-auto max-w-sm text-[14px] sm:text-[15px] text-[#3d3d3d] tracking-wide space-y-3">
+                  <p>살랑이는 바람결에</p>
+                  <p>사랑이 묻어나는 계절입니다.</p>
+                  <p>
+                    여기 곱고 예쁜 두 사람이 <span className="text-[#b85b52]">사랑</span>을 맺어
+                  </p>
+                  <p>인생의 반려자가 되려 합니다.</p>
+                  <p>새 인생을 시작하는 이 자리에 오셔서</p>
+                  <p>
+                    <span className="text-[#b85b52] font-semibold">축복</span>해 주시면 감사하겠습니다.
+                  </p>
+                </div>
+
+              </div>
+
+          <div className="py-10">
                 <h1 className="mb-10 text-2xl font-bold">일정 안내</h1>
                 <Calander/>
-                <h1 className="mb-10 text-2xl font-bold">Wedding D-DAY</h1>
                 <CountdownTimer />
               </div>
               <div className="border-t border-gray-200 py-10">

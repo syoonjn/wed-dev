@@ -1,55 +1,59 @@
 import React, { useState } from "react";
-import {weddingDate} from "../common/wedDate";
-import holidays from '../common/holiday';
-
+import { weddingDate } from "../common/wedDate";
+import holidays from "../common/holiday";
 
 const Calendar = () => {
-
     const [currentDate, setCurrentDate] = useState(new Date(weddingDate));
 
-    // 현재 연도와 월
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
 
-    // 월의 첫 번째와 마지막 날 계산
-    const firstDayOfMonth = new Date(year, month, 1);
-    const lastDayOfMonth = new Date(year, month + 1, 0);
+    const firstDay = new Date(year, month, 1);
+    const totalDays = new Date(year, month + 1, 0).getDate();
+    const startDay = firstDay.getDay();
 
-    // 요일과 총 일수 계산
-    const startDay = firstDayOfMonth.getDay();
-    const totalDays = lastDayOfMonth.getDate();
+    const weddingDay = new Date(weddingDate);
 
-    // 이전/다음 월로 이동
-    const handlePrevMonth = () => {
-        setCurrentDate(new Date(year, month - 1, 1));
+    const handleMonthChange = (offset: number) => {
+        setCurrentDate(new Date(year, month + offset, 1));
     };
 
-    const handleNextMonth = () => {
-        setCurrentDate(new Date(year, month + 1, 1));
+    const formatDate = (day: string) =>
+        `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+    const days: string[] = [
+        ...Array(startDay).fill(""),
+        ...Array.from({ length: totalDays }, (_, i) => (i + 1).toString()),
+    ];
+
+    const getDayClass = (day: string, index: number) => {
+        const isWeddingDay =
+            day === weddingDay.getDate().toString() &&
+            month === weddingDay.getMonth() &&
+            year === weddingDay.getFullYear();
+
+        const holidayName = holidays[formatDate(day)];
+        const isSunday = index % 7 === 0;
+        const isSaturday = (index + 1) % 7 === 0;
+
+        return `
+      cursor-pointer rounded p-2
+      ${isWeddingDay ? "bg-red-500 font-bold text-white" : ""}
+      ${!isWeddingDay && holidayName ? "bg-red-100 font-semibold text-red-500" : ""}
+      ${!isWeddingDay && !holidayName ? "text-gray-800" : ""}
+      ${isSunday ? "text-red-500" : ""}
+      ${isSaturday ? "text-blue-500" : ""}
+      hover:bg-blue-100
+    `;
     };
-
-    // 날짜 배열 생성
-    const days = [];
-    for (let i = 0; i < startDay; i++) {
-        days.push(""); // 첫 주의 빈 칸
-    }
-    for (let i = 1; i <= totalDays; i++) {
-        days.push(i.toString());
-    }
-
-    // 웨딩 날짜 정보
-    const today = new Date(weddingDate);
-
-    // 날짜 포맷팅 함수 (공휴일 체크용)
-    const formatDate = (day: string) => `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
     return (
-        <div className="mx-auto max-w-lg rounded-lg bg-white p-6">
+        <div className="mx-auto max-w-lg bg-white p-6">
             {/* 헤더 */}
             <div className="mb-4 flex items-center justify-between">
                 <button
+                    onClick={() => handleMonthChange(-1)}
                     className="rounded-full bg-gray-200 p-1 hover:bg-gray-300"
-                    onClick={handlePrevMonth}
                 >
                     &lt;
                 </button>
@@ -60,8 +64,8 @@ const Calendar = () => {
                     })}
                 </h2>
                 <button
+                    onClick={() => handleMonthChange(1)}
                     className="rounded-full bg-gray-200 p-1 hover:bg-gray-300"
-                    onClick={handleNextMonth}
                 >
                     &gt;
                 </button>
@@ -78,31 +82,12 @@ const Calendar = () => {
                 <div className="text-blue-500">토</div>
             </div>
 
-            {/* 날짜 */}
+            {/* 날짜 렌더링 */}
             <div className="grid grid-cols-7 text-center text-sm">
                 {days.map((day, index) => {
-                    const isToday =
-                        day === today.getDate().toString() &&
-                        month === today.getMonth() &&
-                        year === today.getFullYear();
-                    // @ts-ignore
                     const holidayName = holidays[formatDate(day)];
                     return (
-                        <div
-                            key={index}
-                            className={`cursor-pointer rounded p-2 ${
-                                isToday
-                                    ? "bg-red-500 font-bold text-white"
-                                    : holidayName
-                                        ? "bg-red-100 font-semibold text-red-500"
-                                        : "text-gray-800"
-                            } ${
-                                index % 7 === 0 ? "text-red-500" : "" /* 일요일 색상 */
-                            } ${
-                                (index + 1) % 7 === 0 ? "text-blue-500" : "" /* 토요일 색상 */
-                            } hover:bg-blue-100`}
-                            title={holidayName || ""}
-                        >
+                        <div key={index} className={getDayClass(day, index)} title={holidayName || ""}>
                             {day}
                             {holidayName && (
                                 <div className="mt-1 text-[10px]">{holidayName}</div>
@@ -112,7 +97,6 @@ const Calendar = () => {
                 })}
             </div>
         </div>
-
     );
 };
 
