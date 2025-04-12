@@ -5,7 +5,6 @@ import React from "react";
 import {
   AccountList,
   AttendanceModal,
-  Calander,
   CountdownTimer,
   GuestBookPage,
   KakaoMarker,
@@ -13,6 +12,7 @@ import {
 } from '@/components';
 import { basePath } from '@/next.config';
 import getCouple from "./common/name";
+import Calendar from "./components/Calander";
 import KakaoNavigation from "./components/KakaoNavigation";
 
 const Home: React.FC = () => {
@@ -72,11 +72,11 @@ const Home: React.FC = () => {
 
             </div>
             <AttendanceModal />
-            <div className="py-10">
-              <h1 className="mb-10 text-2xl font-bold">일정 안내</h1>
-              <Calander />
-              <CountdownTimer />
+            <div className="flex flex-col items-center px-4 py-6 text-center">
+              <h1 className="text-xl font-bold text-center mb-2">예식 안내</h1>
+              <Calendar />
             </div>
+            <CountdownTimer />
             <div className="border-t border-gray-200 py-10">
               <h1 className="mb-10 text-2xl font-bold">오시는길</h1>
               <KakaoMarker />

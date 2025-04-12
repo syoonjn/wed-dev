@@ -6,22 +6,32 @@ html {
     scroll-behavior: smooth;
 }
 
-input, textarea {
-    text-size-adjust: 100%; /* iOS 확대 방지 */
-    font-size: 16px; /* iOS Safari 확대 방지 */
+body {
+    user-select: none;
+}
+
+input,
+textarea {
+    text-size-adjust: 100%;
+    /* iOS 확대 방지 */
+    font-size: 16px;
+    /* iOS Safari 확대 방지 */
 }
 
 /* 초기 상태는 보이지 않게 하고, 아래로 내려둠 */
 .scroll-animate {
     opacity: 0;
-    transform: translateY(30px); /* 화면 밖으로 내려놓기 */
-    transition: opacity 1s ease, transform 1s ease; /* 1초에 걸쳐 부드럽게 변화 */
+    transform: translateY(30px);
+    /* 화면 밖으로 내려놓기 */
+    transition: opacity 1s ease, transform 1s ease;
+    /* 1초에 걸쳐 부드럽게 변화 */
 }
 
 /* 화면에 보일 때 애니메이션을 트리거 */
 .scroll-animate.visible {
     opacity: 1;
-    transform: translateY(0); /* 원래 위치로 돌아옴 */
+    transform: translateY(0);
+    /* 원래 위치로 돌아옴 */
 }
 
 .modal-content {
@@ -39,40 +49,51 @@ input, textarea {
     z-index: 9999;
     right: 8px;
 }
+
 .topBtn {
     font-size: 3rem;
     color: #4b5563 !important;
 }
+
 .countdown-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px; /* 기본 폰트 크기 */
+    font-size: 16px;
+    /* 기본 폰트 크기 */
 }
 
 .time-box {
     background: #F8D9D9;
-    padding: 8px 16px; /* 크기 축소 */
-    border-radius: 6px; /* 모서리 둥글기 축소 */
-    margin: 0 4px; /* 간격 축소 */
+    padding: 8px 16px;
+    /* 크기 축소 */
+    border-radius: 6px;
+    /* 모서리 둥글기 축소 */
+    margin: 0 4px;
+    /* 간격 축소 */
     text-align: center;
-    font-size: 14px; /* 박스 내부 폰트 크기 축소 */
+    font-size: 14px;
+    /* 박스 내부 폰트 크기 축소 */
 }
 
 .time-box span {
-    font-size: 18px; /* 숫자 폰트 크기 축소 */
+    font-size: 18px;
+    /* 숫자 폰트 크기 축소 */
     font-weight: bold;
     display: block;
     margin-bottom: 4px;
 }
 
 .time-box div {
-    font-size: 12px; /* 단위 폰트 크기 축소 */
-    color: #6B7280; /* 그레이 색상 적용 */
+    font-size: 12px;
+    /* 단위 폰트 크기 축소 */
+    color: #6B7280;
+    /* 그레이 색상 적용 */
 }
 
 .separator {
-    font-size: 24px; /* 콜론 크기 */
+    font-size: 24px;
+    /* 콜론 크기 */
     font-weight: bold;
     margin: 0 2px;
 }

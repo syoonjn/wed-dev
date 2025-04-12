@@ -14,10 +14,6 @@ const Calendar = () => {
 
     const weddingDay = new Date(weddingDate);
 
-    const handleMonthChange = (offset: number) => {
-        setCurrentDate(new Date(year, month + offset, 1));
-    };
-
     const formatDate = (day: string) =>
         `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
@@ -37,51 +33,31 @@ const Calendar = () => {
         const isSaturday = (index + 1) % 7 === 0;
 
         return `
-      cursor-pointer rounded p-2
-      ${isWeddingDay ? "bg-red-500 font-bold text-white" : ""}
-      ${!isWeddingDay && holidayName ? "bg-red-100 font-semibold text-red-500" : ""}
-      ${!isWeddingDay && !holidayName ? "text-gray-800" : ""}
-      ${isSunday ? "text-red-500" : ""}
-      ${isSaturday ? "text-blue-500" : ""}
-      hover:bg-blue-100
-    `;
+        cursor-pointer rounded-full p-2 
+        ${isWeddingDay ? "bg-red-500 text-white font-bold rounded-full w-9 h-9 flex items-center justify-center mx-auto" : ""}
+        ${!isWeddingDay && holidayName ? "bg-red-100 font-semibold text-red-500" : ""}
+        ${!isWeddingDay && !holidayName ? "text-gray-800" : ""}
+        ${isSunday ? "text-red-500" : ""}
+        ${isSaturday ? "text-blue-500" : ""}
+        hover:bg-blue-100`;
     };
 
     return (
-        <div className="mx-auto max-w-lg bg-white p-6">
-            {/* 헤더 */}
-            <div className="mb-4 flex items-center justify-between">
-                <button
-                    onClick={() => handleMonthChange(-1)}
-                    className="rounded-full bg-gray-200 p-1 hover:bg-gray-300"
-                >
-                    &lt;
-                </button>
-                <h2 className="text-2xl font-bold text-gray-800">
-                    {currentDate.toLocaleDateString("ko-KR", {
-                        year: "numeric",
-                        month: "long",
-                    })}
-                </h2>
-                <button
-                    onClick={() => handleMonthChange(1)}
-                    className="rounded-full bg-gray-200 p-1 hover:bg-gray-300"
-                >
-                    &gt;
-                </button>
-            </div>
+        <div className="mx-auto max-w-lg bg-white">
 
-            {/* 요일 헤더 */}
-            <div className="mb-2 grid grid-cols-7 text-center text-sm font-semibold text-gray-500">
-                <div className="text-red-500">일</div>
-                <div>월</div>
-                <div>화</div>
-                <div>수</div>
-                <div>목</div>
-                <div>금</div>
-                <div className="text-blue-500">토</div>
+            <div className="w-full max-w-xs sm:max-w-sm">
+                <div className="text-left font-semibold text-gray-800 mb-2 py-2">삼월 스물여덟번째</div>
+                <div className="border-t border-gray-200 py-2"></div>
+                <div className="mb-2 grid grid-cols-7 text-center text-sm font-semibold text-gray-500">
+                    <div className="text-red-500">일</div>
+                    <div>월</div>
+                    <div>화</div>
+                    <div>수</div>
+                    <div>목</div>
+                    <div>금</div>
+                    <div className="text-blue-500">토</div>
+                </div>
             </div>
-
             {/* 날짜 렌더링 */}
             <div className="grid grid-cols-7 text-center text-sm">
                 {days.map((day, index) => {

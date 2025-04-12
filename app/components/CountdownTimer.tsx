@@ -46,24 +46,25 @@ const CountdownTimer: React.FC = () => {
                     <span>{timeLeft.days}</span>
                     <div>Days</div> {/* 색상 및 폰트 수정 */}
                 </div>
-                <div className="separator">:</div>
+                <div className="separator"></div>
                 <div className="time-box">
                     <span>{timeLeft.hours}</span>
                     <div>Hour</div>
                 </div>
-                <div className="separator">:</div>
+                <div className="separator"></div>
                 <div className="time-box">
                     <span>{timeLeft.minutes}</span>
                     <div>Min</div>
                 </div>
-                <div className="separator">:</div>
+                <div className="separator"></div>
                 <div className="time-box">
                     <span>{timeLeft.seconds}</span>
                     <div>Sec</div>
                 </div>
             </div>
             <h1 className="text-center text-lg font-bold">
-                {`${groomFirstName} ❤ ${brideFirstName}의 결혼식이 ${timeLeft.days}일 남았습니다`}
+                {`${groomFirstName} ❤ ${brideFirstName}의 결혼식이`}<br />
+                {`${timeLeft.days}일 남았습니다`}
             </h1>
         </div>
     );

@@ -1,8 +1,8 @@
 import { Button, Modal } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { HiMail } from "react-icons/hi";
-import GuestBookForm from "./GeustBookForm";
-import GuestBookList from "./GeustBookList";
+import GuestBookForm from "./GuestBookForm";
+import GuestBookList from "./GuestBookList";
 
 export default function GuestBookPage() {
     const [openModal, setOpenModal] = useState(false);
