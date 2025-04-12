@@ -33,6 +33,11 @@ const KakaoNavigation = () => {
     const startKakaoNavi = () => {
         if (!window.Kakao?.Navi) return;
 
+        const storeUrl = isIOS()
+            ? 'https://apps.apple.com/app/id417698849'
+            : 'https://play.google.com/store/apps/details?id=com.locnall.KimGiSa';
+
+        // 앱 실행 시도
         window.Kakao.Navi.start({
             name: DESTINATION.name,
             x: DESTINATION.lng,
@@ -40,17 +45,16 @@ const KakaoNavigation = () => {
             coordType: 'wgs84',
         });
 
-        const storeUrl = isIOS()
-            ? 'https://apps.apple.com/app/id417698849'
-            : 'https://play.google.com/store/apps/details?id=com.locnall.KimGiSa';
-
-        window.location.href = storeUrl;
-
+        // 1.5초 뒤에도 여전히 이 페이지에 있다면, 앱 실행 실패로 간주
         setTimeout(() => {
-            setRedirectUrl(storeUrl);
-            setShowModal(true);
+            // 페이지가 백그라운드로 안 갔으면 = 앱 실행 안 된거임
+            if (document.visibilityState === 'visible') {
+                setRedirectUrl(storeUrl);
+                setShowModal(true);
+            }
         }, 1500);
     };
+
 
     const openNaverMap = () => {
 
