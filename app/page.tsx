@@ -6,6 +6,7 @@ import {
   AccountList,
   AttendanceModal,
   CountdownTimer,
+  DirectionsSection,
   GuestBookPage,
   KakaoMarker,
   TopButton
@@ -76,18 +77,25 @@ const Home: React.FC = () => {
               <h1 className="text-xl font-bold text-center mb-2">예식 안내</h1>
               <Calendar />
             </div>
-            <CountdownTimer />
+
+            <div className="flex flex-col items-center px-2 py-6 text-center">
+              <CountdownTimer />
+            </div>
             <div className="border-t border-gray-200 py-10">
-              <h1 className="mb-10 text-2xl font-bold">오시는길</h1>
               <KakaoMarker />
               <KakaoNavigation />
             </div>
+            <div>
+              <h1 className="text-xl font-bold text-center mb-2">오시는길</h1>
+              <DirectionsSection />
+
+            </div>
             <div className="border-t border-gray-200 py-10">
-              <h1 className="mb-10 text-2xl font-bold">마음 전하실 곳</h1>
+              <h1 className="text-xl font-bold text-center mb-2">마음 전하실 곳</h1>
               <AccountList />
             </div>
             <div className="border-t border-gray-200 py-10">
-              <h1 className="mb-10 text-2xl font-bold">방명록</h1>
+              <h1 className="text-xl font-bold text-center mb-2">방명록</h1>
               <GuestBookPage />
             </div>
             <TopButton />
