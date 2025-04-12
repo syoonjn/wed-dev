@@ -2,7 +2,8 @@
 
 import { basePath } from '@/next.config';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import InstallRedirectModal from './InstallRedirectModal';
 
 const DESTINATION = {
     name: 'CA웨딩컨벤션',
@@ -11,6 +12,8 @@ const DESTINATION = {
 };
 
 const KakaoNavigation = () => {
+    const [showModal, setShowModal] = useState(false);
+    const [redirectUrl, setRedirectUrl] = useState("");
     useEffect(() => {
         const script = document.createElement('script');
         script.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js';
@@ -37,15 +40,20 @@ const KakaoNavigation = () => {
             coordType: 'wgs84',
         });
 
+        const storeUrl = isIOS()
+            ? 'https://apps.apple.com/app/id417698849'
+            : 'https://play.google.com/store/apps/details?id=com.locnall.KimGiSa';
+
+        window.location.href = storeUrl;
+
         setTimeout(() => {
-            const storeUrl = isIOS()
-                ? 'https://apps.apple.com/app/id417698849'
-                : 'https://play.google.com/store/apps/details?id=com.locnall.KimGiSa';
-            window.location.href = storeUrl;
+            setRedirectUrl(storeUrl);
+            setShowModal(true);
         }, 1500);
     };
 
     const openNaverMap = () => {
+
         const name = encodeURIComponent(DESTINATION.name);
         const appUrl = `nmap://navigation?dlat=${DESTINATION.lat}&dlng=${DESTINATION.lng}&dname=${name}&appname=myweb.app`;
         const storeUrl = isIOS()
@@ -55,8 +63,10 @@ const KakaoNavigation = () => {
         window.location.href = appUrl;
 
         setTimeout(() => {
-            window.location.href = storeUrl;
+            setRedirectUrl(storeUrl);
+            setShowModal(true);
         }, 1500);
+
     };
 
     const openTmap = () => {
@@ -69,7 +79,8 @@ const KakaoNavigation = () => {
         window.location.href = appUrl;
 
         setTimeout(() => {
-            window.location.href = storeUrl;
+            setRedirectUrl(storeUrl);
+            setShowModal(true);
         }, 1500);
     };
 
@@ -95,6 +106,7 @@ const KakaoNavigation = () => {
         },
     ];
 
+
     return (
         <div className="flex flex-col items-center justify-center border-t p-4">
             <div className="flex items-center justify-center border-t p-4">
@@ -118,6 +130,14 @@ const KakaoNavigation = () => {
             <p className="mt-2 text-[12px] text-gray-400">
                 * 위의 각 항목을 누르면 웨딩홀 길안내가 시작됩니다
             </p>
+            <InstallRedirectModal
+                visible={showModal}
+                onClose={() => setShowModal(false)}
+                onConfirm={() => {
+                    setShowModal(false);
+                    window.location.href = redirectUrl;
+                }}
+            />
         </div>
 
     );
