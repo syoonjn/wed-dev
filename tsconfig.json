@@ -22,16 +22,22 @@
       "./node_modules/@types",
       "./node_modules/flowbite"
     ],
-    "types": [], // 특정 타입 정의만 포함
+    "types": [],
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "@/components/*": ["app/components/*"],
-      "@/components": ["app/components"] // 디렉토리 자체 매핑
+      "@/*": [
+        "./*"
+      ],
+      "@/components/*": [
+        "app/components/*"
+      ],
+      "@/components": [
+        "app/components"
+      ] // 디렉토리 자체 매핑
     },
     "target": "ES2017"
   },
@@ -39,11 +45,17 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "types/**/*.d.ts"
+    ".next/types/**/*.ts"
   ],
+  // "include": [
+  //   "next-env.d.ts",
+  //   "**/*.ts",
+  //   "**/*.tsx",
+  //   ".next/types/**/*.ts",
+  //   "types/**/*.d.ts"
+  // ],
   "exclude": [
     "node_modules",
-    "dist",
+    "dist"
   ]
 }

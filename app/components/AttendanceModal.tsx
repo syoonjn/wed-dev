@@ -1,12 +1,12 @@
 'use client';
 
-import { useCookies } from "react-cookie";
-import { useRef, useEffect, useState } from "react";
 import getCouple from "@/app/common/name";
-import { Accordion } from "flowbite-react";
 import { basePath } from "@/next.config";
-import Image from "next/image";
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { Accordion } from "flowbite-react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { useCookies } from "react-cookie";
 
 export default function AttendanceModal() {
     const { groomFullName, brideFullName } = getCouple();
@@ -78,7 +78,7 @@ export default function AttendanceModal() {
                 <div className="text-center">
                     <h2 className="mb-2 text-lg font-bold">🚧주차 동선 안내</h2>
                     <p className="mb-4 text-sm text-gray-600">
-                        오시는 길이 번거로우시지 않도록 미리 안내드려요.<br/>
+                        오시는 길이 번거로우시지 않도록 미리 안내드려요.<br />
                         차량 이용 시 인근 주차장 정보를 참고해 주세요.
                     </p>
 
@@ -104,7 +104,7 @@ export default function AttendanceModal() {
                                     onClick={() => setShowImageModal(true)}
                                 />
                                 <p className="text-xs text-gray-500">
-                                    상가협의회 주차장 : 장재리 1770번지 <br/>
+                                    상가협의회 주차장 : 장재리 1770번지 <br />
                                 </p>
                             </Accordion.Content>
                         </Accordion.Panel>

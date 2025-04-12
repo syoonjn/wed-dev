@@ -7,10 +7,10 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // 데이터 삽입 함수
 export async function insertGuestBookEntry({
-                                               name,
-                                               password,
-                                               contents,
-                                           }: {
+    name,
+    password,
+    contents,
+}: {
     name: string;
     password: string;
     contents: string; // contents로 변경
@@ -48,7 +48,7 @@ export async function checkGuestId(id: number, password: string) {
 
     if (error) throw new Error("ID 조회 실패");
 
-    if(!data) return;
+    if (!data) return;
 
     if (data.password !== password) throw new Error("비밀번호가 일치하지 않습니다.");
 
@@ -57,7 +57,7 @@ export async function checkGuestId(id: number, password: string) {
 
 
 //삭제 로직
-export async function deleteGuestBookRow(id:number) {
+export async function deleteGuestBookRow(id: number) {
     const numericId = typeof id === "string" ? parseInt(id, 10) : id;
 
     const { error } = await supabase.from("guestbook").delete().eq("id", numericId);

@@ -1,8 +1,7 @@
-// context/AlertContext.tsx
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
 import CustomAlert from "@/components/CustomAlert";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 interface AlertContextType {
     showAlert: (message: string, type?: "success" | "info" | "warning" | "error") => void;

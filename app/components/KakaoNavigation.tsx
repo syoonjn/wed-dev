@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
-import Image from "next/image";
 import { basePath } from "@/next.config";
+import Image from "next/image";
+import { useEffect } from "react";
 
 const KakaoNavigation = () => {
     useEffect(() => {

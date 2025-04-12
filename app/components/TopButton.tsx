@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { BsFillArrowUpCircleFill } from 'react-icons/bs'
 
 export default function TopButton() {

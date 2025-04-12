@@ -1,123 +1,103 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import Script from 'next/script';
-import { Map } from 'react-kakao-maps-sdk';
+import React from "react";
 
-import { Alert, Button, Card, DarkThemeToggle, Toast, ToastToggle } from "flowbite-react";
-import { basePath } from '@/next.config';
 import {
-  TopButton,
-  KakaoMarker,
-  Calander,
-  GuestBookPage,
-  CountdownTimer,
   AccountList,
-  AttendanceModal
+  AttendanceModal,
+  Calander,
+  CountdownTimer,
+  GuestBookPage,
+  KakaoMarker,
+  TopButton
 } from '@/components';
-import useObserver from "./hook/useObserver";
+import { basePath } from '@/next.config';
 import getCouple from "./common/name";
-import { formatKoreanDate } from "./common/wedDate";
 import KakaoNavigation from "./components/KakaoNavigation";
 
 const Home: React.FC = () => {
   const { groomFullName, brideFullName } = getCouple();
 
-  const brideName = process.env.NEXT_PUBLIC_BRIDE_NAME || '';
-  const brideMomName = process.env.NEXT_PUBLIC_BRIDE_MOM_NAME || '';
-  const brideFatherName = process.env.NEXT_PUBLIC_BRIDE_FATHER_NAME || '';
-  const groomMomName = process.env.NEXT_PUBLIC_GROOM_MOM_NAME || '';
-  const groomFatherName = process.env.NEXT_PUBLIC_GROOM_FATHER_NAME || '';
-  const groomName = process.env.NEXT_PUBLIC_GROOM_NAME || '';
-
-  const [showIntroText, setShowIntroText] = useState(true);
-  const brideGroomText = `${groomFullName} & ${brideFullName}`;
-  const fullText = [brideGroomText, "초대합니다."];
-
-  const [typedText, setTypedText] = useState("");
-  const [lineIndex, setLineIndex] = useState(0);
-  const [isTop, setIsTop] = useState(true);
-
   return (
-      <main className="relative flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
-        <div>
-          <div className="flex min-h-screen flex-col items-center justify-center bg-white dark:text-white">
-            <main className="w-full max-w-2xl text-center">
-              <div className="border-t border-gray-200 py-10 text-center text-[#3d3d3d]">
-                  {/* 날짜 */}
+    <main className="relative flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
+      <div>
+        <div className="flex min-h-screen flex-col items-center justify-center bg-white dark:text-white">
+          <main className="w-full max-w-2xl text-center">
+            <div className="border-t border-gray-200 py-10 text-center text-[#3d3d3d]">
+              {/* 날짜 */}
               <div className="mb-1 text-[20px] tracking-widest sm:text-[22px] font-light">26 | 03 | 28</div>
               <div className="mb-6 text-xs tracking-[0.25em] text-gray-400 sm:text-sm">SATURDAY</div>
 
-                  {/* 이미지 */}
-                <Image
-                    src={`${basePath}/images/sample.webp`}
-                    alt="티맵"
-                    layout="responsive"
-                    width={500}
-                    height={500}
-                    sizes="(max-width: 768px) 80vw, 300px"
-                    className="mx-auto mb-6 w-full max-w-[300px] rounded"
-                />
+              {/* 이미지 */}
+              <Image
+                src={`${basePath}/images/sample.webp`}
+                alt="티맵"
+                layout="responsive"
+                width={500}
+                height={500}
+                sizes="(max-width: 768px) 80vw, 300px"
+                className="mx-auto mb-6 w-full max-w-[300px] rounded"
+              />
 
 
-                {/* 이름 */}
+              {/* 이름 */}
               <div className="mb-2 text-lg font-[500] tracking-wider text-gray-800">
                 {`${groomFullName}  ｜  ${brideFullName}`}
               </div>
 
-                  {/* 장소, 날짜 */}
-                <div className="mb-8 text-sm sm:text-base text-[#3d3d3d] tracking-wide space-y-2">
-                  <p>2026년 3월 28일 토요일 오후 1시</p>
-                  <p>CA웨딩컨벤션 루체홀</p>
-                </div>
+              {/* 장소, 날짜 */}
+              <div className="mb-8 text-sm sm:text-base text-[#3d3d3d] tracking-wide space-y-2">
+                <p>2026년 3월 28일 토요일 오후 1시</p>
+                <p>CA웨딩컨벤션 루체홀</p>
+              </div>
 
 
-                {/* 초대 문구 */}
-                <p className="text-base font-semibold text-[#744936] mb-6">
-                  소중한 분들을 초대합니다
+              {/* 초대 문구 */}
+              <p className="text-base font-semibold text-[#744936] mb-6">
+                소중한 분들을 초대합니다
+              </p>
+
+              <div className="mx-auto max-w-sm text-[14px] sm:text-[15px] text-[#3d3d3d] tracking-wide space-y-3">
+                <p>살랑이는 바람결에</p>
+                <p>사랑이 묻어나는 계절입니다.</p>
+                <p>
+                  여기 곱고 예쁜 두 사람이 <span className="text-[#b85b52]">사랑</span>을 맺어
                 </p>
+                <p>인생의 반려자가 되려 합니다.</p>
+                <p>새 인생을 시작하는 이 자리에 오셔서</p>
+                <p>
+                  <span className="text-[#b85b52] font-semibold">축복</span>해 주시면 감사하겠습니다.
+                </p>
+              </div>
 
-                <div className="mx-auto max-w-sm text-[14px] sm:text-[15px] text-[#3d3d3d] tracking-wide space-y-3">
-                  <p>살랑이는 바람결에</p>
-                  <p>사랑이 묻어나는 계절입니다.</p>
-                  <p>
-                    여기 곱고 예쁜 두 사람이 <span className="text-[#b85b52]">사랑</span>을 맺어
-                  </p>
-                  <p>인생의 반려자가 되려 합니다.</p>
-                  <p>새 인생을 시작하는 이 자리에 오셔서</p>
-                  <p>
-                    <span className="text-[#b85b52] font-semibold">축복</span>해 주시면 감사하겠습니다.
-                  </p>
-                </div>
-
-              </div>
-              <AttendanceModal/>
-          <div className="py-10">
-                <h1 className="mb-10 text-2xl font-bold">일정 안내</h1>
-                <Calander/>
-                <CountdownTimer />
-              </div>
-              <div className="border-t border-gray-200 py-10">
-                <h1 className="mb-10 text-2xl font-bold">오시는길</h1>
-                <KakaoMarker />
-                <KakaoNavigation />
-              </div>
-              <div className="border-t border-gray-200 py-10">
-                <h1 className="mb-10 text-2xl font-bold">마음 전하실 곳</h1>
-                <AccountList />
-              </div>
-              <div className="border-t border-gray-200 py-10">
-                <h1 className="mb-10 text-2xl font-bold">방명록</h1>
-                <GuestBookPage />
-              </div>
-              <TopButton/>
-            </main>
-            <footer className="w-full max-w-5xl border-t border-gray-200 px-4 py-6 text-center">
-              <p className="text-sm text-gray-500">@copyright socaeri</p>
-            </footer>
-          </div>
+            </div>
+            <AttendanceModal />
+            <div className="py-10">
+              <h1 className="mb-10 text-2xl font-bold">일정 안내</h1>
+              <Calander />
+              <CountdownTimer />
+            </div>
+            <div className="border-t border-gray-200 py-10">
+              <h1 className="mb-10 text-2xl font-bold">오시는길</h1>
+              <KakaoMarker />
+              <KakaoNavigation />
+            </div>
+            <div className="border-t border-gray-200 py-10">
+              <h1 className="mb-10 text-2xl font-bold">마음 전하실 곳</h1>
+              <AccountList />
+            </div>
+            <div className="border-t border-gray-200 py-10">
+              <h1 className="mb-10 text-2xl font-bold">방명록</h1>
+              <GuestBookPage />
+            </div>
+            <TopButton />
+          </main>
+          <footer className="w-full max-w-5xl border-t border-gray-200 px-4 py-6 text-center">
+            <p className="text-sm text-gray-500">@copyright socaeri</p>
+          </footer>
         </div>
-      </main>
+      </div>
+    </main>
   );
 };
 

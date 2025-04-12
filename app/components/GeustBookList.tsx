@@ -1,9 +1,9 @@
 "use client";
 
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react";
-import { checkGuestId, deleteGuestBookRow, fetchGuestBookEntries } from "../lib/api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
+import { deleteGuestBookRow, fetchGuestBookEntries } from "../lib/api";
 
 export default function GuestBookList() {
     const queryClient = useQueryClient();

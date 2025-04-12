@@ -13,13 +13,9 @@ const formatKoreanDate = () => {
     const hours = date.getHours();
     const period = hours >= 12 ? '오후' : '오전';
     const formattedHour = hours % 12 || 12; // Convert 0 to 12 for 12-hour format
-    const minutes = date.getMinutes().toString().padStart(2, '0');
 
     return `${year}년 ${month}월 ${day}일 ${dayOfWeek} ${period} ${formattedHour}시`;
 }
 
-// 사용 예시
-const target = new Date(weddingDate);
-
-export default { weddingDate, targetTime, formatKoreanDate  };
-export { weddingDate, targetTime, formatKoreanDate };
+export default { weddingDate, targetTime, formatKoreanDate };
+export { formatKoreanDate, targetTime, weddingDate };

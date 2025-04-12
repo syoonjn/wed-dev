@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { weddingDate } from "../common/wedDate";
+import { useState } from "react";
 import holidays from "../common/holiday";
+import { weddingDate } from "../common/wedDate";
 
 const Calendar = () => {
     const [currentDate, setCurrentDate] = useState(new Date(weddingDate));

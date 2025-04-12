@@ -1,19 +1,43 @@
+// {
+//   "extends": [
+//     "next/core-web-vitals",
+//     "plugin:tailwindcss/recommended",
+//     "plugin:@typescript-eslint/recommended",
+//     "plugin:@typescript-eslint/recommended-requiring-type-checking",
+//     "prettier"
+//   ],
+//   "plugins": ["tailwindcss", "@typescript-eslint"],
+//   "parser": "@typescript-eslint/parser",
+//   "parserOptions": {
+//     "project": "./tsconfig.json",
+//     "tsconfigRootDir": ".",
+//     "sourceType": "module"
+//   },
+//   "rules": {
+//     "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+//     "@typescript-eslint/no-floating-promises": "warn",
+//     "react-hooks/exhaustive-deps": "warn",
+//     "no-unused-vars": "off"
+//   }
+// }
 {
   "extends": [
     "next/core-web-vitals",
     "plugin:tailwindcss/recommended",
-    "prettier"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended",  // ✅ 이 줄 중요!
+    "prettier"                       // ✅ 이 줄도 충돌 제거용
   ],
-  "plugins": ["tailwindcss"],
-  "settings": {
-    "tailwindcss": {
-      "callees": ["twMerge", "createTheme"],
-      "classRegex": "^(class(Name)|theme)?$"
-    }
+  "plugins": ["tailwindcss", "@typescript-eslint", "prettier"],
+  "rules": {
+    "prettier/prettier": "warn", // ✅ Prettier 룰 위반 시 ESLint가 경고해줌
+    "@typescript-eslint/no-unused-vars": "warn"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    // "project": "./tsconfig.json",
+    // "tsconfigRootDir": ".",
+    "sourceType": "module"
   }
-//  "rules": {
-//    "prettier/prettier": "warn",
-//    "no-unused-vars": "warn",
-//    "react-hooks/exhaustive-deps": "warn"
-//  }
 }

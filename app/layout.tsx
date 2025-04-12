@@ -1,17 +1,13 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import '@/styles/globals.css';
 import pretendard from '@/assets/fonts/font';
+import '@/styles/globals.css';
 import { ThemeModeScript } from "flowbite-react";
-import localFont from 'next/font/local';
-import { queryClient } from "./lib/react-query";
-import ReactQueryProvider from "./lib/ReactQueryProvider";
-import ClientCookiesProvider from './lib/ClientCookiesProvider';
-import { AlertProvider } from "./context/AlertContext";
+import type { Metadata } from "next";
 import getCouple from "./common/name";
 import { formatKoreanDate } from "./common/wedDate";
+import { AlertProvider } from "./context/AlertContext";
+import ClientCookiesProvider from './lib/ClientCookiesProvider';
+import ReactQueryProvider from "./lib/ReactQueryProvider";
 
-const inter = Inter({ subsets: ["latin"] });
 const weddingDate = formatKoreanDate();
 export const metadata: Metadata = {
   title: "Wedding Page HS",
@@ -21,33 +17,33 @@ export const metadata: Metadata = {
 const { groomFullName, brideFullName } = getCouple();
 
 const pageProps = {
-    ogUrl: 'https://syoonjn.github.io/wed-dev/',
-    ogTitle: `${groomFullName} & ${brideFullName} 결혼합니다.`,
-    ogDesc: weddingDate,
-    ogImage: '/wed-dev/images/sample.webp',
+  ogUrl: 'https://syoonjn.github.io/wed-dev/',
+  ogTitle: `${groomFullName} & ${brideFullName} 결혼합니다.`,
+  ogDesc: weddingDate,
+  ogImage: '/wed-dev/images/sample.webp',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-      <html lang="en">
+    <html lang="en">
       <head>
         <ThemeModeScript />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={pageProps.ogUrl} />
         <meta property="og:title" content={pageProps.ogTitle} />
         <meta property="og:description" content={`${pageProps.ogDesc}`} />
         <meta property="og:image" content={pageProps.ogImage} />
       </head>
-        <body className={pretendard.className}>
+      <body className={pretendard.className}>
         <AlertProvider>
-            <ReactQueryProvider>
-                <ClientCookiesProvider>
-                    {children}
-                </ClientCookiesProvider>
-            </ReactQueryProvider>
+          <ReactQueryProvider>
+            <ClientCookiesProvider>
+              {children}
+            </ClientCookiesProvider>
+          </ReactQueryProvider>
         </AlertProvider>
-        </body>
-      </html>
+      </body>
+    </html>
   );
 }

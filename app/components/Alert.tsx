@@ -1,8 +1,7 @@
-// context/AlertContext.tsx
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
 import { Alert as FlowbiteAlert } from "flowbite-react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 interface AlertContextType {
     showAlert: (content: string) => void;
