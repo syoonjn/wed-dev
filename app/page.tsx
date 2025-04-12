@@ -31,7 +31,7 @@ const Home: React.FC = () => {
 
               {/* 이미지 */}
               <Image
-                src={`${basePath}/images/sample.webp`}
+                src={`${basePath}/images/sample.jpg`}
                 alt="티맵"
                 layout="responsive"
                 width={500}
