@@ -12,7 +12,7 @@ const weddingDate = formatKoreanDate();
 const { groomFullName, groomFirstName, brideFullName, brideFirstName } = getCouple();
 
 const baseUrl = 'https://syoonjn.github.io/wed-dev';
-const thumbnail = `${baseUrl}/images/sample.webp`;
+const thumbnail = `${baseUrl}/images/sample.jpg`;
 
 export const metadata: Metadata = {
   title: `${groomFirstName} & ${brideFirstName} 결혼이야기`,
