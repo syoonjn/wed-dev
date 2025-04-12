@@ -25,6 +25,8 @@ const KakaoNavigation = () => {
         document.body.appendChild(script);
     }, []);
 
+    const isIOS = () => /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
     const startKakaoNavi = () => {
         if (!window.Kakao?.Navi) return;
 
@@ -34,29 +36,43 @@ const KakaoNavigation = () => {
             y: DESTINATION.lat,
             coordType: 'wgs84',
         });
+
+        setTimeout(() => {
+            const storeUrl = isIOS()
+                ? 'https://apps.apple.com/app/id417698849'
+                : 'https://play.google.com/store/apps/details?id=com.locnall.KimGiSa';
+            window.location.href = storeUrl;
+        }, 1500);
     };
 
     const openNaverMap = () => {
         const name = encodeURIComponent(DESTINATION.name);
         const appUrl = `nmap://navigation?dlat=${DESTINATION.lat}&dlng=${DESTINATION.lng}&dname=${name}&appname=myweb.app`;
-        const webUrl = `https://map.naver.com/v5/directions/-/-/${DESTINATION.lng},${DESTINATION.lat},${name},PLACE_POI/-?c=15.00,0,0,0,dh`;
+        const storeUrl = isIOS()
+            ? 'https://apps.apple.com/app/id311867728'
+            : 'https://play.google.com/store/apps/details?id=com.nhn.android.nmap';
 
         window.location.href = appUrl;
+
         setTimeout(() => {
-            window.location.href = webUrl;
+            window.location.href = storeUrl;
         }, 1500);
     };
 
     const openTmap = () => {
         const name = encodeURIComponent(DESTINATION.name);
         const appUrl = `tmap://route?goalx=${DESTINATION.lng}&goaly=${DESTINATION.lat}&goalname=${name}&navType=1`;
-        const webUrl = `https://www.tmap.co.kr/tmap2/mobile/main.do`;
+        const storeUrl = isIOS()
+            ? 'https://apps.apple.com/app/id431589174'
+            : 'https://play.google.com/store/apps/details?id=com.skt.tmap.ku';
 
         window.location.href = appUrl;
+
         setTimeout(() => {
-            window.location.href = webUrl;
+            window.location.href = storeUrl;
         }, 1500);
     };
+
 
     const maps = [
         {
