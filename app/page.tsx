@@ -25,6 +25,7 @@ const Home: React.FC = () => {
         <div className="flex min-h-screen flex-col items-center justify-center bg-white dark:text-white">
           <main className="w-full max-w-2xl text-center">
             <div className="border-t border-gray-200 py-10 text-center text-[#3d3d3d]">
+              <h1 className="sr-only">모바일 청첩장 보기</h1>
               {/* 날짜 */}
               <div className="mb-1 text-[20px] tracking-widest sm:text-[22px] font-light">26 | 03 | 28</div>
               <div className="mb-6 text-xs tracking-[0.25em] text-gray-400 sm:text-sm">SATURDAY</div>
