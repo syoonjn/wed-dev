@@ -14,6 +14,7 @@ const DESTINATION = {
 const KakaoNavigation = () => {
     const [showModal, setShowModal] = useState(false);
     const [redirectUrl, setRedirectUrl] = useState("");
+
     useEffect(() => {
         const script = document.createElement('script');
         script.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js';
@@ -30,6 +31,31 @@ const KakaoNavigation = () => {
 
     const isIOS = () => /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
+    const startNavigationApp = ({
+        key,
+        tryAppLaunch,
+        storeUrl,
+    }: {
+        key: string;
+        tryAppLaunch: () => void;
+        storeUrl: string;
+    }) => {
+        if (localStorage.getItem(key) === 'true') {
+            localStorage.removeItem(key);
+            return;
+        }
+
+        tryAppLaunch();
+
+        setTimeout(() => {
+            if (document.visibilityState === 'visible') {
+                localStorage.setItem(key, 'true');
+                setRedirectUrl(storeUrl);
+                setShowModal(true);
+            }
+        }, 1500);
+    };
+
     const startKakaoNavi = () => {
         if (!window.Kakao?.Navi) return;
 
@@ -37,40 +63,34 @@ const KakaoNavigation = () => {
             ? 'https://apps.apple.com/app/id417698849'
             : 'https://play.google.com/store/apps/details?id=com.locnall.KimGiSa';
 
-        // 앱 실행 시도
-        window.Kakao.Navi.start({
-            name: DESTINATION.name,
-            x: DESTINATION.lng,
-            y: DESTINATION.lat,
-            coordType: 'wgs84',
+        startNavigationApp({
+            key: 'kakao-navi-installing',
+            tryAppLaunch: () => {
+                window.Kakao.Navi.start({
+                    name: DESTINATION.name,
+                    x: DESTINATION.lng,
+                    y: DESTINATION.lat,
+                    coordType: 'wgs84',
+                });
+            },
+            storeUrl,
         });
-
-        // 1.5초 뒤에도 여전히 이 페이지에 있다면, 앱 실행 실패로 간주
-        setTimeout(() => {
-            // 페이지가 백그라운드로 안 갔으면 = 앱 실행 안 된거임
-            if (document.visibilityState === 'visible') {
-                setRedirectUrl(storeUrl);
-                setShowModal(true);
-            }
-        }, 1500);
     };
 
-
     const openNaverMap = () => {
-
         const name = encodeURIComponent(DESTINATION.name);
         const appUrl = `nmap://navigation?dlat=${DESTINATION.lat}&dlng=${DESTINATION.lng}&dname=${name}&appname=myweb.app`;
         const storeUrl = isIOS()
             ? 'https://apps.apple.com/app/id311867728'
             : 'https://play.google.com/store/apps/details?id=com.nhn.android.nmap';
 
-        window.location.href = appUrl;
-
-        setTimeout(() => {
-            setRedirectUrl(storeUrl);
-            setShowModal(true);
-        }, 1500);
-
+        startNavigationApp({
+            key: 'naver-map-installing',
+            tryAppLaunch: () => {
+                window.location.href = appUrl;
+            },
+            storeUrl,
+        });
     };
 
     const openTmap = () => {
@@ -80,14 +100,14 @@ const KakaoNavigation = () => {
             ? 'https://apps.apple.com/app/id431589174'
             : 'https://play.google.com/store/apps/details?id=com.skt.tmap.ku';
 
-        window.location.href = appUrl;
-
-        setTimeout(() => {
-            setRedirectUrl(storeUrl);
-            setShowModal(true);
-        }, 1500);
+        startNavigationApp({
+            key: 'tmap-installing',
+            tryAppLaunch: () => {
+                window.location.href = appUrl;
+            },
+            storeUrl,
+        });
     };
-
 
     const maps = [
         {
@@ -109,7 +129,6 @@ const KakaoNavigation = () => {
             alt: '티맵',
         },
     ];
-
 
     return (
         <div className="flex flex-col items-center justify-center border-t p-4">
@@ -143,7 +162,6 @@ const KakaoNavigation = () => {
                 }}
             />
         </div>
-
     );
 };
 
