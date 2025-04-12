@@ -59,16 +59,12 @@ const Home: React.FC = () => {
               </p>
 
               <div className="mx-auto max-w-sm text-[14px] sm:text-[15px] text-[#3d3d3d] tracking-wide space-y-3">
-                <p>살랑이는 바람결에</p>
-                <p>사랑이 묻어나는 계절입니다.</p>
-                <p>
-                  여기 곱고 예쁜 두 사람이 <span className="text-[#b85b52]">사랑</span>을 맺어
-                </p>
-                <p>인생의 반려자가 되려 합니다.</p>
-                <p>새 인생을 시작하는 이 자리에 오셔서</p>
-                <p>
-                  <span className="text-[#b85b52] font-semibold">축복</span>해 주시면 감사하겠습니다.
-                </p>
+                <p><span className="text-[#b85b52] font-semibold">철</span>길처럼 나란히 걸을 인연이</p>
+                <p><span className="text-[#b85b52] font-semibold">호</span>수처럼 깊은 사랑이 되었습니다</p>
+                <p><span className="text-[#b85b52] font-semibold">윤</span>슬처럼 빛나는 미래를 꿈꾸며</p>
+                <p><span className="text-[#b85b52] font-semibold">정</span>들어 이제는 한 사람이 됩니다</p>
+                <p>그 시작의 순간에</p>
+                <p>당신의 미소로 함께해 주세요.</p>
               </div>
 
             </div>
@@ -103,9 +99,9 @@ const Home: React.FC = () => {
           <footer className="w-full max-w-5xl border-t border-gray-200 px-4 py-6 text-center">
             <p className="text-sm text-gray-500">@copyright socaeri</p>
           </footer>
-        </div>
-      </div>
-    </main>
+        </div >
+      </div >
+    </main >
   );
 };
 
