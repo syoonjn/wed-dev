@@ -9,7 +9,12 @@ import { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import { AiOutlineClose } from "react-icons/ai";
 
-export default function AttendanceModal() {
+
+interface AttendanceModalProps {
+    externalTrigger?: boolean;
+    onClose?: () => void;
+}
+export default function AttendanceModal({ externalTrigger = false, onClose }: AttendanceModalProps) {
     const { groomFullName, brideFullName } = getCouple();
     const [cookies, setCookie] = useCookies(["hide-attendance-modal"]);
     const [ready, setReady] = useState(false); // 쿠키 확인 완료 여부
@@ -19,13 +24,24 @@ export default function AttendanceModal() {
 
     useEffect(() => {
         const hide = cookies["hide-attendance-modal"];
-        if (hide) {
-            setShowModal(false);
+        if (!externalTrigger) {
+            setShowModal(!hide);
         } else {
-            setShowModal(true);
+            setShowModal(true); // 외부 트리거로는 무조건 표시
         }
-        setReady(true); // 쿠키 확인 완료
-    }, [cookies]);
+        setReady(true);
+    }, [cookies, externalTrigger]);
+
+    // 공통 닫기 핸들러
+    const handleClose = () => {
+        if (hideToday) handleHideToday();
+        else setShowModal(false);
+
+        // 외부 트리거였으면 부모에 알려줌
+        if (externalTrigger && onClose) {
+            onClose();
+        }
+    };
 
     // 모달 열릴 때 body 스크롤 막기
     const modalRef = useRef<HTMLDivElement>(null);
@@ -67,11 +83,8 @@ export default function AttendanceModal() {
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-base font-semibold text-black">🚧주차 동선 안내</h2>
                     <button
-                        onClick={() => {
-                            if (hideToday) handleHideToday();
-                            else setShowModal(false);
-                        }}
-                        className="text-gray-400 hover:text-gray-600 text-xl"
+                        onClick={handleClose}
+                        className="text-gray-400 hover:text-gray-600 text-2xl"
                     >
                         <AiOutlineClose />
                     </button>
@@ -181,7 +194,7 @@ export default function AttendanceModal() {
                             </div>
                         </div>
                     )}
-                    <div className="mt-4 flex items-center justify-center">
+                    {!externalTrigger && <div className="mt-4 flex items-center justify-center">
                         <label
                             className="flex cursor-pointer items-center gap-2 text-xs text-gray-400"
                             onClick={handleHideToday}
@@ -190,6 +203,7 @@ export default function AttendanceModal() {
                             오늘 하루 보지 않기
                         </label>
                     </div>
+                    }
                 </div>
             </div>
         </div>
