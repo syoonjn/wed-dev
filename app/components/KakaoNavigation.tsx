@@ -1,124 +1,109 @@
-"use client";
+'use client';
 
-import { basePath } from "@/next.config";
-import Image from "next/image";
-import { useEffect } from "react";
+import { basePath } from '@/next.config';
+import Image from 'next/image';
+import { useEffect } from 'react';
+
+const DESTINATION = {
+    name: 'CA웨딩컨벤션',
+    lat: 36.7935047,
+    lng: 127.1047214,
+};
 
 const KakaoNavigation = () => {
     useEffect(() => {
-        // 카카오 SDK 로드 및 초기화
-        const script = document.createElement("script");
-        script.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js";
+        const script = document.createElement('script');
+        script.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js';
         script.integrity =
-            "sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka";
-        script.crossOrigin = "anonymous";
+            'sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka';
+        script.crossOrigin = 'anonymous';
         script.onload = () => {
-            if (window.Kakao) {
+            if (window.Kakao && !window.Kakao.isInitialized?.()) {
                 window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!);
             }
         };
         document.body.appendChild(script);
     }, []);
 
-    const startNavigation = () => {
-        if (!window.Kakao || !window.Kakao.Navi) {
-            return;
-        }
+    const startKakaoNavi = () => {
+        if (!window.Kakao?.Navi) return;
 
         window.Kakao.Navi.start({
-            name: "CA웨딩컨벤션",
-            x: 127.1045231,
-            y: 36.7933843,
-            coordType: "wgs84",
+            name: DESTINATION.name,
+            x: DESTINATION.lng,
+            y: DESTINATION.lat,
+            coordType: 'wgs84',
         });
     };
 
-    const handleClick = () => {
-        const lat = 36.7935047; // 목적지 위도
-        const lng = 127.1047214; // 목적지 경도
-        const name = encodeURIComponent("CA웨딩컨벤션");
-        const appUrl = `nmap://navigation?dlat=${lat}&dlng=${lng}&dname=${name}&appname=myweb.app`;
+    const openNaverMap = () => {
+        const name = encodeURIComponent(DESTINATION.name);
+        const appUrl = `nmap://navigation?dlat=${DESTINATION.lat}&dlng=${DESTINATION.lng}&dname=${name}&appname=myweb.app`;
+        const webUrl = `https://map.naver.com/v5/directions/-/-/${DESTINATION.lng},${DESTINATION.lat},${name},PLACE_POI/-?c=15.00,0,0,0,dh`;
 
-        const webUrl = `https://map.naver.com/v5/directions/-/-/${lng},${lat},${name},PLACE_POI/-?c=15.00,0,0,0,dh`;
-
-        // 모바일에서 네이버 지도 앱으로 연결, 실패 시 웹으로 fallback
         window.location.href = appUrl;
-
-        // 앱 미설치 대비 fallback 타이머
         setTimeout(() => {
             window.location.href = webUrl;
         }, 1500);
     };
 
-    const openTmapNavigation = () => {
-        const lat = 36.7935047; // 목적지 위도
-        const lng = 127.1047214; // 목적지 경도
-        const name = encodeURIComponent("CA웨딩컨벤션");
-
-        // T map 앱 네비게이션 실행 URL
-        const appUrl = `tmap://route?goalx=${lng}&goaly=${lat}&goalname=${name}&navType=1`;
-
-        // fallback: 앱이 없을 경우
+    const openTmap = () => {
+        const name = encodeURIComponent(DESTINATION.name);
+        const appUrl = `tmap://route?goalx=${DESTINATION.lng}&goaly=${DESTINATION.lat}&goalname=${name}&navType=1`;
         const webUrl = `https://www.tmap.co.kr/tmap2/mobile/main.do`;
 
         window.location.href = appUrl;
-
         setTimeout(() => {
             window.location.href = webUrl;
         }, 1500);
     };
 
+    const maps = [
+        {
+            label: '카카오 내비',
+            onClick: startKakaoNavi,
+            icon: `${basePath}/images/kakaomap_basic.png`,
+            alt: '카카오 지도',
+        },
+        {
+            label: '네이버 지도',
+            onClick: openNaverMap,
+            icon: `${basePath}/images/navermap.webp`,
+            alt: '네이버 지도',
+        },
+        {
+            label: '티맵',
+            onClick: openTmap,
+            icon: `${basePath}/images/tmap.svg`,
+            alt: '티맵',
+        },
+    ];
 
     return (
-        <div className="flex items-center justify-center border-t p-4">
-            {/* 네이버 지도 */}
-            <div
-                onClick={startNavigation}
-                className="flex flex-1 cursor-pointer items-center justify-center hover:opacity-80"
-            >
-                <Image
-                    src={`${basePath}/images/kakaomap_basic.png`}
-                    alt="카카오 지도"
-                    width={18}
-                    height={18}
-                />
-                <span className="ml-2 text-sm font-medium text-gray-800">카카오 내비</span>
+        <div className="flex flex-col items-center justify-center border-t p-4">
+            <div className="flex items-center justify-center border-t p-4">
+                {maps.map((map, index) => (
+                    <div key={map.label} className="flex items-center">
+                        <div
+                            onClick={map.onClick}
+                            className="flex flex-1 cursor-pointer items-center justify-center hover:opacity-80"
+                        >
+                            <Image src={map.icon} alt={map.alt} width={18} height={18} />
+                            <span className="ml-2 text-sm font-medium text-gray-800">
+                                {map.label}
+                            </span>
+                        </div>
+                        {index < maps.length - 1 && (
+                            <div className="h-5 w-px bg-gray-300 mx-2" />
+                        )}
+                    </div>
+                ))}
             </div>
-
-            {/* 구분선 */}
-            <div className="h-5 w-px bg-gray-300"></div>
-
-            {/* 카카오 내비 */}
-            <div
-                onClick={handleClick}
-                className="flex flex-1 cursor-pointer items-center justify-center hover:opacity-80"
-            >
-                <Image
-                    src={`${basePath}/images/navermap.webp`}
-                    alt="티맵"
-                    width={18}
-                    height={18}
-                />
-                <span className="ml-2 text-sm font-medium text-gray-800">네이버 지도</span>
-            </div>
-
-            {/* 구분선 */}
-            <div className="h-5 w-px bg-gray-300"></div>
-
-            {/* 티맵 */}
-            <div
-                onClick={openTmapNavigation}
-                className="flex flex-1 cursor-pointer items-center justify-center hover:opacity-80"
-            >
-                <Image
-                    src={`${basePath}/images/tmap.svg`}
-                    alt="네이버 지도"
-                    width={18}
-                    height={18}
-                />
-                <span className="ml-2 text-sm font-medium text-gray-800">티맵</span>
-            </div>
+            <p className="mt-2 text-[12px] text-gray-400">
+                * 위의 각 항목을 누르면 웨딩홀 길안내가 시작됩니다
+            </p>
         </div>
+
     );
 };
 
