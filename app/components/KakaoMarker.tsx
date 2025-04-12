@@ -1,5 +1,6 @@
 'use client';
 
+import { Loader } from 'lucide-react';
 import { useEffect, useState } from "react";
 import { Map, MapMarker, ZoomControl } from "react-kakao-maps-sdk";
 
@@ -15,32 +16,35 @@ const KakaoMarker = () => {
 
         script.addEventListener("load", () => {
             setScriptLoad(true);
-        })
-
+        });
     }, []);
-
 
     return (
         <div className="mt-4 flex w-full flex-col items-center justify-center">
             {scriptLoad ? (
                 <Map
                     center={{ lat: 36.7933843, lng: 127.1045231 }}
-                    style={{ width: '100%', maxWidth: '500px', height: '300px', borderRadius: '10px' }}
+                    style={{
+                        width: '100%',
+                        maxWidth: '500px',
+                        height: '300px',
+                        borderRadius: '10px',
+                    }}
                     level={4}
                     draggable={false}
                 >
                     <ZoomControl position={kakao.maps.ControlPosition && kakao.maps.ControlPosition.RIGHT} />
-                    <MapMarker position={{ lat: 36.7933843, lng: 127.1045231 }}
-                    />
+                    <MapMarker position={{ lat: 36.7933843, lng: 127.1045231 }} />
                 </Map>
             ) : (
-                <div className="flex h-[300px] w-full max-w-[500px] items-center justify-center bg-gray-300">
-                    <p>지도를 불러오는 중...</p>
+                <div
+                    className="flex items-center justify-center w-full max-w-[500px] h-[300px] rounded-[10px] bg-white"
+                >
+                    <Loader className="w-9 h-9 animate-spin text-red-400" />
                 </div>
             )}
         </div>
-
-    )
-}
+    );
+};
 
 export default KakaoMarker;
