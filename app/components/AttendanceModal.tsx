@@ -89,12 +89,42 @@ export default function AttendanceModal() {
                     <div className="mb-5 text-sm text-gray-700">📍 CA 웨딩컨벤션 루체홀</div>
 
                     {/* 아코디언 */}
-                    <Accordion alwaysOpen collapseAll>
+                    <Accordion>
                         <Accordion.Panel>
                             <Accordion.Title className="text-sm font-medium text-gray-700">
-                                주차장 위치 보기
+                                📹 주차 위치 가이드 영상
                             </Accordion.Title>
-                            <Accordion.Content className="block">
+                            <Accordion.Content className="space-y-3">
+                                <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg">
+                                    <iframe
+                                        className="absolute top-0 left-0 w-full h-full"
+                                        src="https://www.youtube.com/embed/t9ak-LFARbA"
+                                        title="YouTube video player"
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    ></iframe>
+                                </div>
+                                <p className="text-xs text-gray-500 leading-relaxed space-y-1">
+                                    <span className="block font-semibold text-[#b85b52]">📌 주차장 위치 안내</span>
+                                    <span className="block">
+                                        [도보 5분] 와이몰 주차장 &gt;
+                                        <span className="text-gray-700 font-medium"> 주소: "장재리 2023번지"</span>
+                                    </span>
+                                    <span className="block">
+                                        [도보 3~7분] 상가협의회 주차장 &gt;
+                                        <span className="text-gray-700 font-medium"> 주소: "장재리 1770번지"</span>
+                                    </span>
+                                </p>
+
+
+                            </Accordion.Content>
+                        </Accordion.Panel>
+                        <Accordion.Panel>
+                            <Accordion.Title className="text-sm font-medium text-gray-700">
+                                🗺️ CA웨딩 주차장 안내도
+                            </Accordion.Title>
+                            <Accordion.Content>
                                 <Image
                                     src={`${basePath}/images/comming_parking.png`}
                                     alt="주차장 위치"
@@ -103,8 +133,16 @@ export default function AttendanceModal() {
                                     className="w-full rounded-md mb-2 cursor-pointer"
                                     onClick={() => setShowImageModal(true)}
                                 />
-                                <p className="text-xs text-gray-500">
-                                    상가협의회 주차장 : 장재리 1770번지 <br />
+                                <p className="text-xs text-gray-500 leading-relaxed space-y-1">
+                                    <span className="block font-semibold text-[#b85b52]">📌 주차장 위치 안내</span>
+                                    <span className="block">
+                                        [도보 5분] 와이몰 주차장 &gt;
+                                        <span className="text-gray-700 font-medium"> 주소: "장재리 2023번지"</span>
+                                    </span>
+                                    <span className="block">
+                                        [도보 3~7분] 상가협의회 주차장 &gt;
+                                        <span className="text-gray-700 font-medium"> 주소: "장재리 1770번지"</span>
+                                    </span>
                                 </p>
                             </Accordion.Content>
                         </Accordion.Panel>
