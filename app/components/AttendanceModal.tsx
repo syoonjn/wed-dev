@@ -7,6 +7,7 @@ import { Accordion } from "flowbite-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
+import { AiOutlineClose } from "react-icons/ai";
 
 export default function AttendanceModal() {
     const { groomFullName, brideFullName } = getCouple();
@@ -63,7 +64,8 @@ export default function AttendanceModal() {
     return (
         <div ref={modalRef} className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4">
             <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg">
-                <div className="flex justify-end">
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-base font-semibold text-black">🚧주차 동선 안내</h2>
                     <button
                         onClick={() => {
                             if (hideToday) handleHideToday();
@@ -71,12 +73,10 @@ export default function AttendanceModal() {
                         }}
                         className="text-gray-400 hover:text-gray-600 text-xl"
                     >
-                        &times;
+                        <AiOutlineClose />
                     </button>
                 </div>
-
                 <div className="text-center">
-                    <h2 className="mb-2 text-lg font-bold">🚧주차 동선 안내</h2>
                     <p className="mb-4 text-sm text-gray-600">
                         오시는 길이 번거로우시지 않도록 미리 안내드려요.<br />
                         차량 이용 시 인근 주차장 정보를 참고해 주세요.
@@ -91,7 +91,7 @@ export default function AttendanceModal() {
                     {/* 아코디언 */}
                     <Accordion>
                         <Accordion.Panel>
-                            <Accordion.Title className="text-sm font-medium text-gray-700">
+                            <Accordion.Title className="text-sm font-medium text-gray-700 py-2 px-3 leading-tight">
                                 📹 주차 위치 가이드 영상
                             </Accordion.Title>
                             <Accordion.Content className="space-y-3">
@@ -108,12 +108,12 @@ export default function AttendanceModal() {
                                 <p className="text-xs text-gray-500 leading-relaxed space-y-1">
                                     <span className="block font-semibold text-[#b85b52]">📌 주차장 위치 안내</span>
                                     <span className="block">
-                                        [도보 5분] 와이몰 주차장 &gt;
-                                        <span className="text-gray-700 font-medium"> 주소: "장재리 2023번지"</span>
+                                        [도보 3~6분] 상가협의회 주차장
+                                        <span className="text-gray-700 font-medium"> 주소: "장재리 1770번지"</span>
                                     </span>
                                     <span className="block">
-                                        [도보 3~7분] 상가협의회 주차장 &gt;
-                                        <span className="text-gray-700 font-medium"> 주소: "장재리 1770번지"</span>
+                                        [도보 5분] 와이몰 주차장
+                                        <span className="text-gray-700 font-medium"> 주소: "장재리 2023번지"</span>
                                     </span>
                                 </p>
 
@@ -121,7 +121,7 @@ export default function AttendanceModal() {
                             </Accordion.Content>
                         </Accordion.Panel>
                         <Accordion.Panel>
-                            <Accordion.Title className="text-sm font-medium text-gray-700">
+                            <Accordion.Title className="text-sm font-medium text-gray-700 py-2 px-3 leading-tight">
                                 🗺️ CA웨딩 주차장 안내도
                             </Accordion.Title>
                             <Accordion.Content>
@@ -136,12 +136,12 @@ export default function AttendanceModal() {
                                 <p className="text-xs text-gray-500 leading-relaxed space-y-1">
                                     <span className="block font-semibold text-[#b85b52]">📌 주차장 위치 안내</span>
                                     <span className="block">
-                                        [도보 5분] 와이몰 주차장 &gt;
-                                        <span className="text-gray-700 font-medium"> 주소: "장재리 2023번지"</span>
+                                        [도보 3~6분] 상가협의회 주차장
+                                        <span className="text-gray-700 font-medium"> 주소: "장재리 1770번지"</span>
                                     </span>
                                     <span className="block">
-                                        [도보 3~7분] 상가협의회 주차장 &gt;
-                                        <span className="text-gray-700 font-medium"> 주소: "장재리 1770번지"</span>
+                                        [도보 5분] 와이몰 주차장
+                                        <span className="text-gray-700 font-medium"> 주소: "장재리 2023번지"</span>
                                     </span>
                                 </p>
                             </Accordion.Content>
