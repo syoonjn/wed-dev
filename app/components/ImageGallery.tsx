@@ -41,7 +41,7 @@ export default function CustomSlider() {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
-        loop: false,
+        loop: true,
         initial: 0,
         slides: {
             perView: 1.1,
@@ -78,6 +78,8 @@ export default function CustomSlider() {
                             alt={slide.title}
                             fill
                             className="object-cover"
+                            draggable={false} // 드래그 방지
+                            onContextMenu={(e) => e.preventDefault()} // 꾹 누르기 context menu 방지
                         />
                     </div>
 

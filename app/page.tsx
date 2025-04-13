@@ -37,6 +37,8 @@ const Home: React.FC = () => {
               height={500}
               sizes="(max-width: 768px) 80vw, 300px"
               className="mx-auto mb-6 w-full max-w-[300px] rounded"
+              draggable={false}
+              onContextMenu={(e) => e.preventDefault()}
             />
 
             <div className="mb-2 text-lg font-[500] tracking-wider text-gray-800">
