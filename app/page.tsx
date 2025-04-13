@@ -93,8 +93,8 @@ const Home: React.FC = () => {
             <ImageGallery />
           </div>
 
-          <div className="border-t border-gray-200 py-10">
-            <h1 className="text-xl font-bold text-center mb-2">마음 전하실 곳</h1>
+          <div className="border-t border-gray-200 py-10 px-4 w-full max-w-[95%] sm:max-w-[500px] md:max-w-[600px] mx-auto">
+            <h1 className="text-xl font-bold text-center mb-8">마음 전하실 곳</h1>
             <AccountList />
           </div>
 
