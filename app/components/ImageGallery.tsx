@@ -39,8 +39,6 @@ const slides = [
 
 export default function CustomSlider() {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalIndex, setModalIndex] = useState(0);
 
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
         loop: false,
@@ -74,27 +72,20 @@ export default function CustomSlider() {
             <div ref={sliderRef} className="keen-slider">
                 {slides.map((slide, i) => (
                     <div
-                        key={i}
-                        className="keen-slider__slide bg-white rounded-xl overflow-hidden shadow-lg relative"
-                        style={{ aspectRatio: "3 / 4", maxHeight: "80vh" }} // 💡 중요
-                    >
+                        key={i} className="keen-slider__slide aspect-[3/4] relative rounded-xl overflow-hidden shadow-lg">
                         <Image
                             src={slide.imageUrl}
                             alt={slide.title}
-                            width={600}
-                            height={800}
-                            className="w-full h-full object-cover"
-                            onClick={() => {
-                                setModalIndex(i);
-                                setIsModalOpen(true);
-                            }}
+                            fill
+                            className="object-cover"
                         />
                     </div>
+
                 ))}
             </div>
 
             {/* 좌우 버튼 */}
-            <button
+            < button
                 onClick={() => instanceRef.current?.prev()}
                 className="absolute top-1/2 left-2 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow"
             >

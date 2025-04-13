@@ -7,6 +7,7 @@ import {
     FaParking,
     FaShareAlt,
 } from "react-icons/fa";
+import { getCouple } from "../common/name";
 import AttendanceModal from "./AttendanceModal";
 
 const StickyFooter = () => {
@@ -14,6 +15,7 @@ const StickyFooter = () => {
     const [showShareMenu, setShowShareMenu] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const { brideFirstName, groomFirstName } = getCouple();
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -38,8 +40,8 @@ const StickyFooter = () => {
 
     const handleShare = () => {
         const shareData = {
-            title: "소중한 결혼 소식",
-            text: "우리 결혼해요 💍 함께해 주세요!",
+            title: `${brideFirstName} & ${groomFirstName} 모바일 청첩장`,
+            text: `💍${brideFirstName} & ${groomFirstName} 결혼합니다`,
             url: window.location.href,
         };
 
