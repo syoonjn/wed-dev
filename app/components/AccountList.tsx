@@ -1,5 +1,6 @@
 "use client";
 
+import { basePath } from "@/next.config";
 import { Accordion } from "flowbite-react";
 import { Clipboard } from "lucide-react";
 import { useState } from "react";
@@ -65,7 +66,7 @@ export default function AccountList() {
                 {
                     (acc.key === 'groom' || acc.key === 'bride') && <button onClick={() => handleClick(acc.key)}>
                         <img
-                            src="/images/btn_send_small.png"
+                            src={`${basePath}/images/btn_send_small.png`}
                             alt="카카오 송금"
                             className="h-8 w-auto"
                         />
