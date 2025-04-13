@@ -107,7 +107,7 @@ const StickyFooter = () => {
             {/* 실제 footer */}
             {showFooter && (
                 <footer className="fixed bottom-0 left-0 w-full z-50 bg-white border-t border-gray-200 rounded-t-xl shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
-                    <div className="mx-auto flex max-w-md items-center justify-between px-4 py-5">
+                    <div className="mx-auto flex max-w-md items-center justify-between px-4 py-6">
                         {/* 참석 */}
                         <button className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition">
                             <FaCalendarCheck className="text-[18px] mb-1" />
