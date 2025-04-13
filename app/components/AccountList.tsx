@@ -13,7 +13,7 @@ const groomFatherName = process.env.NEXT_PUBLIC_GROOM_FATHER_NAME || '';
 const groomName = process.env.NEXT_PUBLIC_GROOM_NAME || '';
 const brideQrLink = process.env.NEXT_PUBLIC_BRIDE_KAKAO_QR_LINK || '';
 
-const accounts = {
+const accounts: { groom: AccountItem[]; bride: AccountItem[] } = {
     groom: [
         { bank: "신한", account: "111-235-567890", name: groomName, key: 'groom', kakaoLink: brideQrLink },
         { bank: "신한", account: "111-236-567890", name: groomFatherName, key: 'g_father' },
@@ -26,10 +26,19 @@ const accounts = {
     ],
 };
 
+type AccountItem = {
+    bank: string;
+    account: string;
+    name: string;
+    key: string;
+    kakaoLink?: string;
+};
+
 export default function AccountList() {
     const [copied, setCopied] = useState<Record<string, boolean>>({});
 
     const handleClick = (kakaoLink: string) => {
+        console.log('NEXT_PUBLIC_BRIDE_KAKAO_QR_LINK =>', kakaoLink);
         const link = `https://qr.kakaopay.com/${kakaoLink}`;
         window.open(link, "_blank");
 
@@ -51,7 +60,7 @@ export default function AccountList() {
         setTimeout(() => setCopied((prev) => ({ ...prev, [account]: false })), 2000);
     };
 
-    const renderAccountItem = (acc: { bank: string; account: string; name: string, key: string }, index: number) => (
+    const renderAccountItem = (acc: AccountItem, index: number) => (
         <div
             key={index}
             className="mb-2 flex flex-col rounded-lg border border-gray-200 p-4"
@@ -64,7 +73,7 @@ export default function AccountList() {
             <div className="flex gap-2 justify-end">
                 {/* 카카오 송금 버튼 */}
                 {
-                    (acc.key === 'groom' || acc.key === 'bride') && <button onClick={() => handleClick(acc.key)}>
+                    (acc.key === 'groom' || acc.key === 'bride') && <button onClick={() => handleClick(acc.kakaoLink ?? '')}>
                         <img
                             src={`${basePath}/images/btn_send_small.png`}
                             alt="카카오 송금"
