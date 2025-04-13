@@ -71,18 +71,17 @@ export default function CustomSlider() {
             {/* 슬라이더 */}
             <div ref={sliderRef} className="keen-slider">
                 {slides.map((slide, i) => (
-                    <div
-                        key={i} className="keen-slider__slide aspect-[3/4] relative rounded-xl overflow-hidden shadow-lg">
+                    <div className="keen-slider__slide relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg w-full max-h-screen flex-shrink-0">
                         <Image
                             src={slide.imageUrl}
                             alt={slide.title}
                             fill
                             className="object-cover"
-                            draggable={false} // 드래그 방지
-                            onContextMenu={(e) => e.preventDefault()} // 꾹 누르기 context menu 방지
+                            draggable={false}
+                            onContextMenu={(e) => e.preventDefault()}
+                            style={{ WebkitTouchCallout: "none" }}
                         />
                     </div>
-
                 ))}
             </div>
 
