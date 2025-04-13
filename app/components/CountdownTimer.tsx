@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import getCouple from '../common/name';
+import { getCouple } from '../common/name';
 import { targetTime } from '../common/wedDate';
 
 const CountdownTimer: React.FC = () => {

@@ -46,7 +46,7 @@ const Calendar = () => {
         <div className="mx-auto max-w-lg bg-white">
 
             <div className="w-full max-w-xs sm:max-w-sm">
-                <div className="text-left font-semibold text-gray-800 mb-2 py-2">삼월 스물여덟번째</div>
+                <div className="text-center font-semibold text-gray-800 mb-2 py-2">3월</div>
                 <div className="border-t border-gray-200 py-2"></div>
                 <div className="mb-2 grid grid-cols-7 text-center text-sm font-semibold text-gray-500">
                     <div className="text-red-500">일</div>

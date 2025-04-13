@@ -1,6 +1,6 @@
 'use client';
 
-import getCouple from "@/app/common/name";
+import { getCouple } from "@/app/common/name";
 import { basePath } from "@/next.config";
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { Accordion } from "flowbite-react";

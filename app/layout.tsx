@@ -2,7 +2,7 @@ import pretendard from '@/assets/fonts/font';
 import '@/styles/globals.css';
 import { ThemeModeScript } from "flowbite-react";
 import type { Metadata } from "next";
-import getCouple from "./common/name";
+import { getCouple } from "./common/name";
 import { formatKoreanDate } from "./common/wedDate";
 import { AlertProvider } from "./context/AlertContext";
 import ClientCookiesProvider from './lib/ClientCookiesProvider';
