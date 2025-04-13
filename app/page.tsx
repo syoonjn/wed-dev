@@ -32,7 +32,7 @@ const Home: React.FC = () => {
 
               {/* 이미지 */}
               <Image
-                src={`${basePath}/images/sample.jpg`}
+                src={`${basePath}/images/wedding-sample.png`}
                 alt="티맵"
                 layout="responsive"
                 width={500}
