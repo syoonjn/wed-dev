@@ -4,17 +4,16 @@ import React from "react";
 
 import {
   AccountList,
-  AttendanceModal,
   CountdownTimer,
   DirectionsSection,
   GuestBookPage,
-  KakaoMarker,
-  TopButton
+  KakaoMarker
 } from '@/components';
 import { basePath } from '@/next.config';
 import getCouple from "./common/name";
 import Calendar from "./components/Calander";
 import KakaoNavigation from "./components/KakaoNavigation";
+import StickyFooter from "./components/StickyFooter";
 
 const Home: React.FC = () => {
   const { groomFullName, brideFullName } = getCouple();
@@ -69,7 +68,7 @@ const Home: React.FC = () => {
               </div>
 
             </div>
-            <AttendanceModal />
+            {/* <AttendanceModal /> */}
             <div className="flex flex-col items-center px-4 py-6 text-center">
               <h1 className="text-xl font-bold text-center mb-2">예식 안내</h1>
               <Calendar />
@@ -95,11 +94,11 @@ const Home: React.FC = () => {
               <h1 className="text-xl font-bold text-center mb-2">방명록</h1>
               <GuestBookPage />
             </div>
-            <TopButton />
           </main>
-          <footer className="w-full max-w-5xl border-t border-gray-200 px-4 py-6 text-center">
+          <footer className="w-full max-w-5xl border-t border-gray-200 px-4 py-2 text-center">
             <p className="text-sm text-gray-500">@copyright socaeri</p>
           </footer>
+          <StickyFooter />
         </div >
       </div >
     </main >

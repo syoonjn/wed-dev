@@ -121,11 +121,11 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                                 <p className="text-xs text-gray-500 leading-relaxed space-y-1">
                                     <span className="block font-semibold text-[#b85b52]">📌 주차장 위치 안내</span>
                                     <span className="block">
-                                        [도보 3~6분] 상가협의회 주차장
+                                        상가협의회 주차장
                                         <span className="text-gray-700 font-medium"> 주소: "장재리 1770번지"</span>
                                     </span>
                                     <span className="block">
-                                        [도보 5분] 와이몰 주차장
+                                        와이몰 주차장
                                         <span className="text-gray-700 font-medium"> 주소: "장재리 2023번지"</span>
                                     </span>
                                 </p>
@@ -149,11 +149,11 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                                 <p className="text-xs text-gray-500 leading-relaxed space-y-1">
                                     <span className="block font-semibold text-[#b85b52]">📌 주차장 위치 안내</span>
                                     <span className="block">
-                                        [도보 3~6분] 상가협의회 주차장
+                                        상가협의회 주차장
                                         <span className="text-gray-700 font-medium"> 주소: "장재리 1770번지"</span>
                                     </span>
                                     <span className="block">
-                                        [도보 5분] 와이몰 주차장
+                                        와이몰 주차장
                                         <span className="text-gray-700 font-medium"> 주소: "장재리 2023번지"</span>
                                     </span>
                                 </p>
