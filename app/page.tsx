@@ -95,7 +95,7 @@ const Home: React.FC = () => {
               <GuestBookPage />
             </div>
           </main>
-          <footer className="w-full max-w-5xl border-t border-gray-200 px-4 py-2 text-center">
+          <footer className="w-full max-w-5xl border-t border-gray-200 px-4 py-2 text-center pb-[72px]">
             <p className="text-sm text-gray-500">@copyright socaeri</p>
           </footer>
           <StickyFooter />
