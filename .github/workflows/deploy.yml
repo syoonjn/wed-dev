@@ -36,6 +36,7 @@ jobs:
           NEXT_PUBLIC_GROOM_NAME: ${{ secrets.NEXT_PUBLIC_GROOM_NAME }}
           NEXT_PUBLIC_GROOM_MOM_NAME: ${{ secrets.NEXT_PUBLIC_GROOM_MOM_NAME }}
           NEXT_PUBLIC_GROOM_FATHER_NAME: ${{ secrets.NEXT_PUBLIC_GROOM_FATHER_NAME }}
+          NEXT_PUBLIC_BRIDE_KAKAO_QR_LINK: ${{ secrets.NEXT_PUBLIC_BRIDE_KAKAO_QR_LINK }}
 
 
         run: npm run build
