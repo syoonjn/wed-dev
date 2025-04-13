@@ -36,6 +36,25 @@ const StickyFooter = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const handleShare = () => {
+        const shareData = {
+            title: "소중한 결혼 소식",
+            text: "우리 결혼해요 💍 함께해 주세요!",
+            url: window.location.href,
+        };
+
+        if (navigator.share) {
+            navigator.share(shareData).catch((err) => {
+                console.error("공유 실패:", err);
+            });
+        } else {
+            // fallback: 카카오톡 공유 or 링크 복사
+            console.log("Web Share API 지원 안함. 카카오톡 공유나 링크 복사 fallback");
+            // 카카오 SDK가 준비되어 있다면 여기에 Kakao.Link.sendDefault() 호출 가능
+        }
+    };
+
+
 
     return (
         <>
@@ -48,42 +67,40 @@ const StickyFooter = () => {
                     className="fixed inset-0 z-30 bg-black/0"
                 />
             )}
-
-            {/* 공유 드롭업 */}
-            {showShareMenu && (
-                <div className="w-full max-w-md mx-auto px-2 sm:px-4">
-                    <div className="fixed bottom-[56px] left-1/2 z-40 w-full max-w-md -translate-x-1/2 px-4">
-                        <div className="rounded-md bg-white/90 backdrop-blur-sm shadow-md border border-gray-200 divide-y divide-gray-200">
-                            <button className="flex w-full items-center gap-2 px-4 py-3 text-sm text-gray-800 hover:bg-gray-100">
-                                📱 카카오톡 공유하기
-                            </button>
-                            <button className="flex w-full items-center gap-2 px-4 py-3 text-sm text-gray-800 hover:bg-gray-100">
-                                🔗 링크 복사하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* 메뉴 드롭업 */}
             {showMenu && (
-                <div className="w-full max-w-md mx-auto px-2 sm:px-4">
-                    <div className="fixed bottom-[56px] left-0 z-40 w-full">
-                        <div className="mx-auto w-full max-w-md px-2 sm:px-4">
-                            <div className="rounded-md bg-white/90 backdrop-blur-sm shadow-md border border-gray-200 divide-y divide-gray-200">
-                                <button className="flex w-full items-center gap-2 px-4 py-3 text-sm text-gray-800 hover:bg-gray-100">
-                                    🏛 예식 안내
+                <>
+                    {/* 오버레이 - 배경 클릭 시 메뉴 닫힘 */}
+                    <div
+                        className="fixed inset-0 z-40 bg-transparent"
+                        onClick={() => {
+                            setShowMenu(false);
+                        }}
+                    />
+
+                    {/* 메뉴 본체 */}
+                    <div className="fixed inset-0 z-50 flex items-end justify-center pointer-events-none">
+                        <div
+                            className="border pointer-events-auto w-full bg-white/90 backdrop-blur-sm rounded-t-2xl px-6 pt-6 pb-24 space-y-4 overflow-y-auto"
+                            style={{
+                                maxHeight: "calc(100vh - 72px)",
+                                minHeight: "fit-content",
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {[
+                                "오시는 길",
+                                "안내사항",
+                            ].map((text) => (
+                                <button
+                                    key={text}
+                                    className="block w-full text-center text-gray-800 text-[15px] font-medium"
+                                >
+                                    {text}
                                 </button>
-                                <button className="flex w-full items-center gap-2 px-4 py-3 text-sm text-gray-800 hover:bg-gray-100">
-                                    🗺 오시는 길
-                                </button>
-                                <button className="flex w-full items-center gap-2 px-4 py-3 text-sm text-gray-800 hover:bg-gray-100">
-                                    📝 방명록 보기
-                                </button>
-                            </div>
+                            ))}
                         </div>
                     </div>
-                </div>
+                </>
             )}
 
 
@@ -120,6 +137,7 @@ const StickyFooter = () => {
                             onClick={() => {
                                 setShowShareMenu((prev) => !prev);
                                 setShowMenu(false);
+                                handleShare();
                             }}
                             className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition"
                         >
