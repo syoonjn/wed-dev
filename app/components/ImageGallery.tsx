@@ -4,7 +4,7 @@
 import { basePath } from "@/next.config";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Loader } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -36,9 +36,21 @@ const slides = [
     },
 ];
 
-
 export default function CustomSlider() {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [loadingStates, setLoadingStates] = useState(
+        Array(slides.length).fill(true)
+    );
+
+    const handleImageLoad = (index: number) => {
+        setLoadingStates((prev) => {
+            const updated = [...prev];
+            updated[index] = false;
+            return updated;
+        });
+    };
+
+
 
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
         loop: true,
@@ -71,7 +83,18 @@ export default function CustomSlider() {
             {/* 슬라이더 */}
             <div ref={sliderRef} className="keen-slider">
                 {slides.map((slide, i) => (
-                    <div className="keen-slider__slide relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg w-full max-h-screen flex-shrink-0">
+                    <div
+                        key={slide.imageUrl}
+                        className="keen-slider__slide relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg w-full max-h-screen flex-shrink-0"
+                    >
+                        {/* 스피너 */}
+                        {loadingStates[i] && (
+                            <div className="absolute inset-0 z-10 flex items-center justify-center bg-white">
+                                <Loader className="w-8 h-8 animate-spin text-red-400" />
+                            </div>
+                        )}
+
+                        {/* 이미지 */}
                         <Image
                             src={slide.imageUrl}
                             alt={slide.title}
@@ -79,10 +102,12 @@ export default function CustomSlider() {
                             className="object-cover"
                             draggable={false}
                             onContextMenu={(e) => e.preventDefault()}
+                            onLoadingComplete={() => handleImageLoad(i)}
                             style={{ WebkitTouchCallout: "none" }}
                         />
                     </div>
                 ))}
+
             </div>
 
             {/* 좌우 버튼 */}
@@ -109,13 +134,6 @@ export default function CustomSlider() {
                     ></div>
                 ))}
             </div>
-            {/* <ImageModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                slides={slides}
-                currentIndex={modalIndex}
-                setCurrentIndex={setModalIndex}
-            /> */}
         </div>
     );
 }

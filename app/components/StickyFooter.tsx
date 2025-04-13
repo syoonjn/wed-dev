@@ -40,8 +40,8 @@ const StickyFooter = () => {
 
     const handleShare = () => {
         const shareData = {
-            title: `${brideFirstName} & ${groomFirstName} 모바일 청첩장`,
-            text: `💍${brideFirstName} & ${groomFirstName} 결혼합니다`,
+            title: `${groomFirstName} & ${brideFirstName} 모바일 청첩장`,
+            text: `💍${groomFirstName} & ${brideFirstName} 결혼합니다`,
             url: window.location.href,
         };
 
