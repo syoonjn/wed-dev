@@ -12,10 +12,11 @@ const groomMomName = process.env.NEXT_PUBLIC_GROOM_MOM_NAME || '';
 const groomFatherName = process.env.NEXT_PUBLIC_GROOM_FATHER_NAME || '';
 const groomName = process.env.NEXT_PUBLIC_GROOM_NAME || '';
 const brideQrLink = process.env.NEXT_PUBLIC_BRIDE_KAKAO_QR_LINK || '';
+const groomQrLink = process.env.NEXT_PUBLIC_GROOM_KAKAO_QR_LINK || '';
 
 const accounts: { groom: AccountItem[]; bride: AccountItem[] } = {
     groom: [
-        { bank: "신한", account: "111-235-567890", name: groomName, key: 'groom', kakaoLink: brideQrLink },
+        { bank: "신한", account: "111-235-567890", name: groomName, key: 'groom', kakaoLink: groomQrLink },
         { bank: "신한", account: "111-236-567890", name: groomFatherName, key: 'g_father' },
         { bank: "신한", account: "111-237-567890", name: groomMomName, key: 'g_mather' },
     ],
