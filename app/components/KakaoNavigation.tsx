@@ -3,7 +3,7 @@
 import { basePath } from '@/next.config';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import InstallRedirectModal from './InstallRedirectModal';
+import MessageModal from './MessageModal';
 
 const DESTINATION = {
     name: 'CA웨딩컨벤션',
@@ -153,13 +153,14 @@ const KakaoNavigation = () => {
             <p className="mt-2 text-[12px] text-gray-400">
                 * 위의 각 항목을 누르면 웨딩홀 길안내가 시작됩니다
             </p>
-            <InstallRedirectModal
+            <MessageModal
                 visible={showModal}
                 onClose={() => setShowModal(false)}
                 onConfirm={() => {
                     setShowModal(false);
                     window.location.href = redirectUrl;
                 }}
+                message={'앱 미설치로 앱 설치 페이지로 이동합니다.'}
             />
         </div>
     );

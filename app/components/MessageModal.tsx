@@ -4,13 +4,14 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { X } from 'lucide-react'; // ✅ 여기!
 import { useEffect, useRef } from 'react';
 
-interface InstallRedirectModalProps {
+interface MessageModalProps {
     visible: boolean;
     onConfirm: () => void;
     onClose: () => void;
+    message: string;
 }
 
-const InstallRedirectModal = ({ visible, onConfirm, onClose }: InstallRedirectModalProps) => {
+const MessageModal = ({ visible, onConfirm, onClose, message }: MessageModalProps) => {
     const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -43,7 +44,7 @@ const InstallRedirectModal = ({ visible, onConfirm, onClose }: InstallRedirectMo
                 </button>
 
                 <p className="text-sm text-gray-700 font-medium">
-                    앱 미설치로 앱 설치 페이지로 이동합니다.
+                    {message || ''}
                 </p>
                 <button
                     onClick={onConfirm}
@@ -56,4 +57,4 @@ const InstallRedirectModal = ({ visible, onConfirm, onClose }: InstallRedirectMo
     );
 };
 
-export default InstallRedirectModal;
+export default MessageModal;

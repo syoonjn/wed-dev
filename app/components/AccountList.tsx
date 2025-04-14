@@ -4,6 +4,7 @@ import { basePath } from "@/next.config";
 import { Accordion } from "flowbite-react";
 import { Clipboard } from "lucide-react";
 import { useState } from "react";
+import MessageModal from "./MessageModal";
 
 const brideName = process.env.NEXT_PUBLIC_BRIDE_NAME || '';
 const brideMomName = process.env.NEXT_PUBLIC_BRIDE_MOM_NAME || '';
@@ -37,11 +38,31 @@ type AccountItem = {
 
 export default function AccountList() {
     const [copied, setCopied] = useState<Record<string, boolean>>({});
+    const [showModal, setShowModal] = useState(false);
+    const [message, setMessage] = useState('');
+    const isIOS = () => {
+        return /iP(hone|od|ad)/.test(navigator.userAgent);
+    };
 
     const handleClick = (kakaoLink: string) => {
         const link = `https://qr.kakaopay.com/${kakaoLink}`;
-        window.location.href = link;
+
+        if (isIOS()) {
+            window.location.href = link;
+        } else {
+            const newWindow = window.open(link, "_blank");
+
+            if (!newWindow || newWindow.closed || typeof newWindow.closed === "undefined") {
+                setMessage('팝업 차단이 되어 있어 카카오 송금 창이 열리지 않았습니다');
+                setShowModal(true);
+            }
+            //  else {
+            //     setMessage('송금 완료 후 이 창은 닫지 마시고 다시 돌아오세요.');
+            //     setShowModal(true);
+            // }
+        }
     };
+
 
     const handleCopy = (accountInfo: string) => {
         navigator.clipboard.writeText(accountInfo);
@@ -84,20 +105,31 @@ export default function AccountList() {
     );
 
     return (
-        <Accordion className="w-full" collapseAll>
-            <Accordion.Panel>
-                <Accordion.Title className="py-3">신랑측 계좌번호</Accordion.Title>
-                <Accordion.Content>
-                    {accounts.groom.map(renderAccountItem)}
-                </Accordion.Content>
-            </Accordion.Panel>
+        <>
+            <Accordion className="w-full" collapseAll>
+                <Accordion.Panel>
+                    <Accordion.Title className="py-3">신랑측 계좌번호</Accordion.Title>
+                    <Accordion.Content>
+                        {accounts.groom.map(renderAccountItem)}
+                    </Accordion.Content>
+                </Accordion.Panel>
 
-            <Accordion.Panel>
-                <Accordion.Title className="py-3">신부측 계좌번호</Accordion.Title>
-                <Accordion.Content>
-                    {accounts.bride.map(renderAccountItem)}
-                </Accordion.Content>
-            </Accordion.Panel>
-        </Accordion>
+                <Accordion.Panel>
+                    <Accordion.Title className="py-3">신부측 계좌번호</Accordion.Title>
+                    <Accordion.Content>
+                        {accounts.bride.map(renderAccountItem)}
+                    </Accordion.Content>
+                </Accordion.Panel>
+            </Accordion>
+            <MessageModal
+                visible={showModal}
+                onClose={() => setShowModal(false)}
+                onConfirm={() => {
+                    setShowModal(false);
+                }}
+                message={message}
+            />
+        </>
+
     );
 }
