@@ -43,10 +43,10 @@ export default function AccountList() {
         window.location.href = link;
     };
 
-    const handleCopy = (account: string) => {
-        navigator.clipboard.writeText(account);
-        setCopied((prev) => ({ ...prev, [account]: true }));
-        setTimeout(() => setCopied((prev) => ({ ...prev, [account]: false })), 2000);
+    const handleCopy = (accountInfo: string) => {
+        navigator.clipboard.writeText(accountInfo);
+        setCopied((prev) => ({ ...prev, [accountInfo]: true }));
+        setTimeout(() => setCopied((prev) => ({ ...prev, [accountInfo]: false })), 2000);
     };
 
     const renderAccountItem = (acc: AccountItem, index: number) => (
@@ -74,7 +74,7 @@ export default function AccountList() {
                 {/* 복사 버튼 */}
                 <button
                     className="flex items-center gap-1 rounded-md bg-gray-100 px-2 py-1 text-sm"
-                    onClick={() => handleCopy(acc.account)}
+                    onClick={() => handleCopy(`${acc.bank} ${acc.account}`)}
                 >
                     <Clipboard size={16} />
                     {copied[acc.account] ? "복사됨!" : "복사"}
@@ -84,16 +84,16 @@ export default function AccountList() {
     );
 
     return (
-        <Accordion className="w-full">
+        <Accordion className="w-full" collapseAll>
             <Accordion.Panel>
-                <Accordion.Title>신랑측 계좌번호</Accordion.Title>
+                <Accordion.Title className="py-3">신랑측 계좌번호</Accordion.Title>
                 <Accordion.Content>
                     {accounts.groom.map(renderAccountItem)}
                 </Accordion.Content>
             </Accordion.Panel>
 
             <Accordion.Panel>
-                <Accordion.Title>신부측 계좌번호</Accordion.Title>
+                <Accordion.Title className="py-3">신부측 계좌번호</Accordion.Title>
                 <Accordion.Content>
                     {accounts.bride.map(renderAccountItem)}
                 </Accordion.Content>
