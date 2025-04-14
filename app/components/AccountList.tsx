@@ -39,21 +39,9 @@ export default function AccountList() {
     const [copied, setCopied] = useState<Record<string, boolean>>({});
 
     const handleClick = (kakaoLink: string) => {
-        console.log('NEXT_PUBLIC_BRIDE_KAKAO_QR_LINK =>', kakaoLink);
         const link = `https://qr.kakaopay.com/${kakaoLink}`;
-        window.open(link, "_blank");
-
-        // window.Kakao.Link.sendDefault({
-        //     objectType: 'text',
-        //     text: '💰 저에게 송금 부탁드려요!\n👇 아래 링크를 눌러 송금해주세요',
-        //     link: {
-        //         mobileWebUrl: link,
-        //         webUrl: link,
-        //     },
-        // });
+        window.location.href = link;
     };
-
-
 
     const handleCopy = (account: string) => {
         navigator.clipboard.writeText(account);
