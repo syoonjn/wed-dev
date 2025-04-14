@@ -77,7 +77,7 @@ export default function AccountList() {
                     onClick={() => handleCopy(`${acc.bank} ${acc.account}`)}
                 >
                     <Clipboard size={16} />
-                    {copied[acc.account] ? "복사됨!" : "복사"}
+                    {copied[`${acc.bank} ${acc.account}`] ? "복사됨!" : "복사"}
                 </button>
             </div>
         </div>
