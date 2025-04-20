@@ -45,24 +45,60 @@ export default function AccountList() {
         return /iP(hone|od|ad)/.test(navigator.userAgent) && isKakao;
     };
 
+    // const handleClick = (kakaoLink: string) => {
+    //     const link = `https://qr.kakaopay.com/${kakaoLink}`;
+
+    //     if (isIOS()) {
+    //         window.location.href = link;
+    //     } else {
+    //         const newWindow = window.open(link, "_blank");
+
+    //         if (!newWindow || newWindow.closed || typeof newWindow.closed === "undefined") {
+    //             setMessage('팝업 차단이 되어 있어 카카오 송금 창이 열리지 않았습니다');
+    //             setShowModal(true);
+    //         }
+    //         //  else {
+    //         //     setMessage('송금 완료 후 이 창은 닫지 마시고 다시 돌아오세요.');
+    //         //     setShowModal(true);
+    //         // }
+    //     }
+    // };
+
     const handleClick = (kakaoLink: string) => {
-        const link = `https://qr.kakaopay.com/${kakaoLink}`;
+        const kakaoPayLink = `https://qr.kakaopay.com/${kakaoLink}`;
+        // const returnPage = `${window.location.origin}/kakao-return`;
 
-        if (isIOS()) {
-            window.location.href = link;
-        } else {
-            const newWindow = window.open(link, "_blank");
+        // 새 창에 중간 페이지를 먼저 열고 → 카카오페이로 리다이렉트
+        const popup = window.open('', '_blank');
 
-            if (!newWindow || newWindow.closed || typeof newWindow.closed === "undefined") {
-                setMessage('팝업 차단이 되어 있어 카카오 송금 창이 열리지 않았습니다');
-                setShowModal(true);
-            }
-            //  else {
-            //     setMessage('송금 완료 후 이 창은 닫지 마시고 다시 돌아오세요.');
-            //     setShowModal(true);
-            // }
+        if (!popup || popup.closed || typeof popup.closed === "undefined") {
+            setMessage('팝업 차단이 되어 있어 카카오 송금 창이 열리지 않았습니다.');
+            setShowModal(true);
+            return;
         }
+
+        // 중간 페이지에서 카카오페이 링크로 이동 후, 다시 돌아와 닫기 유도
+        popup.document.write(`
+            <html>
+            <head><title>카카오페이 송금 중...</title></head>
+            <body style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif;">
+                <div>
+                    <p>카카오페이 송금 페이지로 이동 중입니다...</p>
+                    <script>
+                        setTimeout(() => {
+                            window.location.href = '${kakaoPayLink}';
+                        }, 1000);
+                    </script>
+                </div>
+            </body>
+            </html>
+        `);
+
+        // 모달로도 안내
+        setMessage('송금이 완료되면 새 창이 자동으로 닫힙니다.\n닫히지 않으면 직접 닫아주세요.');
+        setShowModal(true);
     };
+
 
 
     const handleCopy = (accountInfo: string) => {
