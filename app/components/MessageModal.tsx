@@ -1,7 +1,7 @@
 'use client';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import { X } from 'lucide-react'; // ✅ 여기!
+import { X } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 
 interface MessageModalProps {
@@ -42,13 +42,13 @@ const MessageModal = ({ visible, onConfirm, onClose, message }: MessageModalProp
                 >
                     <X className="w-5 h-5" />
                 </button>
-
-                <p className="text-sm text-gray-700 font-medium">
+                <p className="text-sm text-gray-700 font-medium whitespace-pre-line">
                     {message || ''}
                 </p>
+
                 <button
                     onClick={onConfirm}
-                    className="mt-4 w-full rounded-md bg-red-400 px-4 py-2 text-sm text-white hover:bg-pink-600"
+                    className="mt-4 w-full rounded-md bg-red-400 px-4 py-2 text-sm text-white hover:bg-slate-400"
                 >
                     확인
                 </button>

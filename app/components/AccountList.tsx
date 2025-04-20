@@ -39,6 +39,7 @@ type AccountItem = {
 export default function AccountList() {
     const [copied, setCopied] = useState<Record<string, boolean>>({});
     const [showModal, setShowModal] = useState(false);
+    const [pendingKakaoLink, setPendingKakaoLink] = useState<string | null>(null);
     const [message, setMessage] = useState('');
     const isIOS = () => {
         const isKakao = navigator.userAgent.match("KAKAOTALK")
@@ -51,16 +52,9 @@ export default function AccountList() {
         if (isIOS()) {
             window.location.href = link;
         } else {
-            const newWindow = window.open(link, "_blank");
-
-            if (!newWindow || newWindow.closed || typeof newWindow.closed === "undefined") {
-                setMessage('팝업 차단이 되어 있어 카카오 송금 창이 열리지 않았습니다');
-                setShowModal(true);
-            }
-            //  else {
-            //     setMessage('송금 완료 후 이 창은 닫지 마시고 다시 돌아오세요.');
-            //     setShowModal(true);
-            // }
+            setMessage('송금이 완료되면 창을 닫고 \n이 화면으로 돌아와 주세요.');
+            setPendingKakaoLink(link);
+            setShowModal(true);
         }
     };
 
@@ -125,12 +119,26 @@ export default function AccountList() {
             </Accordion>
             <MessageModal
                 visible={showModal}
-                onClose={() => setShowModal(false)}
+                onClose={() => {
+                    setShowModal(false);
+                    setPendingKakaoLink(null);
+                }}
                 onConfirm={() => {
                     setShowModal(false);
+                    if (pendingKakaoLink) {
+                        const newWindow = window.open(pendingKakaoLink, "_blank");
+
+                        if (!newWindow || newWindow.closed || typeof newWindow.closed === "undefined") {
+                            setMessage('팝업 차단이 되어 있어 카카오 송금 창이 열리지 않았습니다.');
+                            setShowModal(true);
+                        }
+
+                        setPendingKakaoLink(null);
+                    }
                 }}
                 message={message}
             />
+
         </>
 
     );
