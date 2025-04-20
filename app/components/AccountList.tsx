@@ -41,7 +41,8 @@ export default function AccountList() {
     const [showModal, setShowModal] = useState(false);
     const [message, setMessage] = useState('');
     const isIOS = () => {
-        return /iP(hone|od|ad)/.test(navigator.userAgent);
+        const isKakao = navigator.userAgent.match("KAKAOTALK")
+        return /iP(hone|od|ad)/.test(navigator.userAgent) && isKakao;
     };
 
     const handleClick = (kakaoLink: string) => {
