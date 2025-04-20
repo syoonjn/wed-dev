@@ -18,15 +18,16 @@ export default function GuestBookPage() {
     }, [openModal]);
 
     return (
-        <div className="mb-4 text-center">
+        <div className="mb-4 text-center max-w-[600px] mx-auto">
             {/* 모달을 여는 버튼 */}
             <Button
-                className="mx-auto mb-8 flex items-center gap-2 rounded-lg bg-[#42382F] px-6 py-3 text-white"
+                className="mx-auto mb-6 flex items-center gap-2 rounded-md bg-[#42382F] px-4 py-2 text-sm text-white sm:text-base hover:bg-[#2e251f]"
                 onClick={() => setOpenModal(true)}
             >
-                <HiMail className="size-5" />
+                <HiMail className="w-4 h-4 sm:w-5 sm:h-5" />
                 축하 메시지 작성하기
             </Button>
+
 
             {/* 모달 */}
             <Modal

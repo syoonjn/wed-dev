@@ -2,7 +2,6 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
 import { deleteGuestBookRow, fetchGuestBookEntries } from "../lib/api";
 
 export default function GuestBookList() {
@@ -36,16 +35,28 @@ export default function GuestBookList() {
     };
 
     return (
-        <div className="flex min-h-screen flex-col items-center p-4">
+        <div className="flex flex-col items-center">
             <ul className="w-full max-w-3xl space-y-4">
                 {visibleEntries.map((entry) => (
-                    <li key={entry.id} className="flex items-start justify-start space-x-3">
-                        <FaUserCircle className="text-5xl text-gray-400" />
-                        <div className="relative mx-auto w-full max-w-2xl rounded-2xl border border-gray-300 bg-white p-4 shadow-md">
-                            <div className="mb-1 text-left text-base font-bold text-gray-700">{`From. ${entry.name}`}</div>
-                            <p className="max-h-[90px] min-h-[30px] w-full whitespace-pre-line rounded-lg bg-gray-100 p-4 text-left text-sm text-gray-800">{entry.contents}</p>
-                            <div className="mt-2 text-right text-xs text-gray-400">{formatDateTime(entry.created_at)}</div>
-                            <button onClick={() => deleteMutation.mutate(entry.id)} className="absolute right-4 top-2 text-lg text-gray-400 hover:text-red-500">✖</button>
+                    <li key={entry.id} className="w-full mb-4">
+                        {/* From. + 삭제버튼 줄 */}
+                        <div className="flex justify-between items-center px-1 mb-1">
+                            <span className="text-sm text-gray-600">{`From. ${entry.name}`}</span>
+                            <button
+                                onClick={() => deleteMutation.mutate(entry.id)}
+                                className="text-sm text-gray-400 hover:text-red-500"
+                            >
+                                ✖
+                            </button>
+                        </div>
+                        <div className="relative flex w-full max-w-[95%] sm:max-w-[500px] md:max-w-[600px] mx-auto pb-[12px]">
+                            <div className="absolute top-3 left-0 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-[#3f3f3f] z-10" />
+                            <div className="ml-3 w-full bg-[#3f3f3f] text-white px-4 py-3 rounded-xl text-sm leading-relaxed whitespace-pre-line break-words text-left">
+                                <span>{entry.contents}</span>
+                                <span className="block mt-2 text-xs text-right text-gray-300">
+                                    {formatDateTime(entry.created_at)}
+                                </span>
+                            </div>
                         </div>
                     </li>
                 ))}
