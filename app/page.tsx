@@ -1,6 +1,8 @@
+// ✅ Home.tsx
 "use client";
+
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 import {
   AccountList,
@@ -16,11 +18,13 @@ import { basePath } from '@/next.config';
 import { REGION } from "./common/constant";
 import { getCouple } from "./common/name";
 import Calendar from "./components/Calander";
+import FloatingHearts from "./components/FloatingHearts";
 import KakaoNavigation from "./components/KakaoNavigation";
 import StickyFooter from "./components/StickyFooter";
 
 const Home: React.FC = () => {
   const { groomFullName, brideFullName } = getCouple();
+  const [showStickyFooter, setShowStickyFooter] = useState(false);
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-800 dark:text-white">
@@ -30,7 +34,9 @@ const Home: React.FC = () => {
             <h1 className="sr-only">모바일 청첩장 보기</h1>
             <div className="mb-1 text-[20px] tracking-widest sm:text-[22px] font-light">26 | 03 | 28</div>
             <div className="mb-6 text-xs tracking-[0.25em] text-gray-400 sm:text-sm">SATURDAY</div>
-
+            <div className="text-2xl">
+              <FloatingHearts isFooterVisible={showStickyFooter} />
+            </div>
             <Image
               src={`${basePath}/images/wedding-sample.png`}
               alt="티맵"
@@ -115,7 +121,7 @@ const Home: React.FC = () => {
           </footer>
         </div>
 
-        <StickyFooter />
+        <StickyFooter setShowFooterState={setShowStickyFooter} />
       </div>
     </main>
   );
