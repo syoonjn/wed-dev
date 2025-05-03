@@ -6,12 +6,11 @@ import { useState } from "react";
 import { checkGuestId, deleteGuestBookRow, fetchGuestBookEntries } from "../lib/api";
 import PasswordValidationModal from "./PasswordValidationModal";
 
-export default function GuestBookList() {
+export default function GuestBookList({ showAll }: { showAll: boolean }) {
     const queryClient = useQueryClient();
 
     const [passwordModalOpen, setPasswordModalOpen] = useState(false);
     const [selectedEntryId, setSelectedEntryId] = useState<number | null>(null);
-    const [showAll, setShowAll] = useState(false);
 
     const { data, isLoading, error } = useQuery(
         {
@@ -34,7 +33,7 @@ export default function GuestBookList() {
     if (error) return <p>에러가 발생했습니다: {(error as Error).message}</p>;
     if (!data || data.length === 0) return <p>방명록이 없습니다. 첫 번째로 작성해보세요!</p>;
 
-    const visibleEntries = showAll ? data : data.slice(0, 5);
+    const visibleEntries = showAll ? data : data?.slice(0, 3);
 
     const formatDateTime = (dateString: string) => {
         const date = new Date(dateString);
@@ -74,16 +73,6 @@ export default function GuestBookList() {
                         </li>
                     ))}
                 </ul>
-                {data.length > 5 && (
-                    <div className="mt-4">
-                        <button
-                            onClick={() => setShowAll((prev) => !prev)}
-                            className="text-blue-500 hover:underline"
-                        >
-                            {showAll ? "간략히 보기" : "전체보기"}
-                        </button>
-                    </div>
-                )}
             </div>
             <PasswordValidationModal
                 passwordModalOpen={passwordModalOpen}
