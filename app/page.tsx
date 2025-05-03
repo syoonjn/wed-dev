@@ -149,11 +149,7 @@ const Home: React.FC = () => {
           </SlideInSection>
 
           <footer className="w-full border-t border-gray-200 px-4 py-2 text-center pb-[100px]">
-            <p className="text-sm text-gray-500">@copyright socaeri</p>
-            <p className="text-[11px] text-gray-400 mt-1 leading-snug">
-              이 영상은 뮤팟에서 제공한 음원 소스를 사용했습니다.<br />
-              Sunlight at the Break of Dawn - Download: mewc.at/songs/6524
-            </p>
+            <p className="text-[11px] text-gray-400 mt-1 leading-snug">@copyright socaeri</p>
           </footer>
         </div>
 
