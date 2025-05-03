@@ -18,6 +18,7 @@ import {
 import { basePath } from '@/next.config';
 import { REGION } from "./common/constant";
 import { getCouple } from "./common/name";
+import BGMPlayer from "./components/BGMPlayer";
 import Calendar from "./components/Calander";
 import FloatingHearts from "./components/FloatingHearts";
 import KakaoNavigation from "./components/KakaoNavigation";
@@ -40,6 +41,7 @@ const Home: React.FC = () => {
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-800 dark:text-white">
+      <BGMPlayer />
       <div className="w-full max-w-md mx-auto px-4">
         <div className="flex flex-col items-center">
           <SlideInSection>
@@ -148,6 +150,10 @@ const Home: React.FC = () => {
 
           <footer className="w-full border-t border-gray-200 px-4 py-2 text-center pb-[100px]">
             <p className="text-sm text-gray-500">@copyright socaeri</p>
+            <p className="text-[11px] text-gray-400 mt-1 leading-snug">
+              이 영상은 뮤팟에서 제공한 음원 소스를 사용했습니다.<br />
+              Sunlight at the Break of Dawn - Download: mewc.at/songs/6524
+            </p>
           </footer>
         </div>
 
