@@ -111,6 +111,16 @@ textarea {
     border: 0;
 }
 
+[role="dialog"] {
+    height: auto !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    [role="dialog"] {
+        background-color: rgba(17, 17, 17, 0.8);
+    }
+}
+
 
 @layer utilities {
     .clip-path-speech-left::before {

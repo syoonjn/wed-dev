@@ -110,7 +110,7 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                             <Accordion.Content className="space-y-3">
                                 <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg">
                                     <iframe
-                                        className="absolute top-0 left-0 w-full h-full"
+                                        className="absolute top-0 left-0 w-full"
                                         src="https://www.youtube.com/embed/t9ak-LFARbA"
                                         title="YouTube video player"
                                         frameBorder="0"

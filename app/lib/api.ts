@@ -38,7 +38,6 @@ export async function fetchGuestBookEntries() {
     return data;
 }
 
-//
 export async function checkGuestId(id: number, password: string) {
     const { data, error } = await supabase
         .from("guestbook")
@@ -50,9 +49,9 @@ export async function checkGuestId(id: number, password: string) {
 
     if (!data) return;
 
-    if (data.password !== password) throw new Error("비밀번호가 일치하지 않습니다.");
+    if (data.password !== password) return false;
 
-    return true; // 비밀번호가 맞다면 true 반환
+    return true;
 }
 
 

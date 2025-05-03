@@ -32,7 +32,7 @@ const MessageModal = ({ visible, onConfirm, onClose, message }: MessageModalProp
     return (
         <div
             ref={modalRef}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4"
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-50 px-4"
         >
             <div className="relative w-full max-w-xs rounded-xl bg-white p-6 pt-10 text-center shadow-lg">
                 <button

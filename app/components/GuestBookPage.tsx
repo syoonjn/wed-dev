@@ -1,21 +1,11 @@
 import { Button, Modal } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HiMail } from "react-icons/hi";
 import GuestBookForm from "./GuestBookForm";
 import GuestBookList from "./GuestBookList";
 
 export default function GuestBookPage() {
     const [openModal, setOpenModal] = useState(false);
-
-    useEffect(() => {
-        if (openModal) {
-            setTimeout(() => {
-                document
-                    .querySelectorAll('[role="dialog"]')
-                    .forEach((el) => el.classList.remove("h-full"));
-            }, 0); // 약간의 지연 추가
-        }
-    }, [openModal]);
 
     return (
         <div className="mb-4 text-center max-w-[600px] mx-auto">
@@ -33,9 +23,9 @@ export default function GuestBookPage() {
             <Modal
                 show={openModal}
                 onClose={() => setOpenModal(false)}
-                className="flex items-center justify-center"
+                className="[&_[role=dialog]]:!h-auto"
             >
-                <div className="relative w-full max-w-2xl !h-auto">
+                <div className="relative w-full max-w-2xl">
                     <Modal.Header className="text-center text-lg font-semibold">
                         축하 메시지 작성하기
                     </Modal.Header>
