@@ -4,13 +4,12 @@ import React from "react";
 
 import {
   AccountList,
+  BrideGroomIntro,
   Bus,
   CountdownTimer,
   DirectionsSection,
-  GuestBookPage,
   ImageGallery,
-  KakaoMarker,
-  ParentInfo
+  KakaoMarker
 } from '@/components';
 import { basePath } from '@/next.config';
 import { REGION } from "./common/constant";
@@ -68,7 +67,8 @@ const Home: React.FC = () => {
               <p>축복해주시면 감사하겠습니다</p>
             </div>
 
-            <ParentInfo />
+            {/* <ParentInfo /> */}
+            <BrideGroomIntro />
           </div>
 
           <div className="flex flex-col items-center py-6 text-center">
@@ -106,8 +106,8 @@ const Home: React.FC = () => {
           </div>
 
           <div className="border-t border-gray-200 py-10 px-4 w-full max-w-[95%] sm:max-w-[500px] md:max-w-[600px] mx-auto">
-            <h1 className="text-xl font-bold text-center mb-8">방명록</h1>
-            <GuestBookPage />
+            <h1 className="text-xl font-bold text-center mb-8">{REGION.GWANGYANG} 출발 전세버스</h1>
+            <Bus />
           </div>
 
           <footer className="w-full border-t border-gray-200 px-4 py-2 text-center pb-[100px]">
