@@ -5,7 +5,6 @@ import { targetTime } from '../common/wedDate';
 const CountdownTimer: React.FC = () => {
     const { brideFirstName, groomFirstName } = getCouple();
 
-
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
         hours: 0,
@@ -40,31 +39,30 @@ const CountdownTimer: React.FC = () => {
     }, [targetTime]);
 
     return (
-        <div className="space-y-6"> {/* 전체 간격 약간 줄임 */}
-            <div className="countdown-container">
-                <div className="time-box">
-                    <span>{timeLeft.days}</span>
-                    <div>Days</div> {/* 색상 및 폰트 수정 */}
-                </div>
-                <div className="separator"></div>
-                <div className="time-box">
-                    <span>{timeLeft.hours}</span>
-                    <div>Hour</div>
-                </div>
-                <div className="separator"></div>
-                <div className="time-box">
-                    <span>{timeLeft.minutes}</span>
-                    <div>Min</div>
-                </div>
-                <div className="separator"></div>
-                <div className="time-box">
-                    <span>{timeLeft.seconds}</span>
-                    <div>Sec</div>
-                </div>
+        <div className="space-y-6">
+            <div className="flex justify-center gap-x-4 text-center">
+                {[
+                    { value: timeLeft.days, label: 'DAYS' },
+                    { value: timeLeft.hours, label: 'HOUR' },
+                    { value: timeLeft.minutes, label: 'MIN' },
+                    { value: timeLeft.seconds, label: 'SEC' },
+                ].map((item, idx, arr) => {
+                    const isLast = idx === arr.length - 1;
+                    const text = item.value.toString().padStart(2, '0') + (isLast ? '' : ' :');
+                    return (
+                        <div key={idx} className="flex flex-col items-center">
+                            <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                                {item.label}
+                            </div>
+                            <span className="text-3xl font-semibold tabular-nums">
+                                {text}
+                            </span>
+                        </div>
+                    );
+                })}
             </div>
-            <h1 className="text-center text-base font-bold">
-                {`${groomFirstName} ❤ ${brideFirstName}의 결혼식이 `}<br />
-                {`${timeLeft.days}일 남았습니다`}
+            <h1 className="text-center text-sm font-medium leading-relaxed text-gray-600">
+                {`${groomFirstName} ❤ ${brideFirstName}의 결혼식이`} {`${timeLeft.days}일 남았습니다`}
             </h1>
         </div>
     );

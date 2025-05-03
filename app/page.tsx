@@ -40,7 +40,7 @@ const Home: React.FC = () => {
   const [showStickyFooter, setShowStickyFooter] = useState(false);
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-800 dark:text-white">
+    <main className="min-h-screen bg-[#f9f8f6] dark:bg-gray-800 dark:text-white">
       <BGMPlayer />
       <div className="w-full max-w-md mx-auto px-4">
         <div className="flex flex-col items-center">

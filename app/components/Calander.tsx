@@ -43,7 +43,7 @@ const Calendar = () => {
     };
 
     return (
-        <div className="mx-auto max-w-lg bg-white">
+        <div className="mx-auto max-w-lg bg-[#f9f8f6]">
 
             <div className="w-full max-w-xs sm:max-w-sm">
                 <div className="text-center font-semibold text-gray-800 mb-2 py-2">3월</div>
