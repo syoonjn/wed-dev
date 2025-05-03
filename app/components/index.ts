@@ -1,5 +1,6 @@
 export { default as AccountList } from './AccountList';
 export { default as AttendanceModal } from './AttendanceModal';
+export { default as Bus } from './Bus';
 export { default as Calander } from './Calander';
 export { default as CountdownTimer } from './CountdownTimer';
 export { default as DirectionsSection } from './DirectionsSection';
