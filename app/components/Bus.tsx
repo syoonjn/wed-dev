@@ -9,7 +9,7 @@ const Bus = () => {
     };
 
     return (
-        <div className="mt-6 text-sm sm:text-[17px] text-[#3d3d3d] text-center leading-[2.2]">
+        <div className="mt-6 text-sm sm:text-[17px] text-[#3d3d3d] text-center leading-[2.2] text-abs-14">
             <p className="mb-2 font-semibold">{REGION.GWANGYANG} 발 셔틀버스를 운행할 예정입니다.</p>
             <p>출발 위치 : <strong>{DETAIL_LOCATION.GWANGYANG}</strong></p>
             <p>탑승 시간 : <strong>오전 8시</strong></p>

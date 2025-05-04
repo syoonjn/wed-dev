@@ -102,53 +102,53 @@ const StickyFooter = ({
                     id="sticky-footer"
                     className="fixed bottom-0 left-0 w-full z-50 bg-white border-t border-gray-200 rounded-t-xl shadow-[0_-2px_10px_rgba(0,0,0,0.05)]"
                 >
-                    <div className="mx-auto flex max-w-md items-center justify-between px-4 py-6">
-                        <button className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition">
-                            <FaCalendarCheck className="text-[18px] mb-1" />
-                            <span className="text-[11px]">참석</span>
-                        </button>
+                    <div className="mx-auto flex max-w-md flex-col px-4 py-4">
+                        <div className="flex items-center justify-between mb-2">
+                            <button className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition">
+                                <FaCalendarCheck className="text-[18px] mb-1" />
+                                <span className="text-[11px]">참석</span>
+                            </button>
+                            <button
+                                onClick={() => setShowModal(true)}
+                                className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition"
+                            >
+                                <FaParking className="text-[18px] mb-1" />
+                                <span className="text-[11px]">주차</span>
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setShowMenu((prev) => !prev);
+                                    setShowShareMenu(false);
+                                }}
+                                className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition"
+                            >
+                                <FaBars className="text-[18px] mb-1" />
+                                <span className="text-[11px]">메뉴</span>
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setShowShareMenu((prev) => !prev);
+                                    setShowMenu(false);
+                                    handleShare();
+                                }}
+                                className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition"
+                            >
+                                <FaShareAlt className="text-[18px] mb-1" />
+                                <span className="text-[11px]">공유</span>
+                            </button>
+                            <button
+                                onClick={scrollToTop}
+                                className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition"
+                            >
+                                <FaArrowUp className="text-[18px] mb-1" />
+                                <span className="text-[11px]">맨 위</span>
+                            </button>
+                        </div>
 
-                        <button
-                            onClick={() => setShowModal(true)}
-                            className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition"
-                        >
-                            <FaParking className="text-[18px] mb-1" />
-                            <span className="text-[11px]">주차</span>
-                        </button>
-
-                        <button
-                            onClick={() => {
-                                setShowMenu((prev) => !prev);
-                                setShowShareMenu(false);
-                            }}
-                            className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition"
-                        >
-                            <FaBars className="text-[18px] mb-1" />
-                            <span className="text-[11px]">메뉴</span>
-                        </button>
-
-                        <button
-                            onClick={() => {
-                                setShowShareMenu((prev) => !prev);
-                                setShowMenu(false);
-                                handleShare();
-                            }}
-                            className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition"
-                        >
-                            <FaShareAlt className="text-[18px] mb-1" />
-                            <span className="text-[11px]">공유</span>
-                        </button>
-
-                        <button
-                            onClick={scrollToTop}
-                            className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition"
-                        >
-                            <FaArrowUp className="text-[18px] mb-1" />
-                            <span className="text-[11px]">맨 위</span>
-                        </button>
                     </div>
                 </footer>
             )}
+
 
             {showModal && <AttendanceModal externalTrigger={true} onClose={() => setShowModal(false)} />}
         </>

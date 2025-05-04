@@ -1,4 +1,5 @@
 export { default as AccountList } from './AccountList';
+export { default as AddFont } from './AddFont';
 export { default as AttendanceModal } from './AttendanceModal';
 export { default as BrideGroomIntro } from './BrideGroomIntro';
 export { default as Bus } from './Bus';

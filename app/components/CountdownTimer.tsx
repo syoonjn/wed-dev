@@ -61,7 +61,7 @@ const CountdownTimer: React.FC = () => {
                     );
                 })}
             </div>
-            <h1 className="text-center text-sm font-medium leading-relaxed text-gray-600">
+            <h1 className="text-center text-sm font-medium leading-relaxed text-gray-600 text-abs-14">
                 {`${groomFirstName} ❤ ${brideFirstName}의 결혼식이`} {`${timeLeft.days}일 남았습니다`}
             </h1>
         </div>

@@ -48,7 +48,7 @@ export default function GuestBookList({ showAll }: { showAll: boolean }) {
                         <li key={entry.id} className="w-full mb-4">
                             {/* From. + 삭제버튼 줄 */}
                             <div className="flex justify-between items-center px-1 mb-1">
-                                <span className="text-sm text-gray-600">{`From. ${entry.name}`}</span>
+                                <span className="text-sm text-gray-600 text-abs-14">{`From. ${entry.name}`}</span>
                                 <button
                                     onClick={() => {
                                         setSelectedEntryId(entry.id);
@@ -63,9 +63,9 @@ export default function GuestBookList({ showAll }: { showAll: boolean }) {
                             </div>
                             <div className="relative flex w-full max-w-[95%] sm:max-w-[500px] md:max-w-[600px] mx-auto pb-[12px]">
                                 <div className="absolute top-3 left-0 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-[#3f3f3f] z-10" />
-                                <div className="ml-3 w-full bg-[#3f3f3f] text-white px-4 py-3 rounded-xl text-sm leading-relaxed whitespace-pre-line break-words text-left">
+                                <div className="ml-3 w-full bg-[#3f3f3f] text-white px-4 py-3 rounded-xl text-sm leading-relaxed whitespace-pre-line break-words text-left text-abs-14">
                                     <span>{entry.contents}</span>
-                                    <span className="block mt-2 text-xs text-right text-gray-300">
+                                    <span className="block mt-2 text-xs text-right text-gray-300 text-abs-12">
                                         {formatDateTime(entry.created_at)}
                                     </span>
                                 </div>

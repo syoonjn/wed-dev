@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { getCouple } from "./common/name";
 import { formatKoreanDate } from "./common/wedDate";
 import { AlertProvider } from "./context/AlertContext";
+import { FontSizeProvider } from './context/FontSizeContext';
 import ClientCookiesProvider from './lib/ClientCookiesProvider';
 import ReactQueryProvider from "./lib/ReactQueryProvider";
 
@@ -47,13 +48,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </head>
       <body className={pretendard.className}>
-        <AlertProvider>
-          <ReactQueryProvider>
-            <ClientCookiesProvider>
-              {children}
-            </ClientCookiesProvider>
-          </ReactQueryProvider>
-        </AlertProvider>
+        <FontSizeProvider>
+          <AlertProvider>
+            <ReactQueryProvider>
+              <ClientCookiesProvider>
+                {children}
+              </ClientCookiesProvider>
+            </ReactQueryProvider>
+          </AlertProvider>
+        </FontSizeProvider>
       </body>
     </html>
   );

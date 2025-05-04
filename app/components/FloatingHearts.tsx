@@ -46,7 +46,7 @@ export default function FloatingHearts({ isFooterVisible }: { isFooterVisible: b
         <>
             <button
                 onClick={handleClick}
-                className={`fixed z-50 left-1/2 -translate-x-1/2 bg-white p-3 rounded-full shadow-lg transition-all duration-300 ${isFooterVisible ? "bottom-[120px]" : "bottom-10"
+                className={`fixed z-50 right-4 bg-white p-3 rounded-full shadow-lg transition-all duration-300 ${isFooterVisible ? "bottom-[120px]" : "bottom-10"
                     }`}
             >
                 <FcLike className="w-7 h-7" />
