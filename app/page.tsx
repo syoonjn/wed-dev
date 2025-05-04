@@ -27,10 +27,10 @@ import StickyFooter from "./components/StickyFooter";
 const SlideInSection = ({ children }: { children: React.ReactNode }) => (
   <motion.div
     className="w-full"
-    initial={{ opacity: 0, y: 30 }}
+    initial={{ opacity: 0, y: 40 }}
     whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, ease: "easeOut" }}
-    viewport={{ once: true, amount: 0.2 }}
+    transition={{ duration: 1.2, ease: "easeOut" }}
+    viewport={{ once: true, amount: 0.5 }}
   >
     {children}
   </motion.div>

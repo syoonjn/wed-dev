@@ -16,10 +16,25 @@ export default function BGMPlayer() {
         return () => clearTimeout(timer);
     }, []);
 
+    useEffect(() => {
+        const audio = audioRef.current;
+        if (audio) {
+            audio.muted = false;
+            audio
+                .play()
+                .then(() => setPlaying(true))
+                .catch((err) => {
+                    console.warn("자동 재생 실패:", err);
+                    setPlaying(false);
+                });
+        }
+    }, []);
+
 
     return (
         <>
-            <audio ref={audioRef} src={`${basePath}/bgm/spring-sunshine-piano-solo-ver.mp3`} loop preload="auto" />
+            <audio ref={audioRef} src={`${basePath}/bgm/spring-sunshine-piano-solo-ver.mp3`} loop preload="auto" muted
+                autoPlay />
 
             {/* 🎵 알림 문구 */}
             {showNotice && (
