@@ -86,11 +86,26 @@ export default function GuestBookForm({ closeModal }: GuestBookFormProps) {
                 visible={showModal}
                 onClose={() => setShowModal(false)}
                 onConfirm={() => {
+                    // 1. 입력 포커스 강제 해제
+                    if (document.activeElement instanceof HTMLElement) {
+                        document.activeElement.blur();
+                    }
+
+                    // 2. 현재 스크롤 위치 저장
+                    const scrollY = window.scrollY;
+
+                    // 3. 모달 닫기
                     setShowModal(false);
+
+                    // 4. 약간의 지연 후 모달 완전히 닫히면 스크롤 복원
                     setTimeout(() => {
                         closeModal();
+                        requestAnimationFrame(() => {
+                            window.scrollTo({ top: scrollY });
+                        });
                     }, 100);
                 }}
+
 
                 message={message}
             />
