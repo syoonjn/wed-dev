@@ -24,7 +24,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # 4. 빌드 실행
+      # 4. Debug Secrets (값 확인용)
+      - name: Debug Secrets
+        run: |
+          echo "Kakao: ${{ secrets.NEXT_PUBLIC_KAKAO_MAP_API_KEY }}"
+          echo "Supabase URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}"
+          echo "Supabase Key: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}"
+
+      # 5. 빌드 실행
       - name: Build project
         env:
           NEXT_PUBLIC_KAKAO_MAP_API_KEY: ${{ secrets.NEXT_PUBLIC_KAKAO_MAP_API_KEY }}
@@ -38,8 +45,6 @@ jobs:
           NEXT_PUBLIC_GROOM_FATHER_NAME: ${{ secrets.NEXT_PUBLIC_GROOM_FATHER_NAME }}
           NEXT_PUBLIC_BRIDE_KAKAO_QR_LINK: ${{ secrets.NEXT_PUBLIC_BRIDE_KAKAO_QR_LINK }}
           NEXT_PUBLIC_GROOM_KAKAO_QR_LINK: ${{ secrets.NEXT_PUBLIC_GROOM_KAKAO_QR_LINK }}
-
-
         run: npm run build
 
       # 5. GitHub Pages에 배포
