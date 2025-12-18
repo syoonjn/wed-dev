@@ -17,7 +17,7 @@ const KakaoMarker = () => {
         script.addEventListener("load", () => {
             setScriptLoad(true);
         });
-    }, []);
+    }, [apiKey]);
 
     return (
         <div className="mt-4 flex w-full flex-col items-center justify-center">
