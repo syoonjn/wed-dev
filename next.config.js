@@ -1,11 +1,9 @@
-const isProd = process.env.NODE_ENV === 'production';
-const repoName = 'wed-dev';
 const path = require('path');
 
 module.exports = {
     output: 'export',
-    basePath: isProd ? `/${repoName}` : '',
-    assetPrefix: isProd ? `/${repoName}/` : '',
+    basePath: '',
+    assetPrefix: '',
     images: {
         unoptimized: true,
     },
