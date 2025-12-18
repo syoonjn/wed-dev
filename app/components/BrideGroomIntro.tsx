@@ -13,17 +13,17 @@ const BrideGroomIntro = () => {
             <div className="flex flex-row items-center justify-center gap-4">
                 {/* 신랑 */}
                 <div>
-                    <div className="relative w-32 h-32 mx-auto mb-2">
+                    <div className="relative w-32 h-32 mx-auto mb-2 rounded-full overflow-hidden">
                         <Image
-                            src={`${basePath}/images/groom_sample.png`}
+                            src={`${basePath}/images/groom_main.jpg`}
                             alt="신랑"
                             fill
-                            className="rounded-full object-cover"
+                            className="object-cover scale-200"
                         />
                     </div>
                     <p className="text-sm text-blue-500 font-semibold text-abs-14">신랑 {groomFullName}</p>
                     <p className="text-xl my-1 text-abs-20">🏡🎮😝</p>
-                    <p className="text-gray-700 mb-2 text-abs-16">ISTP</p>
+                    <p className="text-gray-700 mb-2 text-abs-16">INTP</p>
                     <p className="text-sm text-gray-500 text-abs-14">
                         {groomFatherName} · {groomMatherName} <span className="text-blue-600">의 아들</span>
                     </p>
@@ -34,12 +34,12 @@ const BrideGroomIntro = () => {
 
                 {/* 신부 */}
                 <div>
-                    <div className="relative w-32 h-32 mx-auto mb-2">
+                    <div className="relative w-32 h-32 mx-auto mb-2 rounded-full overflow-hidden">
                         <Image
-                            src={`${basePath}/images/bride_sample.png`}
+                            src={`${basePath}/images/bride_main.jpg`}
                             alt="신부"
                             fill
-                            className="rounded-full object-cover"
+                            className="object-cover scale-200"
                         />
                     </div>
                     <p className="text-sm text-pink-500 font-semibold text-abs-14">신부 {brideFullName}</p>

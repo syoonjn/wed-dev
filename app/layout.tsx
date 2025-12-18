@@ -13,7 +13,7 @@ const weddingDate = formatKoreanDate();
 const { groomFullName, groomFirstName, brideFullName, brideFirstName } = getCouple();
 
 const baseUrl = 'https://syoonjn.github.io/wed-dev';
-const thumbnail = `${baseUrl}/images/wedding-sample.png`;
+const thumbnail = `${baseUrl}/images/wedding-main.jpg`;
 
 export const metadata: Metadata = {
   title: `${groomFirstName} & ${brideFirstName} 모바일 청첩장`, // "청첩장" 키워드 추가!

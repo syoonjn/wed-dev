@@ -12,27 +12,27 @@ const slides = [
     {
         title: "Apple Intelligence 및 macOS",
         description: "쉽게 사용하고.\n쉽게 빠져들고.",
-        imageUrl: `${basePath}/images/wedding-sample1.png`
+        imageUrl: `${basePath}/images/wedding1.jpg`
     },
     {
         title: "성능 및 배터리 사용 시간",
         description: "더 빠르게. 더 오래.",
-        imageUrl: `${basePath}/images/wedding-sample2.png`
+        imageUrl: `${basePath}/images/wedding2.jpg`
     },
     {
         title: "성능 및 배터리 사용 시간",
         description: "더 빠르게. 더 오래.",
-        imageUrl: `${basePath}/images/wedding-sample3.png`
+        imageUrl: `${basePath}/images/wedding3.jpg`
     },
     {
         title: "성능 및 배터리 사용 시간",
         description: "더 빠르게. 더 오래.",
-        imageUrl: `${basePath}/images/wedding-sample4.png`
+        imageUrl: `${basePath}/images/wedding4.jpg`
     },
     {
         title: "성능 및 배터리 사용 시간",
         description: "더 빠르게. 더 오래.",
-        imageUrl: `${basePath}/images/wedding-sample5.png`
+        imageUrl: `${basePath}/images/wedding5.jpg`
     },
 ];
 

@@ -67,7 +67,7 @@ const Home: React.FC = () => {
               </div>
 
               <Image
-                src={`${basePath}/images/wedding-sample.png`}
+                src={`${basePath}/images/wedding-main.jpg`}
                 alt="티맵"
                 layout="responsive"
                 width={500}
