@@ -8,7 +8,6 @@ import {
   AccountList,
   AddFont,
   BrideGroomIntro,
-  Bus,
   CountdownTimer,
   DirectionsSection,
   GuestBookPage,
@@ -16,7 +15,6 @@ import {
   KakaoMarker
 } from '@/components';
 import { basePath } from '@/next.config';
-import { REGION } from "./common/constant";
 import { getCouple } from "./common/name";
 import BGMPlayer from "./components/BGMPlayer";
 import Calendar from "./components/Calander";
@@ -151,12 +149,6 @@ const Home: React.FC = () => {
             </div>
           </SlideInSection>
 
-          <SlideInSection>
-            <div className="border-t border-gray-200 py-10 px-4 w-full max-w-[95%] sm:max-w-[500px] md:max-w-[600px] mx-auto">
-              <h1 className="text-xl font-bold text-center mb-8 text-abs-20">{REGION.GWANGYANG} 출발 전세버스</h1>
-              <Bus />
-            </div>
-          </SlideInSection>
 
           <SlideInSection>
             <div className="border-t border-gray-200 py-10 px-4 w-full max-w-[95%] sm:max-w-[500px] md:max-w-[600px] mx-auto">
