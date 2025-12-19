@@ -100,6 +100,7 @@ export default function CustomSlider() {
                             alt={slide.title}
                             fill
                             className="object-cover"
+                            loading="lazy"
                             draggable={false}
                             onContextMenu={(e) => e.preventDefault()}
                             onLoadingComplete={() => handleImageLoad(i)}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { getCouple } from '../common/name';
 import { targetTime } from '../common/wedDate';
 
@@ -68,4 +68,4 @@ const CountdownTimer: React.FC = () => {
     );
 };
 
-export default CountdownTimer;
+export default memo(CountdownTimer);

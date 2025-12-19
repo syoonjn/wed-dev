@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { checkGuestId, deleteGuestBookRow, fetchGuestBookEntries } from "../lib/api";
 import PasswordValidationModal from "./PasswordValidationModal";
 
@@ -35,10 +35,10 @@ export default function GuestBookList({ showAll }: { showAll: boolean }) {
 
     const visibleEntries = showAll ? data : data?.slice(0, 3);
 
-    const formatDateTime = (dateString: string) => {
+    const formatDateTime = useCallback((dateString: string) => {
         const date = new Date(dateString);
         return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")} ${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`;
-    };
+    }, []);
 
     return (
         <div>

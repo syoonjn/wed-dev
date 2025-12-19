@@ -19,6 +19,7 @@ const BrideGroomIntro = () => {
                             alt="신랑"
                             fill
                             className="object-cover scale-200"
+                            loading="lazy"
                         />
                     </div>
                     <p className="text-sm text-blue-500 font-semibold text-abs-14">신랑 {groomFullName}</p>
@@ -40,6 +41,7 @@ const BrideGroomIntro = () => {
                             alt="신부"
                             fill
                             className="object-cover scale-200"
+                            loading="lazy"
                         />
                     </div>
                     <p className="text-sm text-pink-500 font-semibold text-abs-14">신부 {brideFullName}</p>
