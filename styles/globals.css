@@ -4,20 +4,13 @@
 @import 'keen-slider/keen-slider.min.css';
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     touch-action: pan-x pan-y;
 }
 
 body {
     user-select: none;
     touch-action: pan-x pan-y;
-    overflow-x: hidden;
-}
-
-/* 모달 열릴 때 스크롤바로 인한 레이아웃 shift 방지 */
-body.modal-open {
-    overflow: hidden;
-    padding-right: 0 !important;
 }
 
 input,
