@@ -1,8 +1,6 @@
 'use client';
 
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { X } from 'lucide-react';
-import { useEffect, useRef } from 'react';
 
 interface MessageModalProps {
     visible: boolean;
@@ -12,26 +10,10 @@ interface MessageModalProps {
 }
 
 const MessageModal = ({ visible, onConfirm, onClose, message }: MessageModalProps) => {
-    const modalRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const target = modalRef.current;
-        if (!target) return;
-
-        if (visible) {
-            disableBodyScroll(target);
-        } else {
-            enableBodyScroll(target);
-        }
-
-        return () => enableBodyScroll(target);
-    }, [visible]);
-
     if (!visible) return null;
 
     return (
         <div
-            ref={modalRef}
             className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-50 px-4"
         >
             <div className="relative w-full max-w-xs rounded-xl bg-white p-6 pt-10 text-center shadow-lg">
