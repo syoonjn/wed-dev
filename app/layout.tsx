@@ -13,7 +13,7 @@ const weddingDate = formatKoreanDate();
 const { groomFullName, groomFirstName, brideFullName, brideFirstName } = getCouple();
 
 // const baseUrl = 'https://syoonjn.github.io/wed-dev';
-const baseUrl = `https://cheolho-so.com?v=${new Date().getTime()}`;
+const baseUrl = 'https://cheolho-so.com';
 const thumbnail = `${baseUrl}/images/wedding-main.jpg`;
 
 export const metadata: Metadata = {
