@@ -6,6 +6,7 @@ import Image from "next/image";
 import { memo } from "react";
 import AddFont from "../AddFont";
 import FloatingHearts from "../FloatingHearts";
+import WavyText from "../WavyText";
 
 interface HeroSectionProps {
     showStickyFooter: boolean;
@@ -25,23 +26,44 @@ function HeroSection({ showStickyFooter }: HeroSectionProps) {
             <div className="mb-6 tracking-[0.25em] text-gray-400 text-abs-12">
                 SATURDAY
             </div>
+
             <div className="text-2xl">
                 <AddFont isFooterVisible={showStickyFooter} />
                 <FloatingHearts isFooterVisible={showStickyFooter} />
             </div>
 
-            <Image
-                src={`${basePath}/images/wedding-main.jpg`}
-                alt="결혼식 메인 이미지"
-                layout="responsive"
-                width={500}
-                height={500}
-                sizes="(max-width: 768px) 80vw, 300px"
-                className="mx-auto mb-6 w-full max-w-[300px] rounded"
-                priority
-                draggable={false}
-                onContextMenu={(e) => e.preventDefault()}
-            />
+            <div className="relative mx-auto mb-6 w-full max-w-[300px]"
+            >
+                <Image
+                    src={`${basePath}/images/wedding-main.jpg`}
+                    alt="결혼식 메인 이미지"
+                    layout="responsive"
+                    width={500}
+                    height={500}
+                    sizes="(max-width: 768px) 80vw, 300px"
+                    className="rounded"
+                    priority
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
+                />
+
+                {/* 떠다니는 텍스트 오버레이 */}
+                <div className="absolute top-[90%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 max-w-[90%]">
+                    <WavyText
+                        text="we are getting married"
+                        delay={0.1}
+                        duration={0.08}
+                        className="font-medium tracking-wide opacity-95 whitespace-nowrap justify-center"
+                        style={{
+                            fontFamily: "'Great Vibes', cursive",
+                            letterSpacing: '0.02em',
+                            fontSize: 'clamp(1.25rem, 5.5vw, 1.75rem)',
+                            color: '#2d2d2d',
+                            fontWeight: 500
+                        }}
+                    />
+                </div>
+            </div>
 
             <div className="mb-2 font-[500] tracking-wider text-gray-800 text-abs-20">
                 {`${groomFullName}  ｜  ${brideFullName}`}
