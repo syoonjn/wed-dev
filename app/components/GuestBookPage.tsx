@@ -9,11 +9,13 @@ export default function GuestBookPage() {
     const [openModal, setOpenModal] = useState(false);
     const [showAll, setShowAll] = useState(false);
 
+
     return (
         <div className="mb-4 text-center max-w-[600px] mx-auto">
             {/* 모달 여는 버튼 */}
             <div className="flex justify-center gap-2 mb-6">
                 <button
+                    type="button"
                     onClick={() => setShowAll((prev) => !prev)}
                     className="flex items-center gap-1 rounded-md bg-black px-4 py-2 text-white text-sm sm:text-base hover:bg-gray-800"
                 >
@@ -21,6 +23,7 @@ export default function GuestBookPage() {
                     {showAll ? "간략히 보기" : "전체보기"}
                 </button>
                 <button
+                    type="button"
                     onClick={() => setOpenModal(true)}
                     className="flex items-center gap-1 rounded-md bg-black px-4 py-2 text-white text-sm sm:text-base hover:bg-gray-800"
                 >
