@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from "react";
-import { DETAIL_LOCATION, REGION } from "../common/constant";
 import AttendanceModal from "./AttendanceModal";
 
 const DirectionsSection = () => {
@@ -33,15 +32,6 @@ const DirectionsSection = () => {
                         >
                             📍 주차 안내 보기
                         </button>
-                    </div>
-
-                    {/* 전세버스 */}
-                    <div className="space-y-2 text-left">
-                        <h3 className="flex items-start font-semibold text-left text-abs-16">
-                            🚌 <span className="ml-2 text-left">{REGION.GWANGYANG} 출발 전세 버스</span>
-                        </h3>
-                        <p className="text-abs-14"><span className="font-semibold">{DETAIL_LOCATION.GWANGYANG} 오전 8시 출발 /</span> 버스(전남00바0000)</p>
-                        <p className="text-abs-14"><span className="font-semibold">아래로 내리면 탑승 위치 지도가 있습니다.</span></p>
                     </div>
 
                     {/* 버스 */}

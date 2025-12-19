@@ -1,39 +1,24 @@
 "use client";
 
+import { AccountItem, bride, groom } from "@/app/common/bank";
 import { basePath } from "@/next.config";
 import { Accordion } from "flowbite-react";
 import { Clipboard } from "lucide-react";
 import { useState } from "react";
 import MessageModal from "./MessageModal";
 
-const brideName = process.env.NEXT_PUBLIC_BRIDE_NAME || '';
-const brideMomName = process.env.NEXT_PUBLIC_BRIDE_MOM_NAME || '';
-const brideFatherName = process.env.NEXT_PUBLIC_BRIDE_FATHER_NAME || '';
-const groomMomName = process.env.NEXT_PUBLIC_GROOM_MOM_NAME || '';
-const groomFatherName = process.env.NEXT_PUBLIC_GROOM_FATHER_NAME || '';
-const groomName = process.env.NEXT_PUBLIC_GROOM_NAME || '';
-const brideQrLink = process.env.NEXT_PUBLIC_BRIDE_KAKAO_QR_LINK || '';
-const groomQrLink = process.env.NEXT_PUBLIC_GROOM_KAKAO_QR_LINK || '';
 
 const accounts: { groom: AccountItem[]; bride: AccountItem[] } = {
     groom: [
-        { bank: "신한", account: "111-235-567890", name: groomName, key: 'groom', kakaoLink: groomQrLink },
-        { bank: "신한", account: "111-236-567890", name: groomFatherName, key: 'g_father' },
-        { bank: "신한", account: "111-237-567890", name: groomMomName, key: 'g_mather' },
+        { bank: groom.bank, account: groom.account, name: groom.name, key: 'groom', kakaoLink: groom.qrLink },
+        { bank: groom.father.bank, account: groom.father.account, name: groom.father.name, key: 'g_father' },
+        { bank: groom.mother.bank, account: groom.mother.account, name: groom.mother.name, key: 'g_mather' },
     ],
     bride: [
-        { bank: "국민", account: "222-341-678901", name: brideName, key: 'bride', kakaoLink: brideQrLink },
-        { bank: "국민", account: "222-342-678901", name: brideFatherName, key: 'b_father' },
-        { bank: "국민", account: "222-343-678901", name: brideMomName, key: 'b_mather' },
+        { bank: bride.bank, account: bride.account, name: bride.name, key: 'bride', kakaoLink: bride.qrLink },
+        { bank: bride.father.bank, account: bride.father.account, name: bride.father.name, key: 'b_father' },
+        { bank: bride.mother.bank, account: bride.mother.account, name: bride.mother.name, key: 'b_mather' },
     ],
-};
-
-type AccountItem = {
-    bank: string;
-    account: string;
-    name: string;
-    key: string;
-    kakaoLink?: string;
 };
 
 export default function AccountList() {

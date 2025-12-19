@@ -29,7 +29,7 @@ const SlideInSection = ({ children }: { children: React.ReactNode }) => (
     initial={{ opacity: 0, y: 40 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 1.2, ease: "easeOut" }}
-    viewport={{ once: true, amount: 0.5 }}
+    viewport={{ once: true, amount: 0.2, margin: "0px 0px -100px 0px" }}
   >
     {children}
   </motion.div>
@@ -38,7 +38,6 @@ const Home: React.FC = () => {
   const { fontSize } = useFontSize();
   const { groomFullName, brideFullName } = getCouple();
   const [showStickyFooter, setShowStickyFooter] = useState(false);
-  const { setFontSize } = useFontSize();
 
   return (
     <main
