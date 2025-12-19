@@ -2,7 +2,7 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button, Label, Textarea, TextInput } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { insertGuestBookEntry } from "../lib/api";
 import MessageModal from "./MessageModal";
 
@@ -18,17 +18,7 @@ export default function GuestBookForm({ closeModal }: GuestBookFormProps) {
     const [showModal, setShowModal] = useState(false);
     const [message, setMessage] = useState('');
 
-    // 모바일 줄인 방지를 위한 viewport 복원
-    useEffect(() => {
-        const resetZoom = () => {
-            const viewport = document.querySelector('meta[name="viewport"]');
-            if (viewport) {
-                viewport.setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no');
-            }
-        };
 
-        return () => resetZoom();
-    }, []);
 
     const mutation = useMutation({
         mutationFn: insertGuestBookEntry,
@@ -47,18 +37,12 @@ export default function GuestBookForm({ closeModal }: GuestBookFormProps) {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         // 포커스 해제
         if (document.activeElement instanceof HTMLElement) {
             document.activeElement.blur();
         }
-        
-        // viewport 복원
-        const viewport = document.querySelector('meta[name="viewport"]');
-        if (viewport) {
-            viewport.setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no');
-        }
-        
+
         mutation.mutate({ name, password, contents });
     };
 
@@ -73,8 +57,7 @@ export default function GuestBookForm({ closeModal }: GuestBookFormProps) {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
-                        className="mt-1 w-full"
-                        style={{ fontSize: '16px' }}
+                        className="mt-1 w-full [&_input]:!text-base"
                         autoFocus={false}
                     />
                 </div>
@@ -86,8 +69,7 @@ export default function GuestBookForm({ closeModal }: GuestBookFormProps) {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
-                        className="mt-1 w-full"
-                        style={{ fontSize: '16px' }}
+                        className="mt-1 w-full [&_input]:!text-base"
                         autoFocus={false}
                     />
                 </div>
@@ -100,8 +82,7 @@ export default function GuestBookForm({ closeModal }: GuestBookFormProps) {
                         placeholder="내용을 입력하세요"
                         required
                         rows={3}
-                        className="mt-1 w-full"
-                        style={{ fontSize: '16px' }}
+                        className="mt-1 w-full [&_textarea]:!text-base"
                         autoFocus={false}
                     />
                 </div>
