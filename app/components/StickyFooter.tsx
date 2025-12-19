@@ -1,4 +1,5 @@
 "use client";
+import { shareKakao } from "@/app/lib/kakaoShare";
 import { useEffect, useState } from "react";
 import {
     FaArrowUp,
@@ -9,6 +10,12 @@ import {
 } from "react-icons/fa";
 import { getCouple } from "../common/name";
 import AttendanceModal from "./AttendanceModal";
+
+declare global {
+    interface Window {
+        Kakao: any;
+    }
+}
 
 const StickyFooter = ({
     setShowFooterState,
@@ -42,18 +49,21 @@ const StickyFooter = ({
     }, [setShowFooterState]);
 
     const handleShare = () => {
-        const shareData = {
-            title: `${groomFirstName} & ${brideFirstName} 모바일 청첩장`,
-            text: `💍${groomFirstName} & ${brideFirstName} 결혼합니다`,
-            url: window.location.href,
-        };
+        const shared = shareKakao();
 
-        if (navigator.share) {
-            navigator.share(shareData).catch((err) => {
-                console.error("공유 실패:", err);
-            });
-        } else {
-            console.log("Web Share API 지원 안함. 카카오톡 공유나 링크 복사 fallback");
+        // 카카오톡 공유가 실패하면 Web Share API 사용
+        if (!shared) {
+            const shareData = {
+                title: `${groomFirstName} & ${brideFirstName} 모바일 청첩장`,
+                text: `💍${groomFirstName} & ${brideFirstName} 결혼합니다`,
+                url: window.location.href,
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData).catch((err) => {
+                    console.error("공유 실패:", err);
+                });
+            }
         }
     };
 

@@ -80,6 +80,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(eventStructuredData) }}
         />
+        <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+          crossOrigin="anonymous" async></script>
       </head>
       <body className={pretendard.className}>
         <FontSizeProvider>
