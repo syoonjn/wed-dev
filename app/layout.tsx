@@ -39,14 +39,47 @@ export const metadata: Metadata = {
     description: `${weddingDate} - ${groomFullName} ♥ ${brideFullName}`,
     images: [thumbnail],
   },
+  other: {
+    'event:start_time': '2026-03-28T13:00:00+09:00',
+    'event:end_time': '2026-03-28T15:00:00+09:00',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const eventStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": `${groomFullName} ♥ ${brideFullName} 결혼식`,
+    "description": `${groomFullName}과 ${brideFullName}의 결혼식에 초대합니다`,
+    "startDate": "2026-03-28T13:00:00+09:00",
+    "endDate": "2026-03-28T15:00:00+09:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": "CA웨딩컨벤션 루체홀",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "KR",
+        "addressLocality": "서울"
+      }
+    },
+    "image": [thumbnail],
+    "organizer": {
+      "@type": "Person",
+      "name": `${groomFullName} & ${brideFullName}`
+    }
+  };
+
   return (
     <html lang="ko">
       <head>
         <ThemeModeScript />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventStructuredData) }}
+        />
       </head>
       <body className={pretendard.className}>
         <FontSizeProvider>
