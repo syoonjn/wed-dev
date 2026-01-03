@@ -77,7 +77,11 @@ export default function CustomSlider() {
                 <div className="flex justify-end mb-4">
                     <button
                         type="button"
-                        onClick={() => setViewMode('slider')}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setViewMode('slider');
+                        }}
                         className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                     >
                         간략히 보기
@@ -130,7 +134,11 @@ export default function CustomSlider() {
             <div className="flex justify-end mb-4">
                 <button
                     type="button"
-                    onClick={() => setViewMode('grid')}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setViewMode('grid');
+                    }}
                     className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                 >
                     더보기
@@ -172,14 +180,22 @@ export default function CustomSlider() {
             {/* 좌우 버튼 */}
             <button
                 type="button"
-                onClick={() => instanceRef.current?.prev()}
+                onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    instanceRef.current?.prev();
+                }}
                 className="absolute top-1/2 left-2 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow"
             >
                 <ChevronLeft className="w-5 h-5" />
             </button>
             <button
                 type="button"
-                onClick={() => instanceRef.current?.next()}
+                onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    instanceRef.current?.next();
+                }}
                 className="absolute top-1/2 right-2 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow"
             >
                 <ChevronRight className="w-5 h-5" />
