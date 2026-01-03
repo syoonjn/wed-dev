@@ -84,6 +84,11 @@ export default function CustomSlider() {
                 <div className="flex justify-end mb-4">
                     <button
                         type="button"
+                        onTouchEnd={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handleViewModeChange('slider');
+                        }}
                         onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
@@ -111,8 +116,8 @@ export default function CustomSlider() {
                                 style={{ touchAction: "pan-y" }}
                             >
                                 {loadingStates[i] && (
-                                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-white">
-                                        <Loader className="w-8 h-8 animate-spin text-red-400" />
+                                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100/80 backdrop-blur-sm">
+                                        <Loader className="w-10 h-10 animate-spin text-gray-400" />
                                     </div>
                                 )}
                                 <Image
@@ -137,10 +142,19 @@ export default function CustomSlider() {
     }
 
     return (
-        <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 py-6">
+        <div
+            className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 py-6"
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => e.stopPropagation()}
+        >
             <div className="flex justify-end mb-4">
                 <button
                     type="button"
+                    onTouchEnd={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleViewModeChange('grid');
+                    }}
                     onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -160,8 +174,8 @@ export default function CustomSlider() {
                         style={{ willChange: "transform", transform: "translateZ(0)", touchAction: "pan-y" }}
                     >
                         {loadingStates[i] && (
-                            <div className="absolute inset-0 z-10 flex items-center justify-center bg-white">
-                                <Loader className="w-8 h-8 animate-spin text-red-400" />
+                            <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100/80 backdrop-blur-sm">
+                                <Loader className="w-12 h-12 animate-spin text-gray-400" />
                             </div>
                         )}
 
