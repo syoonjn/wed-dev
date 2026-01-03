@@ -14,6 +14,7 @@ const slides = Array.from({ length: 12 }, (_, i) => ({
 
 export default function CustomSlider() {
     const [viewMode, setViewMode] = useState<'slider' | 'grid'>('slider');
+    const [hasOpenedGrid, setHasOpenedGrid] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [loadingStates, setLoadingStates] = useState(
         Array(slides.length).fill(true)
@@ -25,6 +26,13 @@ export default function CustomSlider() {
             updated[index] = false;
             return updated;
         });
+    };
+
+    const handleViewModeChange = (mode: 'slider' | 'grid') => {
+        if (mode === 'grid') {
+            setHasOpenedGrid(true);
+        }
+        setViewMode(mode);
     };
 
     // 최대 5개의 점만 표시하고 순환
@@ -68,8 +76,7 @@ export default function CustomSlider() {
     if (viewMode === 'grid') {
         return (
             <motion.div
-                key="grid-view"
-                initial={{ opacity: 0 }}
+                initial={hasOpenedGrid ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 py-6"
@@ -80,7 +87,7 @@ export default function CustomSlider() {
                         onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            setViewMode('slider');
+                            handleViewModeChange('slider');
                         }}
                         className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                     >
@@ -93,12 +100,12 @@ export default function CustomSlider() {
                         return (
                             <motion.div
                                 key={`grid-${i}`}
-                                initial={{ opacity: 0, y: 10 }}
+                                initial={hasOpenedGrid ? false : { opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{
-                                    duration: 0.4,
+                                    duration: hasOpenedGrid ? 0 : 0.4,
                                     ease: "easeOut",
-                                    delay: rowIndex * 0.25
+                                    delay: hasOpenedGrid ? 0 : rowIndex * 0.25
                                 }}
                                 className="relative aspect-[3/4] overflow-hidden shadow-lg"
                                 style={{ touchAction: "pan-y" }}
@@ -137,7 +144,7 @@ export default function CustomSlider() {
                     onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        setViewMode('grid');
+                        handleViewModeChange('grid');
                     }}
                     className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                 >
