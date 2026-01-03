@@ -1,4 +1,3 @@
-// components/CustomGallerySlider.tsx
 "use client";
 
 import { basePath } from "@/next.config";
@@ -77,6 +76,7 @@ export default function CustomSlider() {
             >
                 <div className="flex justify-end mb-4">
                     <button
+                        type="button"
                         onClick={() => setViewMode('slider')}
                         className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                     >
@@ -129,6 +129,7 @@ export default function CustomSlider() {
         <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 py-6">
             <div className="flex justify-end mb-4">
                 <button
+                    type="button"
                     onClick={() => setViewMode('grid')}
                     className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                 >
@@ -169,13 +170,15 @@ export default function CustomSlider() {
             </div>
 
             {/* 좌우 버튼 */}
-            < button
+            <button
+                type="button"
                 onClick={() => instanceRef.current?.prev()}
                 className="absolute top-1/2 left-2 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow"
             >
                 <ChevronLeft className="w-5 h-5" />
             </button>
             <button
+                type="button"
                 onClick={() => instanceRef.current?.next()}
                 className="absolute top-1/2 right-2 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow"
             >

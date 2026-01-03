@@ -23,7 +23,6 @@ export default function GuestBookList({ showAll }: { showAll: boolean }) {
         mutationFn: async (id: number) => await deleteGuestBookRow(id),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["guestbookEntries"] });
-            console.log("삭제 성공!");
         },
     });
 

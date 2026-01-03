@@ -58,8 +58,8 @@ const StickyFooter = ({
             };
 
             if (navigator.share) {
-                navigator.share(shareData).catch((err) => {
-                    console.error("공유 실패:", err);
+                navigator.share(shareData).catch(() => {
+                    // 공유 실패 시 조용히 처리
                 });
             }
         }
