@@ -24,7 +24,7 @@ function HeroSection({ showStickyFooter }: HeroSectionProps) {
                 <FloatingHearts isFooterVisible={showStickyFooter} />
             </div>
 
-            <div className="relative w-full max-w-md mx-auto mb-6">
+            <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-6">
                 <Image
                     src={`${basePath}/images/wedding-main.jpg`}
                     alt="결혼식 메인 이미지"

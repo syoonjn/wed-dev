@@ -3,10 +3,8 @@ import { shareKakao } from "@/app/lib/kakaoShare";
 import { useEffect, useState } from "react";
 import {
     FaArrowUp,
-    FaBars,
-    FaCalendarCheck,
     FaParking,
-    FaShareAlt,
+    FaShareAlt
 } from "react-icons/fa";
 import { getCouple } from "../common/name";
 import AttendanceModal from "./AttendanceModal";
@@ -114,26 +112,12 @@ const StickyFooter = ({
                 >
                     <div className="mx-auto flex max-w-md flex-col px-4 py-4">
                         <div className="flex items-center justify-between mb-2">
-                            <button className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition">
-                                <FaCalendarCheck className="text-[18px] mb-1" />
-                                <span className="text-[11px]">참석</span>
-                            </button>
                             <button
                                 onClick={() => setShowModal(true)}
                                 className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition"
                             >
                                 <FaParking className="text-[18px] mb-1" />
                                 <span className="text-[11px]">주차</span>
-                            </button>
-                            <button
-                                onClick={() => {
-                                    setShowMenu((prev) => !prev);
-                                    setShowShareMenu(false);
-                                }}
-                                className="flex flex-col items-center justify-center flex-1 text-gray-500 hover:text-black transition"
-                            >
-                                <FaBars className="text-[18px] mb-1" />
-                                <span className="text-[11px]">메뉴</span>
                             </button>
                             <button
                                 onClick={() => {

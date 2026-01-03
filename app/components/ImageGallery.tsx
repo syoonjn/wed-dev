@@ -2,41 +2,19 @@
 "use client";
 
 import { basePath } from "@/next.config";
+import { motion } from "framer-motion";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { ChevronLeft, ChevronRight, Loader } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
-const slides = [
-    {
-        title: "Apple Intelligence 및 macOS",
-        description: "쉽게 사용하고.\n쉽게 빠져들고.",
-        imageUrl: `${basePath}/images/wedding1.jpg`
-    },
-    {
-        title: "성능 및 배터리 사용 시간",
-        description: "더 빠르게. 더 오래.",
-        imageUrl: `${basePath}/images/wedding2.jpg`
-    },
-    {
-        title: "성능 및 배터리 사용 시간",
-        description: "더 빠르게. 더 오래.",
-        imageUrl: `${basePath}/images/wedding3.jpg`
-    },
-    {
-        title: "성능 및 배터리 사용 시간",
-        description: "더 빠르게. 더 오래.",
-        imageUrl: `${basePath}/images/wedding4.jpg`
-    },
-    {
-        title: "성능 및 배터리 사용 시간",
-        description: "더 빠르게. 더 오래.",
-        imageUrl: `${basePath}/images/wedding5.jpg`
-    },
-];
+const slides = Array.from({ length: 12 }, (_, i) => ({
+    imageUrl: `${basePath}/images/wedding${i + 1}.jpg`
+}));
 
 export default function CustomSlider() {
+    const [viewMode, setViewMode] = useState<'slider' | 'grid'>('slider');
     const [currentSlide, setCurrentSlide] = useState(0);
     const [loadingStates, setLoadingStates] = useState(
         Array(slides.length).fill(true)
@@ -50,11 +28,21 @@ export default function CustomSlider() {
         });
     };
 
+    // 최대 5개의 점만 표시하고 순환
+    const maxDots = 5;
+    const activeDot = currentSlide % maxDots;
+
 
 
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
         loop: true,
         initial: 0,
+        renderMode: "performance",
+        drag: true,
+        rubberband: false,
+        defaultAnimation: {
+            duration: 200
+        },
         slides: {
             perView: 1.1,
             spacing: 16,
@@ -78,33 +66,102 @@ export default function CustomSlider() {
         },
     });
 
+    if (viewMode === 'grid') {
+        return (
+            <motion.div
+                key="grid-view"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 py-6"
+            >
+                <div className="flex justify-end mb-4">
+                    <button
+                        onClick={() => setViewMode('slider')}
+                        className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                    >
+                        간략히 보기
+                    </button>
+                </div>
+                <div className="grid grid-cols-3 gap-1">
+                    {slides.map((slide, i) => {
+                        const rowIndex = Math.floor(i / 3);
+                        return (
+                            <motion.div
+                                key={`grid-${i}`}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.4,
+                                    ease: "easeOut",
+                                    delay: rowIndex * 0.25
+                                }}
+                                className="relative aspect-[3/4] overflow-hidden shadow-lg"
+                                style={{ touchAction: "pan-y" }}
+                            >
+                                {loadingStates[i] && (
+                                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-white">
+                                        <Loader className="w-8 h-8 animate-spin text-red-400" />
+                                    </div>
+                                )}
+                                <Image
+                                    src={slide.imageUrl}
+                                    alt={''}
+                                    fill
+                                    className="object-cover"
+                                    loading="lazy"
+                                    quality={75}
+                                    sizes="(max-width: 640px) 33vw, (max-width: 1024px) 33vw, 25vw"
+                                    draggable={false}
+                                    onContextMenu={(e) => e.preventDefault()}
+                                    onLoadingComplete={() => handleImageLoad(i)}
+                                    style={{ WebkitTouchCallout: "none" }}
+                                />
+                            </motion.div>
+                        );
+                    })}
+                </div>
+            </motion.div>
+        );
+    }
+
     return (
-        <div className="relative w-full max-w-4xl mx-auto px-4 py-6">
+        <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 py-6">
+            <div className="flex justify-end mb-4">
+                <button
+                    onClick={() => setViewMode('grid')}
+                    className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                >
+                    더보기
+                </button>
+            </div>
             {/* 슬라이더 */}
             <div ref={sliderRef} className="keen-slider">
                 {slides.map((slide, i) => (
                     <div
                         key={slide.imageUrl}
                         className="keen-slider__slide relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg w-full max-h-screen flex-shrink-0"
+                        style={{ willChange: "transform", transform: "translateZ(0)", touchAction: "pan-y" }}
                     >
-                        {/* 스피너 */}
                         {loadingStates[i] && (
                             <div className="absolute inset-0 z-10 flex items-center justify-center bg-white">
                                 <Loader className="w-8 h-8 animate-spin text-red-400" />
                             </div>
                         )}
 
-                        {/* 이미지 */}
                         <Image
                             src={slide.imageUrl}
-                            alt={slide.title}
+                            alt={''}
                             fill
                             className="object-cover"
-                            loading="lazy"
+                            loading="eager"
+                            priority={i < 3}
+                            quality={75}
+                            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 33vw"
                             draggable={false}
                             onContextMenu={(e) => e.preventDefault()}
                             onLoadingComplete={() => handleImageLoad(i)}
-                            style={{ WebkitTouchCallout: "none" }}
+                            style={{ WebkitTouchCallout: "none", willChange: "transform" }}
                         />
                     </div>
                 ))}
@@ -125,12 +182,11 @@ export default function CustomSlider() {
                 <ChevronRight className="w-5 h-5" />
             </button>
 
-            {/* 인디케이터 */}
             <div className="flex justify-center mt-4 gap-2">
-                {slides.map((_, i) => (
+                {Array.from({ length: maxDots }).map((_, i) => (
                     <div
                         key={i}
-                        className={`w-2 h-2 rounded-full transition-all ${i === currentSlide ? "bg-gray-800" : "bg-gray-300"
+                        className={`w-2 h-2 rounded-full transition-all ${i === activeDot ? "bg-gray-800" : "bg-gray-300"
                             }`}
                     ></div>
                 ))}
