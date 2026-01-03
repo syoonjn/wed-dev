@@ -70,23 +70,12 @@ export default function CustomSlider() {
                 <div className="flex justify-end mb-4">
                     <button
                         type="button"
-                        onTouchStart={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }}
-                        onTouchEnd={(e) => {
+                        onPointerDown={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             setViewMode('slider');
-                            return false;
                         }}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setViewMode('slider');
-                            return false;
-                        }}
-                        style={{ WebkitTapHighlightColor: 'transparent' }}
+                        style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'none' }}
                         className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                     >
                         간략히 보기
@@ -99,7 +88,7 @@ export default function CustomSlider() {
                                 key={`grid-${i}`}
                                 className="relative aspect-[3/4] overflow-hidden shadow-lg"
                                 style={{
-                                    touchAction: "none",
+                                    touchAction: "pan-y",
                                     userSelect: "none",
                                     WebkitUserSelect: "none"
                                 }}
@@ -149,23 +138,12 @@ export default function CustomSlider() {
             <div className="flex justify-end mb-4">
                 <button
                     type="button"
-                    onTouchStart={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }}
-                    onTouchEnd={(e) => {
+                    onPointerDown={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
                         setViewMode('grid');
-                        return false;
                     }}
-                    onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setViewMode('grid');
-                        return false;
-                    }}
-                    style={{ WebkitTapHighlightColor: 'transparent' }}
+                    style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'none' }}
                     className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                 >
                     더보기
@@ -180,7 +158,7 @@ export default function CustomSlider() {
                         style={{
                             willChange: "transform",
                             transform: "translateZ(0)",
-                            touchAction: "none",
+                            touchAction: "pan-y",
                             userSelect: "none",
                             WebkitUserSelect: "none"
                         }}
