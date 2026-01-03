@@ -1,7 +1,6 @@
 "use client";
 
 import { basePath } from "@/next.config";
-import { motion } from "framer-motion";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { ChevronLeft, ChevronRight, Loader } from "lucide-react";
@@ -14,7 +13,6 @@ const slides = Array.from({ length: 12 }, (_, i) => ({
 
 export default function CustomSlider() {
     const [viewMode, setViewMode] = useState<'slider' | 'grid'>('slider');
-    const [hasOpenedGrid, setHasOpenedGrid] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [loadingStates, setLoadingStates] = useState(
         Array(slides.length).fill(true)
@@ -26,13 +24,6 @@ export default function CustomSlider() {
             updated[index] = false;
             return updated;
         });
-    };
-
-    const handleViewModeChange = (mode: 'slider' | 'grid') => {
-        if (mode === 'grid') {
-            setHasOpenedGrid(true);
-        }
-        setViewMode(mode);
     };
 
     // 최대 5개의 점만 표시하고 순환
@@ -75,24 +66,19 @@ export default function CustomSlider() {
 
     if (viewMode === 'grid') {
         return (
-            <motion.div
-                initial={hasOpenedGrid ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 py-6"
-            >
+            <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 py-6">
                 <div className="flex justify-end mb-4">
                     <button
                         type="button"
                         onTouchEnd={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            handleViewModeChange('slider');
+                            setViewMode('slider');
                         }}
                         onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            handleViewModeChange('slider');
+                            setViewMode('slider');
                         }}
                         className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                     >
@@ -101,19 +87,25 @@ export default function CustomSlider() {
                 </div>
                 <div className="grid grid-cols-3 gap-1">
                     {slides.map((slide, i) => {
-                        const rowIndex = Math.floor(i / 3);
                         return (
-                            <motion.div
+                            <div
                                 key={`grid-${i}`}
-                                initial={hasOpenedGrid ? false : { opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{
-                                    duration: hasOpenedGrid ? 0 : 0.4,
-                                    ease: "easeOut",
-                                    delay: hasOpenedGrid ? 0 : rowIndex * 0.25
-                                }}
                                 className="relative aspect-[3/4] overflow-hidden shadow-lg"
-                                style={{ touchAction: "pan-y" }}
+                                style={{
+                                    touchAction: "none",
+                                    userSelect: "none",
+                                    WebkitUserSelect: "none"
+                                }}
+                                onTouchStart={(e) => {
+                                    if (e.touches.length > 1) {
+                                        e.preventDefault();
+                                    }
+                                }}
+                                onTouchMove={(e) => {
+                                    if (e.touches.length > 1) {
+                                        e.preventDefault();
+                                    }
+                                }}
                             >
                                 {loadingStates[i] && (
                                     <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100/80 backdrop-blur-sm">
@@ -133,11 +125,11 @@ export default function CustomSlider() {
                                     onLoadingComplete={() => handleImageLoad(i)}
                                     style={{ WebkitTouchCallout: "none" }}
                                 />
-                            </motion.div>
+                            </div>
                         );
                     })}
                 </div>
-            </motion.div>
+            </div>
         );
     }
 
@@ -153,12 +145,12 @@ export default function CustomSlider() {
                     onTouchEnd={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        handleViewModeChange('grid');
+                        setViewMode('grid');
                     }}
                     onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        handleViewModeChange('grid');
+                        setViewMode('grid');
                     }}
                     className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                 >
@@ -171,7 +163,23 @@ export default function CustomSlider() {
                     <div
                         key={slide.imageUrl}
                         className="keen-slider__slide relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg w-full max-h-screen flex-shrink-0"
-                        style={{ willChange: "transform", transform: "translateZ(0)", touchAction: "pan-y" }}
+                        style={{
+                            willChange: "transform",
+                            transform: "translateZ(0)",
+                            touchAction: "none",
+                            userSelect: "none",
+                            WebkitUserSelect: "none"
+                        }}
+                        onTouchStart={(e) => {
+                            if (e.touches.length > 1) {
+                                e.preventDefault();
+                            }
+                        }}
+                        onTouchMove={(e) => {
+                            if (e.touches.length > 1) {
+                                e.preventDefault();
+                            }
+                        }}
                     >
                         {loadingStates[i] && (
                             <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100/80 backdrop-blur-sm">
