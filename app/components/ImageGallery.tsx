@@ -70,16 +70,23 @@ export default function CustomSlider() {
                 <div className="flex justify-end mb-4">
                     <button
                         type="button"
+                        onTouchStart={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }}
                         onTouchEnd={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             setViewMode('slider');
+                            return false;
                         }}
                         onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             setViewMode('slider');
+                            return false;
                         }}
+                        style={{ WebkitTapHighlightColor: 'transparent' }}
                         className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                     >
                         간략히 보기
@@ -142,16 +149,23 @@ export default function CustomSlider() {
             <div className="flex justify-end mb-4">
                 <button
                     type="button"
+                    onTouchStart={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }}
                     onTouchEnd={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
                         setViewMode('grid');
+                        return false;
                     }}
                     onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
                         setViewMode('grid');
+                        return false;
                     }}
+                    style={{ WebkitTapHighlightColor: 'transparent' }}
                     className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                 >
                     더보기
