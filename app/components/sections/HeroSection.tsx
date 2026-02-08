@@ -6,6 +6,7 @@ import Image from "next/image";
 import { memo } from "react";
 import AddFont from "../AddFont";
 import FloatingHearts from "../FloatingHearts";
+import WavyText from "../WavyText";
 
 interface HeroSectionProps {
     showStickyFooter: boolean;
@@ -24,7 +25,7 @@ function HeroSection({ showStickyFooter }: HeroSectionProps) {
             </div>
 
             <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-6">
-                <div className="relative w-full aspect-square">
+                <div className="relative w-full aspect-[3/4]">
                     <Image
                         src={`${basePath}/images/wedding-main.jpg`}
                         alt="결혼식 메인 이미지"
@@ -48,7 +49,7 @@ function HeroSection({ showStickyFooter }: HeroSectionProps) {
                 </div>
 
                 {/* 떠다니는 텍스트 오버레이 */}
-                {/* <div className="absolute top-[90%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 max-w-[90%] z-10">
+                <div className="absolute top-[90%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 max-w-[90%] z-10">
                     <WavyText
                         text="we are getting married"
                         delay={0.1}
@@ -62,7 +63,7 @@ function HeroSection({ showStickyFooter }: HeroSectionProps) {
                             fontWeight: 500
                         }}
                     />
-                </div> */}
+                </div>
             </div>
 
             <div className="mb-2 font-[500] tracking-wider text-gray-800 text-abs-20">

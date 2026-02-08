@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import { BrideGroomIntro, CountdownTimer } from '@/components';
+import { motion } from "framer-motion";
 import BGMPlayer from "./components/BGMPlayer";
 import {
   AccountSection,
   DirectionsInfoSection,
   GallerySection,
   GuestBookSection,
+  HeroSection,
   LocationSection,
   WeddingInfoSection
 } from "./components/sections";
@@ -16,36 +18,29 @@ import StickyFooter from "./components/StickyFooter";
 import { useFontSize } from "./context/FontSizeContext";
 
 const SlideInSection = React.memo(({ children }: { children: React.ReactNode }) => {
-  // 🔍 디버깅용: 모션 임시 비활성화
+  // transition 및 viewport 객체 메모이제이션
+  const transition = useMemo(() => ({
+    duration: 1.2,
+    ease: "easeOut"
+  }), []);
+
+  const viewport = useMemo(() => ({
+    once: true,
+    amount: 0.2,
+    margin: "0px 0px -100px 0px"
+  }), []);
+
   return (
-    <div className="w-full">
+    <motion.div
+      className="w-full"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={transition}
+      viewport={viewport}
+    >
       {children}
-    </div>
+    </motion.div>
   );
-
-  // // transition 및 viewport 객체 메모이제이션
-  // const transition = useMemo(() => ({
-  //   duration: 1.2,
-  //   ease: "easeOut"
-  // }), []);
-
-  // const viewport = useMemo(() => ({
-  //   once: true,
-  //   amount: 0.2,
-  //   margin: "0px 0px -100px 0px"
-  // }), []);
-
-  // return (
-  //   <motion.div
-  //     className="w-full"
-  //     initial={{ opacity: 0, y: 40 }}
-  //     whileInView={{ opacity: 1, y: 0 }}
-  //     transition={transition}
-  //     viewport={viewport}
-  //   >
-  //     {children}
-  //   </motion.div>
-  // );
 });
 
 const Home: React.FC = () => {
@@ -66,7 +61,7 @@ const Home: React.FC = () => {
       <div className="w-full max-w-md mx-auto px-4">
         <div className="flex flex-col items-center">
           <SlideInSection>
-            {/* <HeroSection showStickyFooter={showStickyFooter} /> */}
+            <HeroSection showStickyFooter={showStickyFooter} />
             <BrideGroomIntro />
           </SlideInSection>
 
