@@ -21,6 +21,7 @@ export default function AddFont({ isFooterVisible }: { isFooterVisible: boolean 
 
     return (
         <motion.div
+            initial={{ bottom: 40 }}
             animate={animate}
             transition={transition}
             className="fixed z-50 left-4"

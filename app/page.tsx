@@ -18,29 +18,36 @@ import StickyFooter from "./components/StickyFooter";
 import { useFontSize } from "./context/FontSizeContext";
 
 const SlideInSection = React.memo(({ children }: { children: React.ReactNode }) => {
-  // transition 및 viewport 객체 메모이제이션
-  const transition = useMemo(() => ({
-    duration: 1.2,
-    ease: "easeOut"
-  }), []);
-
-  const viewport = useMemo(() => ({
-    once: true,
-    amount: 0.2,
-    margin: "0px 0px -100px 0px"
-  }), []);
-
+  // 🔍 디버깅용: 모션 임시 비활성화
   return (
-    <motion.div
-      className="w-full"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={transition}
-      viewport={viewport}
-    >
+    <div className="w-full">
       {children}
-    </motion.div>
+    </div>
   );
+  
+  // // transition 및 viewport 객체 메모이제이션
+  // const transition = useMemo(() => ({
+  //   duration: 1.2,
+  //   ease: "easeOut"
+  // }), []);
+
+  // const viewport = useMemo(() => ({
+  //   once: true,
+  //   amount: 0.2,
+  //   margin: "0px 0px -100px 0px"
+  // }), []);
+
+  // return (
+  //   <motion.div
+  //     className="w-full"
+  //     initial={{ opacity: 0, y: 40 }}
+  //     whileInView={{ opacity: 1, y: 0 }}
+  //     transition={transition}
+  //     viewport={viewport}
+  //   >
+  //     {children}
+  //   </motion.div>
+  // );
 });
 
 const Home: React.FC = () => {
