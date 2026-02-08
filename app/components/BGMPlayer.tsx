@@ -8,6 +8,7 @@ export default function BGMPlayer() {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [playing, setPlaying] = useState(false);
     const [showNotice, setShowNotice] = useState(true);
+    const [autoplayAttempted, setAutoplayAttempted] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -17,18 +18,26 @@ export default function BGMPlayer() {
     }, []);
 
     useEffect(() => {
+        // 자동재생 시도는 한 번만
+        if (autoplayAttempted) return;
+        
         const audio = audioRef.current;
         if (audio) {
+            setAutoplayAttempted(true);
+            
+            // 일반 브라우저에서만 자동재생 시도
             audio.muted = false;
             audio
                 .play()
-                .then(() => setPlaying(true))
-                .catch((err) => {
-                    console.warn("자동 재생 실패:", err);
+                .then(() => {
+                    setPlaying(true);
+                })
+                .catch(() => {
+                    // 자동재생 실패는 정상적인 상황 (사용자 상호작용 필요)
                     setPlaying(false);
                 });
         }
-    }, []);
+    }, [autoplayAttempted]);
 
 
     return (
