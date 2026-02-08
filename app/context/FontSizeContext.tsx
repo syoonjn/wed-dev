@@ -1,5 +1,5 @@
 'use client';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 type FontSize = 'base' | 'lg' | 'xl';
 
@@ -11,7 +11,27 @@ interface FontSizeContextType {
 const FontSizeContext = createContext<FontSizeContextType | undefined>(undefined);
 
 export const FontSizeProvider = ({ children }: { children: React.ReactNode }) => {
-    const [fontSize, setFontSize] = useState<FontSize>('base');
+    const [fontSize, setFontSizeState] = useState<FontSize>('base');
+    const [mounted, setMounted] = useState(false);
+
+    // 초기 로드 시 localStorage에서 값 불러오기
+    useEffect(() => {
+        const saved = localStorage.getItem('fontSize') as FontSize;
+        if (saved && (saved === 'base' || saved === 'lg' || saved === 'xl')) {
+            setFontSizeState(saved);
+        }
+        setMounted(true);
+    }, []);
+
+    const setFontSize = (size: FontSize) => {
+        setFontSizeState(size);
+        localStorage.setItem('fontSize', size);
+    };
+
+    // 클라이언트에서만 렌더링 (SSR 호환성)
+    if (!mounted) {
+        return null;
+    }
 
     return (
         <FontSizeContext.Provider value={{ fontSize, setFontSize }}>

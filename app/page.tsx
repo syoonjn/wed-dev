@@ -26,8 +26,7 @@ const SlideInSection = ({ children }: { children: React.ReactNode }) => (
     viewport={{ 
       once: true, 
       amount: 0.2, 
-      margin: "0px 0px -100px 0px",
-      fallback: "inView" // iOS 카카오톡 호환성
+      margin: "0px 0px -100px 0px"
     }}
   >
     {children}
