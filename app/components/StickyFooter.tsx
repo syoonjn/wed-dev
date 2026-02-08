@@ -34,10 +34,11 @@ const StickyFooter = ({
         const handleScroll = () => {
             const shouldShow = window.scrollY > 200;
 
-            // ✅ 상태가 실제로 변경될 때만 업데이트
+            // ✅ 로컬 상태와 부모 상태를 독립적으로 업데이트
             setShowFooter((prev) => {
                 if (prev !== shouldShow) {
-                    setShowFooterState(shouldShow); // 외부로도 상태 전달
+                    // 상태 업데이트를 다음 틱으로 연기
+                    setTimeout(() => setShowFooterState(shouldShow), 0);
                     return shouldShow;
                 }
                 return prev;

@@ -3,9 +3,9 @@
 import { basePath } from "@/next.config";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-import { ChevronLeft, ChevronRight, Loader } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 const slides = Array.from({ length: 12 }, (_, i) => ({
     imageUrl: `${basePath}/images/wedding${i + 1}.jpg`,
@@ -15,21 +15,9 @@ const slides = Array.from({ length: 12 }, (_, i) => ({
 export default function CustomSlider() {
     const [viewMode, setViewMode] = useState<'slider' | 'grid'>('slider');
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [loadedCount, setLoadedCount] = useState(0); // 개별 상태 대신 카운트 사용
-    const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
-
-    const handleImageLoad = useCallback((index: number) => {
-        setLoadedImages(prev => {
-            // 이미 로드된 이미지면 스킵
-            if (prev.has(index)) return prev;
-
-            const newSet = new Set(prev);
-            newSet.add(index);
-            return newSet;
-        });
-
-        setLoadedCount(prev => Math.min(prev + 1, slides.length));
-    }, []);
+    
+    // ✅ 로딩 상태를 제거하고 이미지가 자연스럽게 로드되도록 변경
+    // spinner를 제거하여 리렌더 방지
 
     // 최대 5개의 점만 표시하고 순환
     const maxDots = 5;
@@ -92,11 +80,10 @@ export default function CustomSlider() {
                 </div>
                 <div className="grid grid-cols-3 gap-1">
                     {slides.map((slide, i) => {
-                        const isLoaded = loadedImages.has(i);
                         return (
                             <div
                                 key={slide.id}
-                                className="relative aspect-[3/4] overflow-hidden shadow-lg"
+                                className="relative aspect-[3/4] overflow-hidden shadow-lg bg-gray-100"
                                 style={{
                                     touchAction: "pan-y",
                                     userSelect: "none",
@@ -113,11 +100,6 @@ export default function CustomSlider() {
                                     }
                                 }}
                             >
-                                {!isLoaded && (
-                                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100/80 backdrop-blur-sm">
-                                        <Loader className="w-10 h-10 animate-spin text-gray-400" />
-                                    </div>
-                                )}
                                 <Image
                                     src={slide.imageUrl}
                                     alt={''}
@@ -128,7 +110,6 @@ export default function CustomSlider() {
                                     sizes="(max-width: 640px) 33vw, (max-width: 1024px) 33vw, 25vw"
                                     draggable={false}
                                     onContextMenu={(e) => e.preventDefault()}
-                                    onLoad={() => handleImageLoad(i)}
                                     style={{ WebkitTouchCallout: "none" }}
                                 />
                             </div>
@@ -165,11 +146,10 @@ export default function CustomSlider() {
             {/* 슬라이더 */}
             <div ref={sliderRef} className="keen-slider">
                 {slides.map((slide, i) => {
-                    const isLoaded = loadedImages.has(i);
                     return (
                         <div
                             key={slide.id}
-                            className="keen-slider__slide relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg w-full max-h-screen flex-shrink-0"
+                            className="keen-slider__slide relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg w-full max-h-screen flex-shrink-0 bg-gray-100"
                             style={{
                                 willChange: "transform",
                                 transform: "translateZ(0)",
@@ -188,12 +168,6 @@ export default function CustomSlider() {
                                 }
                             }}
                         >
-                            {!isLoaded && (
-                                <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100/80 backdrop-blur-sm">
-                                    <Loader className="w-12 h-12 animate-spin text-gray-400" />
-                                </div>
-                            )}
-
                             <Image
                                 src={slide.imageUrl}
                                 alt={''}
@@ -205,7 +179,6 @@ export default function CustomSlider() {
                                 sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 33vw"
                                 draggable={false}
                                 onContextMenu={(e) => e.preventDefault()}
-                                onLoad={() => handleImageLoad(i)}
                                 style={{ WebkitTouchCallout: "none", willChange: "transform" }}
                             />
                         </div>

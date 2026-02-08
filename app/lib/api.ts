@@ -27,15 +27,27 @@ export async function insertGuestBookEntry({
 
 // 데이터 조회 함수
 export async function fetchGuestBookEntries() {
-    const { data, error } = await supabase
+    // ✅ 타임아웃 설정 (10초)
+    const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('요청 시간 초과')), 10000)
+    );
+
+    const fetchPromise = supabase
         .from("guestbook")
         .select("*")
         .order("created_at", { ascending: false });
 
-    if (error) {
-        throw new Error(error.message);
+    try {
+        const { data, error } = await Promise.race([fetchPromise, timeoutPromise]) as any;
+        
+        if (error) {
+            throw new Error(error.message);
+        }
+        return data;
+    } catch (err) {
+        console.error('방명록 조회 실패:', err);
+        throw err;
     }
-    return data;
 }
 
 export async function checkGuestId(id: number, password: string) {
