@@ -22,16 +22,17 @@ const WavyText: FC<Props> = ({
     ...props
 }: Props) => {
     const letters = Array.from(text);
+    // 🔍 디버깅용: 반복 애니메이션 비활성화
     const [replay, setReplay] = useState(true);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setReplay(false);
-            setTimeout(() => setReplay(true), 100);
-        }, repeatDelay);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setReplay(false);
+    //         setTimeout(() => setReplay(true), 100);
+    //     }, repeatDelay);
 
-        return () => clearInterval(interval);
-    }, [repeatDelay]);
+    //     return () => clearInterval(interval);
+    // }, [repeatDelay]);
 
     const container: Variants = {
         hidden: {
