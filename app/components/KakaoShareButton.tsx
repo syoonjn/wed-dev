@@ -12,15 +12,26 @@ declare global {
 
 const KakaoShareButton = () => {
     useEffect(() => {
+        // 이미 초기화되었으면 스킵
+        if (window.Kakao?.isInitialized()) return;
+        
         if (window.Kakao) {
             initKakao();
         } else {
             const script = document.querySelector('script[src*="kakao"]');
             if (script) {
-                script.addEventListener('load', initKakao);
+                const handleLoad = () => {
+                    initKakao();
+                    script.removeEventListener('load', handleLoad);
+                };
+                script.addEventListener('load', handleLoad);
+                
+                return () => {
+                    script.removeEventListener('load', handleLoad);
+                };
             }
         }
-    }, []);
+    }, []); // 빈 의존성 배열로 한 번만 실행
 
     const handleShare = () => {
         const shared = shareKakao();
