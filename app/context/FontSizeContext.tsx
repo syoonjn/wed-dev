@@ -10,24 +10,19 @@ interface FontSizeContextType {
 
 const FontSizeContext = createContext<FontSizeContextType | undefined>(undefined);
 
-export const FontSizeProvider = ({ children }: { children: React.ReactNode }) => {
-    const [fontSize, setFontSizeState] = useState<FontSize>('base');
-    const [mounted, setMounted] = useState(false);
+// ✅ 초기값을 함수로 계산하여 리렌더 방지
+const getInitialFontSize = (): FontSize => {
+    if (typeof window === 'undefined') return 'base';
+    const saved = localStorage.getItem('fontSize') as FontSize;
+    return (saved === 'base' || saved === 'lg' || saved === 'xl') ? saved : 'base';
+};
 
-    // 초기 로드 시 localStorage에서 값 불러오기
-    useEffect(() => {
-        const saved = localStorage.getItem('fontSize') as FontSize;
-        if (saved && (saved === 'base' || saved === 'lg' || saved === 'xl')) {
-            setFontSizeState(saved);
-        }
-        setMounted(true);
-    }, []);
+export const FontSizeProvider = ({ children }: { children: React.ReactNode }) => {
+    const [fontSize, setFontSizeState] = useState<FontSize>(getInitialFontSize);
 
     const setFontSize = (size: FontSize) => {
         setFontSizeState(size);
-        if (mounted) {
-            localStorage.setItem('fontSize', size);
-        }
+        localStorage.setItem('fontSize', size);
     };
 
     return (
