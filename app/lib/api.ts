@@ -28,7 +28,7 @@ export async function insertGuestBookEntry({
 // 데이터 조회 함수
 export async function fetchGuestBookEntries() {
     // ✅ 타임아웃 설정 (10초)
-    const timeoutPromise = new Promise((_, reject) => 
+    const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => reject(new Error('요청 시간 초과')), 10000)
     );
 
@@ -39,7 +39,7 @@ export async function fetchGuestBookEntries() {
 
     try {
         const { data, error } = await Promise.race([fetchPromise, timeoutPromise]) as any;
-        
+
         if (error) {
             throw new Error(error.message);
         }

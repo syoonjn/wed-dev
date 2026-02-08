@@ -13,11 +13,7 @@ const slides = Array.from({ length: 12 }, (_, i) => ({
 }));
 
 export default function CustomSlider() {
-    const [viewMode, setViewMode] = useState<'slider' | 'grid'>('slider');
     const [currentSlide, setCurrentSlide] = useState(0);
-    
-    // ✅ 로딩 상태를 제거하고 이미지가 자연스럽게 로드되도록 변경
-    // spinner를 제거하여 리렌더 방지
 
     // 최대 5개의 점만 표시하고 순환
     const maxDots = 5;
@@ -58,98 +54,19 @@ export default function CustomSlider() {
 
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(sliderOptions);
 
-    if (viewMode === 'grid') {
-        return (
-            <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 py-6">
-                <div className="flex justify-end mb-4">
-                    <button
-                        type="button"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setViewMode('slider');
-                        }}
-                        onTouchEnd={(e) => {
-                            e.preventDefault();
-                        }}
-                        style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
-                        className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
-                    >
-                        간략히 보기
-                    </button>
-                </div>
-                <div className="grid grid-cols-3 gap-1">
-                    {slides.map((slide, i) => {
-                        return (
-                            <div
-                                key={slide.id}
-                                className="relative aspect-[3/4] overflow-hidden shadow-lg bg-gray-100"
-                                style={{
-                                    touchAction: "pan-y",
-                                    userSelect: "none",
-                                    WebkitUserSelect: "none"
-                                }}
-                                onTouchStart={(e) => {
-                                    if (e.touches.length > 1) {
-                                        e.preventDefault();
-                                    }
-                                }}
-                                onTouchMove={(e) => {
-                                    if (e.touches.length > 1) {
-                                        e.preventDefault();
-                                    }
-                                }}
-                            >
-                                <Image
-                                    src={slide.imageUrl}
-                                    alt={''}
-                                    fill
-                                    className="object-cover"
-                                    loading="lazy"
-                                    quality={75}
-                                    sizes="(max-width: 640px) 33vw, (max-width: 1024px) 33vw, 25vw"
-                                    draggable={false}
-                                    onContextMenu={(e) => e.preventDefault()}
-                                    style={{ WebkitTouchCallout: "none" }}
-                                />
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div
             className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 py-6"
             onTouchStart={(e) => e.stopPropagation()}
             onTouchEnd={(e) => e.stopPropagation()}
         >
-            <div className="flex justify-end mb-4">
-                <button
-                    type="button"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setViewMode('grid');
-                    }}
-                    onTouchEnd={(e) => {
-                        e.preventDefault();
-                    }}
-                    style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
-                    className="px-3 py-1.5 text-sm bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
-                >
-                    더보기
-                </button>
-            </div>
             {/* 슬라이더 */}
             <div ref={sliderRef} className="keen-slider">
                 {slides.map((slide, i) => {
                     return (
                         <div
                             key={slide.id}
-                            className="keen-slider__slide relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg w-full max-h-screen flex-shrink-0 bg-gray-100"
+                            className="keen-slider__slide relative aspect-square overflow-hidden rounded-xl shadow-lg w-full max-h-screen flex-shrink-0 bg-gray-100"
                             style={{
                                 willChange: "transform",
                                 transform: "translateZ(0)",
