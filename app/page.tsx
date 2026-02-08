@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import { BrideGroomIntro, CountdownTimer } from '@/components';
 import BGMPlayer from "./components/BGMPlayer";
@@ -23,18 +23,24 @@ const SlideInSection = ({ children }: { children: React.ReactNode }) => (
     initial={{ opacity: 0, y: 40 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 1.2, ease: "easeOut" }}
-    viewport={{ 
-      once: true, 
-      amount: 0.2, 
+    viewport={{
+      once: true,
+      amount: 0.2,
       margin: "0px 0px -100px 0px"
     }}
   >
     {children}
   </motion.div>
 );
+
 const Home: React.FC = () => {
   const { fontSize } = useFontSize();
   const [showStickyFooter, setShowStickyFooter] = useState(false);
+
+  // useCallback으로 메모이제이션하여 StickyFooter의 useEffect 무한 루프 방지
+  const handleSetShowStickyFooter = useCallback((visible: boolean) => {
+    setShowStickyFooter(visible);
+  }, []);
 
   return (
     <main
@@ -84,7 +90,7 @@ const Home: React.FC = () => {
           </footer>
         </div>
 
-        <StickyFooter setShowFooterState={setShowStickyFooter} />
+        <StickyFooter setShowFooterState={handleSetShowStickyFooter} />
       </div>
     </main>
   );

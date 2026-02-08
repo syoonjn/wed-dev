@@ -22,7 +22,7 @@ export default function CustomSlider() {
         setLoadingStates((prev) => {
             // 이미 로드된 이미지는 스킵 (iOS 캐시 문제 방지)
             if (!prev[index]) return prev;
-            
+
             const updated = [...prev];
             updated[index] = false;
             return updated;

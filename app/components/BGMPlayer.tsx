@@ -14,17 +14,17 @@ export default function BGMPlayer() {
         const timer = setTimeout(() => {
             setShowNotice(false);
         }, 2000);
-        
+
         return () => clearTimeout(timer);
     }, []);
 
 
     return (
         <>
-            <audio 
-                ref={audioRef} 
-                src={`${basePath}/bgm/spring-sunshine-piano-solo-ver.mp3`} 
-                loop 
+            <audio
+                ref={audioRef}
+                src={`${basePath}/bgm/spring-sunshine-piano-solo-ver.mp3`}
+                loop
                 preload="metadata"
             />
 

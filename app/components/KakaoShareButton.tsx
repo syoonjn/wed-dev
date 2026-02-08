@@ -14,7 +14,7 @@ const KakaoShareButton = () => {
     useEffect(() => {
         // 이미 초기화되었으면 스킵
         if (window.Kakao?.isInitialized()) return;
-        
+
         if (window.Kakao) {
             initKakao();
         } else {
@@ -25,7 +25,7 @@ const KakaoShareButton = () => {
                     script.removeEventListener('load', handleLoad);
                 };
                 script.addEventListener('load', handleLoad);
-                
+
                 return () => {
                     script.removeEventListener('load', handleLoad);
                 };

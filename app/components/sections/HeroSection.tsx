@@ -38,8 +38,8 @@ function HeroSection({ showStickyFooter }: HeroSectionProps) {
                     />
                 </div>
 
-                    {/* 날짜/요일 오버레이 */}
-                    <div className="absolute top-6 left-1/2 transform -translate-x-1/2 text-center z-10">
+                {/* 날짜/요일 오버레이 */}
+                <div className="absolute top-6 left-1/2 transform -translate-x-1/2 text-center z-10">
                     <div className="mb-1 tracking-widest font-bold text-abs-20 text-[#2d2d2d]">
                         26 | 03 | 28
                     </div>
@@ -48,8 +48,8 @@ function HeroSection({ showStickyFooter }: HeroSectionProps) {
                     </div>
                 </div>
 
-                    {/* 떠다니는 텍스트 오버레이 */}
-                    <div className="absolute top-[90%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 max-w-[90%] z-10">
+                {/* 떠다니는 텍스트 오버레이 */}
+                <div className="absolute top-[90%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 max-w-[90%] z-10">
                     <WavyText
                         text="we are getting married"
                         delay={0.1}

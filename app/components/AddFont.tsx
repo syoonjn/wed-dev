@@ -8,9 +8,9 @@ export default function AddFont({ isFooterVisible }: { isFooterVisible: boolean 
 
     return (
         <motion.div
-            animate={{ 
+            animate={{
                 y: 0,
-                bottom: isFooterVisible ? 120 : 40 
+                bottom: isFooterVisible ? 120 : 40
             }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="fixed z-50 left-4"

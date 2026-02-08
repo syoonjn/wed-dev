@@ -25,13 +25,10 @@ export const FontSizeProvider = ({ children }: { children: React.ReactNode }) =>
 
     const setFontSize = (size: FontSize) => {
         setFontSizeState(size);
-        localStorage.setItem('fontSize', size);
+        if (mounted) {
+            localStorage.setItem('fontSize', size);
+        }
     };
-
-    // 클라이언트에서만 렌더링 (SSR 호환성)
-    if (!mounted) {
-        return null;
-    }
 
     return (
         <FontSizeContext.Provider value={{ fontSize, setFontSize }}>
