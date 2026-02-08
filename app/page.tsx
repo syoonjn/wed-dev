@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import { BrideGroomIntro, CountdownTimer } from '@/components';
 import BGMPlayer from "./components/BGMPlayer";
@@ -10,7 +9,6 @@ import {
   DirectionsInfoSection,
   GallerySection,
   GuestBookSection,
-  HeroSection,
   LocationSection,
   WeddingInfoSection
 } from "./components/sections";
@@ -24,7 +22,7 @@ const SlideInSection = React.memo(({ children }: { children: React.ReactNode }) 
       {children}
     </div>
   );
-  
+
   // // transition 및 viewport 객체 메모이제이션
   // const transition = useMemo(() => ({
   //   duration: 1.2,
@@ -68,7 +66,7 @@ const Home: React.FC = () => {
       <div className="w-full max-w-md mx-auto px-4">
         <div className="flex flex-col items-center">
           <SlideInSection>
-            <HeroSection showStickyFooter={showStickyFooter} />
+            {/* <HeroSection showStickyFooter={showStickyFooter} /> */}
             <BrideGroomIntro />
           </SlideInSection>
 

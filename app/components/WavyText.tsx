@@ -1,7 +1,7 @@
 "use client";
 
 import { HTMLMotionProps, motion, Variants } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 
 interface Props extends HTMLMotionProps<"div"> {
     text: string;
