@@ -26,18 +26,18 @@ export default function GuestBookList({ showAll }: { showAll: boolean }) {
         },
     });
 
-    if (isLoading) return <div className="absolute inset-0 z-10 flex items-center justify-center bg-white">
-        <Loader className="w-8 h-8 animate-spin text-red-400" />
-    </div>;
-    if (error) return <p>에러가 발생했습니다: {(error as Error).message}</p>;
-    if (!data || data.length === 0) return <p>방명록이 없습니다. 첫 번째로 작성해보세요!</p>;
-
-    const visibleEntries = showAll ? data : data?.slice(0, 3);
-
     const formatDateTime = useCallback((dateString: string) => {
         const date = new Date(dateString);
         return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")} ${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`;
     }, []);
+
+    if (isLoading) return <div className="absolute inset-0 z-10 flex items-center justify-center bg-white">
+        <Loader className="w-8 h-8 animate-spin text-red-400" />
+    </div>;
+    if (error) return <p>에러가 발생했습니다: {(error as Error).message}</p>;
+    if (!data || !Array.isArray(data) || data.length === 0) return <p>방명록이 없습니다. 첫 번째로 작성해보세요!</p>;
+
+    const visibleEntries = showAll ? data : data.slice(0, 3);
 
     return (
         <div>
