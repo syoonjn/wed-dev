@@ -8,6 +8,7 @@ import BGMPlayer from "./components/BGMPlayer";
 import {
   AccountSection,
   DirectionsInfoSection,
+  GallerySection,
   GuestBookSection,
   HeroSection,
   LocationSection,
@@ -82,9 +83,9 @@ const Home: React.FC = () => {
             <DirectionsInfoSection />
           </SlideInSection>
 
-          {/* <SlideInSection>
+          <SlideInSection>
             <GallerySection />
-          </SlideInSection> */}
+          </SlideInSection>
 
           <SlideInSection>
             <AccountSection />

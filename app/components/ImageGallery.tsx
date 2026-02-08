@@ -19,6 +19,19 @@ export default function CustomSlider() {
     const maxDots = 5;
     const activeDot = currentSlide % maxDots;
 
+    // ✅ slideChanged 콜백을 useCallback으로 메모이제이션
+    const handleSlideChanged = useMemo(() => {
+        let lastSlide = 0;
+        return (slider: any) => {
+            const newSlide = slider.track.details.rel;
+            // 실제로 슬라이드가 변경됐을 때만 상태 업데이트
+            if (lastSlide !== newSlide) {
+                lastSlide = newSlide;
+                setCurrentSlide(newSlide);
+            }
+        };
+    }, []);
+
     // keen-slider 설정 메모이제이션
     const sliderOptions = useMemo(() => ({
         loop: true,
@@ -47,10 +60,8 @@ export default function CustomSlider() {
                 },
             },
         },
-        slideChanged(slider: any) {
-            setCurrentSlide(slider.track.details.rel);
-        },
-    }), []);
+        slideChanged: handleSlideChanged,
+    }), [handleSlideChanged]);
 
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(sliderOptions);
 
@@ -90,9 +101,9 @@ export default function CustomSlider() {
                                 alt={''}
                                 fill
                                 className="object-cover"
-                                loading="eager"
-                                priority={i < 3}
-                                quality={75}
+                                loading={i < 2 ? "eager" : "lazy"}
+                                priority={i === 0}
+                                quality={70}
                                 sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 33vw"
                                 draggable={false}
                                 onContextMenu={(e) => e.preventDefault()}
