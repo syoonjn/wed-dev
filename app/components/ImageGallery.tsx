@@ -121,7 +121,7 @@ export default function CustomSlider() {
                                     sizes="(max-width: 640px) 33vw, (max-width: 1024px) 33vw, 25vw"
                                     draggable={false}
                                     onContextMenu={(e) => e.preventDefault()}
-                                    onLoadingComplete={() => handleImageLoad(i)}
+                                    onLoad={() => handleImageLoad(i)}
                                     style={{ WebkitTouchCallout: "none" }}
                                 />
                             </div>
@@ -196,7 +196,7 @@ export default function CustomSlider() {
                             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 33vw"
                             draggable={false}
                             onContextMenu={(e) => e.preventDefault()}
-                            onLoadingComplete={() => handleImageLoad(i)}
+                            onLoad={() => handleImageLoad(i)}
                             style={{ WebkitTouchCallout: "none", willChange: "transform" }}
                         />
                     </div>
