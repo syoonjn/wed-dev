@@ -33,8 +33,15 @@ const StickyFooter = ({
     useEffect(() => {
         const handleScroll = () => {
             const shouldShow = window.scrollY > 200;
-            setShowFooter(shouldShow);
-            setShowFooterState(shouldShow); // ✅ 외부로도 상태 전달
+            
+            // ✅ 상태가 실제로 변경될 때만 업데이트
+            setShowFooter((prev) => {
+                if (prev !== shouldShow) {
+                    setShowFooterState(shouldShow); // 외부로도 상태 전달
+                    return shouldShow;
+                }
+                return prev;
+            });
 
             if (!shouldShow) {
                 setShowShareMenu(false);
