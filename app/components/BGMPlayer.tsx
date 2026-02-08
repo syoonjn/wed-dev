@@ -42,8 +42,12 @@ export default function BGMPlayer() {
 
     return (
         <>
-            <audio ref={audioRef} src={`${basePath}/bgm/spring-sunshine-piano-solo-ver.mp3`} loop preload="auto" muted
-                autoPlay />
+            <audio 
+                ref={audioRef} 
+                src={`${basePath}/bgm/spring-sunshine-piano-solo-ver.mp3`} 
+                loop 
+                preload="metadata"
+            />
 
             {/* 🎵 알림 문구 */}
             {showNotice && (

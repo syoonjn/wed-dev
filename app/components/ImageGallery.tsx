@@ -5,7 +5,7 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { ChevronLeft, ChevronRight, Loader } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const slides = Array.from({ length: 12 }, (_, i) => ({
     imageUrl: `${basePath}/images/wedding${i + 1}.jpg`
@@ -18,13 +18,16 @@ export default function CustomSlider() {
         Array(slides.length).fill(true)
     );
 
-    const handleImageLoad = (index: number) => {
+    const handleImageLoad = useCallback((index: number) => {
         setLoadingStates((prev) => {
+            // 이미 로드된 이미지는 스킵 (iOS 캐시 문제 방지)
+            if (!prev[index]) return prev;
+            
             const updated = [...prev];
             updated[index] = false;
             return updated;
         });
-    };
+    }, []);
 
     // 최대 5개의 점만 표시하고 순환
     const maxDots = 5;
