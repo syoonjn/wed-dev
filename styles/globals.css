@@ -6,11 +6,23 @@
 html {
     scroll-behavior: auto;
     touch-action: pan-x pan-y;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    font-size: 16px;
 }
 
 body {
     user-select: none;
     touch-action: pan-x pan-y;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+* {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 input,
