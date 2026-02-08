@@ -5,40 +5,41 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { ChevronLeft, ChevronRight, Loader } from "lucide-react";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 const slides = Array.from({ length: 12 }, (_, i) => ({
-    imageUrl: `${basePath}/images/wedding${i + 1}.jpg`
+    imageUrl: `${basePath}/images/wedding${i + 1}.jpg`,
+    id: i // 고유 ID 추가
 }));
 
 export default function CustomSlider() {
     const [viewMode, setViewMode] = useState<'slider' | 'grid'>('slider');
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [loadingStates, setLoadingStates] = useState(
-        Array(slides.length).fill(true)
-    );
+    const [loadedCount, setLoadedCount] = useState(0); // 개별 상태 대신 카운트 사용
+    const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
 
     const handleImageLoad = useCallback((index: number) => {
-        setLoadingStates((prev) => {
-            // 이미 로드된 이미지는 스킵 (iOS 캐시 문제 방지)
-            if (!prev[index]) return prev;
-
-            const updated = [...prev];
-            updated[index] = false;
-            return updated;
+        setLoadedImages(prev => {
+            // 이미 로드된 이미지면 스킵
+            if (prev.has(index)) return prev;
+            
+            const newSet = new Set(prev);
+            newSet.add(index);
+            return newSet;
         });
+        
+        setLoadedCount(prev => Math.min(prev + 1, slides.length));
     }, []);
 
     // 최대 5개의 점만 표시하고 순환
     const maxDots = 5;
     const activeDot = currentSlide % maxDots;
 
-
-
-    const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
+    // keen-slider 설정 메모이제이션
+    const sliderOptions = useMemo(() => ({
         loop: true,
         initial: 0,
-        renderMode: "performance",
+        renderMode: "performance" as const,
         drag: true,
         rubberband: false,
         defaultAnimation: {
@@ -62,10 +63,12 @@ export default function CustomSlider() {
                 },
             },
         },
-        slideChanged(slider) {
+        slideChanged(slider: any) {
             setCurrentSlide(slider.track.details.rel);
         },
-    });
+    }), []);
+
+    const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(sliderOptions);
 
     if (viewMode === 'grid') {
         return (
@@ -89,9 +92,10 @@ export default function CustomSlider() {
                 </div>
                 <div className="grid grid-cols-3 gap-1">
                     {slides.map((slide, i) => {
+                        const isLoaded = loadedImages.has(i);
                         return (
                             <div
-                                key={`grid-${i}`}
+                                key={slide.id}
                                 className="relative aspect-[3/4] overflow-hidden shadow-lg"
                                 style={{
                                     touchAction: "pan-y",
@@ -109,7 +113,7 @@ export default function CustomSlider() {
                                     }
                                 }}
                             >
-                                {loadingStates[i] && (
+                                {!isLoaded && (
                                     <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100/80 backdrop-blur-sm">
                                         <Loader className="w-10 h-10 animate-spin text-gray-400" />
                                     </div>
@@ -160,10 +164,12 @@ export default function CustomSlider() {
             </div>
             {/* 슬라이더 */}
             <div ref={sliderRef} className="keen-slider">
-                {slides.map((slide, i) => (
-                    <div
-                        key={slide.imageUrl}
-                        className="keen-slider__slide relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg w-full max-h-screen flex-shrink-0"
+                {slides.map((slide, i) => {
+                    const isLoaded = loadedImages.has(i);
+                    return (
+                        <div
+                            key={slide.id}
+                            className="keen-slider__slide relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg w-full max-h-screen flex-shrink-0"
                         style={{
                             willChange: "transform",
                             transform: "translateZ(0)",
@@ -182,7 +188,7 @@ export default function CustomSlider() {
                             }
                         }}
                     >
-                        {loadingStates[i] && (
+                        {!isLoaded && (
                             <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100/80 backdrop-blur-sm">
                                 <Loader className="w-12 h-12 animate-spin text-gray-400" />
                             </div>
@@ -203,7 +209,8 @@ export default function CustomSlider() {
                             style={{ WebkitTouchCallout: "none", willChange: "transform" }}
                         />
                     </div>
-                ))}
+                );
+                })}
 
             </div>
 

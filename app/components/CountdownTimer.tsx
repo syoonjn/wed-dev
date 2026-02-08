@@ -13,30 +13,50 @@ const CountdownTimer: React.FC = () => {
     });
 
     useEffect(() => {
-        const interval = setInterval(() => {
+        // 초기 계산
+        const calculateTimeLeft = () => {
             const now = new Date().getTime();
             const distance = targetTime - now;
 
             if (distance <= 0) {
-                clearInterval(interval);
-                setTimeLeft({
+                return {
                     days: 0,
                     hours: 0,
                     minutes: 0,
                     seconds: 0,
-                });
-            } else {
-                setTimeLeft({
-                    days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-                    hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-                    minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-                    seconds: Math.floor((distance % (1000 * 60)) / 1000),
-                });
+                };
             }
+            
+            return {
+                days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+                hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+                seconds: Math.floor((distance % (1000 * 60)) / 1000),
+            };
+        };
+
+        // 즉시 초기값 설정
+        setTimeLeft(calculateTimeLeft());
+
+        const interval = setInterval(() => {
+            const newTimeLeft = calculateTimeLeft();
+            
+            // 값이 변경되었을 때만 상태 업데이트 (불필요한 리렌더 방지)
+            setTimeLeft(prev => {
+                if (
+                    prev.days === newTimeLeft.days &&
+                    prev.hours === newTimeLeft.hours &&
+                    prev.minutes === newTimeLeft.minutes &&
+                    prev.seconds === newTimeLeft.seconds
+                ) {
+                    return prev;
+                }
+                return newTimeLeft;
+            });
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [targetTime]);
+    }, []); // 빈 배열로 한 번만 실행
 
     return (
         <div className="space-y-6">
