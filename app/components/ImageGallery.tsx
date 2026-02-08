@@ -22,12 +22,12 @@ export default function CustomSlider() {
         setLoadedImages(prev => {
             // 이미 로드된 이미지면 스킵
             if (prev.has(index)) return prev;
-            
+
             const newSet = new Set(prev);
             newSet.add(index);
             return newSet;
         });
-        
+
         setLoadedCount(prev => Math.min(prev + 1, slides.length));
     }, []);
 
@@ -170,46 +170,46 @@ export default function CustomSlider() {
                         <div
                             key={slide.id}
                             className="keen-slider__slide relative aspect-[3/4] overflow-hidden rounded-xl shadow-lg w-full max-h-screen flex-shrink-0"
-                        style={{
-                            willChange: "transform",
-                            transform: "translateZ(0)",
-                            touchAction: "pan-y",
-                            userSelect: "none",
-                            WebkitUserSelect: "none"
-                        }}
-                        onTouchStart={(e) => {
-                            if (e.touches.length > 1) {
-                                e.preventDefault();
-                            }
-                        }}
-                        onTouchMove={(e) => {
-                            if (e.touches.length > 1) {
-                                e.preventDefault();
-                            }
-                        }}
-                    >
-                        {!isLoaded && (
-                            <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100/80 backdrop-blur-sm">
-                                <Loader className="w-12 h-12 animate-spin text-gray-400" />
-                            </div>
-                        )}
+                            style={{
+                                willChange: "transform",
+                                transform: "translateZ(0)",
+                                touchAction: "pan-y",
+                                userSelect: "none",
+                                WebkitUserSelect: "none"
+                            }}
+                            onTouchStart={(e) => {
+                                if (e.touches.length > 1) {
+                                    e.preventDefault();
+                                }
+                            }}
+                            onTouchMove={(e) => {
+                                if (e.touches.length > 1) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        >
+                            {!isLoaded && (
+                                <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100/80 backdrop-blur-sm">
+                                    <Loader className="w-12 h-12 animate-spin text-gray-400" />
+                                </div>
+                            )}
 
-                        <Image
-                            src={slide.imageUrl}
-                            alt={''}
-                            fill
-                            className="object-cover"
-                            loading="eager"
-                            priority={i < 3}
-                            quality={75}
-                            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 33vw"
-                            draggable={false}
-                            onContextMenu={(e) => e.preventDefault()}
-                            onLoad={() => handleImageLoad(i)}
-                            style={{ WebkitTouchCallout: "none", willChange: "transform" }}
-                        />
-                    </div>
-                );
+                            <Image
+                                src={slide.imageUrl}
+                                alt={''}
+                                fill
+                                className="object-cover"
+                                loading="eager"
+                                priority={i < 3}
+                                quality={75}
+                                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 33vw"
+                                draggable={false}
+                                onContextMenu={(e) => e.preventDefault()}
+                                onLoad={() => handleImageLoad(i)}
+                                style={{ WebkitTouchCallout: "none", willChange: "transform" }}
+                            />
+                        </div>
+                    );
                 })}
 
             </div>

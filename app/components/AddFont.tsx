@@ -1,18 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useMemo } from "react";
 import { useFontSize } from "../context/FontSizeContext";
 
 export default function AddFont({ isFooterVisible }: { isFooterVisible: boolean }) {
     const { setFontSize, fontSize } = useFontSize();
 
+    // animate 객체 메모이제이션
+    const animate = useMemo(() => ({
+        y: 0,
+        bottom: isFooterVisible ? 120 : 40
+    }), [isFooterVisible]);
+
+    // transition 객체 메모이제이션
+    const transition = useMemo(() => ({
+        duration: 0.3,
+        ease: "easeInOut"
+    }), []);
+
     return (
         <motion.div
-            animate={{
-                y: 0,
-                bottom: isFooterVisible ? 120 : 40
-            }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            animate={animate}
+            transition={transition}
             className="fixed z-50 left-4"
         >
             <button

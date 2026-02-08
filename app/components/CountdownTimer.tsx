@@ -26,7 +26,7 @@ const CountdownTimer: React.FC = () => {
                     seconds: 0,
                 };
             }
-            
+
             return {
                 days: Math.floor(distance / (1000 * 60 * 60 * 24)),
                 hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
@@ -40,7 +40,7 @@ const CountdownTimer: React.FC = () => {
 
         const interval = setInterval(() => {
             const newTimeLeft = calculateTimeLeft();
-            
+
             // 값이 변경되었을 때만 상태 업데이트 (불필요한 리렌더 방지)
             setTimeLeft(prev => {
                 if (

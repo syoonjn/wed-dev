@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import { BrideGroomIntro, CountdownTimer } from '@/components';
 import BGMPlayer from "./components/BGMPlayer";
@@ -17,21 +17,31 @@ import {
 import StickyFooter from "./components/StickyFooter";
 import { useFontSize } from "./context/FontSizeContext";
 
-const SlideInSection = ({ children }: { children: React.ReactNode }) => (
-  <motion.div
-    className="w-full"
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 1.2, ease: "easeOut" }}
-    viewport={{
-      once: true,
-      amount: 0.2,
-      margin: "0px 0px -100px 0px"
-    }}
-  >
-    {children}
-  </motion.div>
-);
+const SlideInSection = React.memo(({ children }: { children: React.ReactNode }) => {
+  // transition 및 viewport 객체 메모이제이션
+  const transition = useMemo(() => ({
+    duration: 1.2,
+    ease: "easeOut"
+  }), []);
+
+  const viewport = useMemo(() => ({
+    once: true,
+    amount: 0.2,
+    margin: "0px 0px -100px 0px"
+  }), []);
+
+  return (
+    <motion.div
+      className="w-full"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={transition}
+      viewport={viewport}
+    >
+      {children}
+    </motion.div>
+  );
+});
 
 const Home: React.FC = () => {
   const { fontSize } = useFontSize();
