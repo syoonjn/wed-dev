@@ -17,7 +17,7 @@ interface AttendanceModalProps {
 export default function AttendanceModal({ externalTrigger = false, onClose }: AttendanceModalProps) {
     const { groomFullName, brideFullName } = getCouple();
     const [cookies, setCookie] = useCookies(["hide-attendance-modal"]);
-    const [ready, setReady] = useState(false); // 쿠키 확인 완료 여부
+    const [ready, setReady] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [hideToday, setHideToday] = useState(false);
     const [showImageModal, setShowImageModal] = useState(false);
@@ -27,7 +27,7 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
         if (!externalTrigger) {
             setShowModal(!hide);
         } else {
-            setShowModal(true); // 외부 트리거로는 무조건 표시
+            setShowModal(true);
         }
         setReady(true);
     }, [cookies, externalTrigger]);
@@ -41,6 +41,20 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
         if (externalTrigger && onClose) {
             onClose();
         }
+    };
+
+    const handleHideToday = () => {
+        const expire = new Date();
+        expire.setDate(expire.getDate() + 1);
+        expire.setHours(0, 0, 0, 0);
+
+        setCookie("hide-attendance-modal", "true", {
+            path: "/",
+            expires: expire,
+        });
+
+        setHideToday(true);
+        setShowModal(false);
     };
 
     // 모달 열릴 때 body 스크롤 막기
@@ -76,27 +90,11 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
         }
     }, [showModal]);
 
-
-    const handleHideToday = () => {
-        const expire = new Date();
-        expire.setDate(expire.getDate() + 1); // KST 기준으로 하루 뒤
-        expire.setHours(0, 0, 0, 0);          // 자정으로 맞춤 (UTC로는 내일 00:00)
-
-        setCookie("hide-attendance-modal", "true", {
-            path: "/",
-            expires: expire,
-        });
-
-        setHideToday(true);
-        setShowModal(false);
-    };
-
-    // ✅ 쿠키 확인이 끝난 뒤에만 모달 렌더링
     if (!ready || !showModal) return null;
 
     return (
-        <div ref={modalRef} className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4">
-            <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg">
+        <div ref={modalRef} className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4 py-4 overflow-y-auto">
+            <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg max-h-[calc(100vh-2rem)] overflow-y-auto">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-base font-semibold text-black">🚧주차 동선 안내</h2>
                     <button
@@ -177,10 +175,6 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                                     <span className="block text-sm">
                                         와이몰 주차장
                                         <span className="text-gray-700 font-semibold"> 주소: "장재리 2023번지"</span>
-                                    </span>
-                                    <span className="block text-sm">
-                                        광장1,2주차장
-                                        <span className="text-gray-700 font-semibold"> 주소: "천안아산역 광장1 주차장"</span>
                                     </span>
                                 </p>
                             </Accordion.Content>
