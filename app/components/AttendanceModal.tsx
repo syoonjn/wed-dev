@@ -59,9 +59,10 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
 
     // 모달 열릴 때 body 스크롤 막기
     const modalRef = useRef<HTMLDivElement>(null);
+    const modalContentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const target = modalRef.current;
+        const target = modalContentRef.current;
         if (!target) return;
 
         if (showModal || showImageModal) {
@@ -73,28 +74,18 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
         return () => enableBodyScroll(target); // 언마운트 시 복구
     }, [showModal, showImageModal]);
 
-    useEffect(() => {
-        if (!showModal) return;
-
-        const target = modalRef.current;
-        if (!target) return;
-
-        const headings = target.querySelectorAll('[data-testid="flowbite-accordion-heading"]');
-        const mapHeading = Array.from(headings).find((heading) =>
-            heading.textContent?.includes("CA웨딩 주차장 안내도")
-        );
-        const mapButton = mapHeading?.closest("button") as HTMLButtonElement | null;
-
-        if (mapButton && mapButton.getAttribute("aria-expanded") !== "true") {
-            mapButton.click();
-        }
-    }, [showModal]);
-
     if (!ready || !showModal) return null;
 
     return (
-        <div ref={modalRef} className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4 py-4 overflow-y-auto">
-            <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg max-h-[calc(100vh-2rem)] overflow-y-auto">
+        <div ref={modalRef} className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4 py-4 overflow-hidden">
+            <div
+                ref={modalContentRef}
+                className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg max-h-[calc(100vh-2rem)] overflow-y-auto overscroll-contain touch-pan-y"
+                style={{
+                    maxHeight: "calc(100dvh - 2rem)",
+                    WebkitOverflowScrolling: "touch",
+                }}
+            >
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-base font-semibold text-black">🚧주차 동선 안내</h2>
                     <button
@@ -117,45 +108,12 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                     <div className="mb-1 text-sm text-gray-700">📅 2026년 3월 28일 토요일 오후 1시</div>
                     <div className="mb-5 text-sm text-gray-700">📍 CA 웨딩컨벤션 루체홀</div>
 
+
                     {/* 아코디언 */}
-                    <Accordion collapseAll>
+                    <Accordion>
                         <Accordion.Panel>
                             <Accordion.Title className="text-sm font-medium text-gray-700 py-2 px-3 leading-tight">
-                                📹 주차 위치 가이드 영상
-                            </Accordion.Title>
-                            <Accordion.Content className="space-y-3">
-                                <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg">
-                                    <iframe
-                                        className="absolute top-0 left-0 w-full"
-                                        src="https://www.youtube.com/embed/t9ak-LFARbA"
-                                        title="YouTube video player"
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                    ></iframe>
-                                </div>
-                                <p className="text-xs text-gray-500 leading-relaxed space-y-1">
-                                    <span className="block font-semibold text-[#b85b52]">📌 주차장 위치 안내</span>
-                                    <span className="block">
-                                        상가협의회 주차장
-                                        <span className="text-gray-700 font-medium"> 주소: "장재리 1770번지"</span>
-                                    </span>
-                                    <span className="block">
-                                        와이몰 주차장
-                                        <span className="text-gray-700 font-medium"> 주소: "장재리 2023번지"</span>
-                                    </span>
-                                    <span className="block">
-                                        광장1,2 주차장
-                                        <span className="text-gray-700 font-medium"> 주소: "천안아산역 광장1 주차장"</span>
-                                    </span>
-                                </p>
-
-
-                            </Accordion.Content>
-                        </Accordion.Panel>
-                        <Accordion.Panel>
-                            <Accordion.Title className="text-sm font-medium text-gray-700 py-2 px-3 leading-tight">
-                                🗺️ CA웨딩 주차장 안내도
+                                🗺️ CA웨딩 주차장 안내
                             </Accordion.Title>
                             <Accordion.Content>
                                 <Image
@@ -166,8 +124,8 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                                     className="w-full rounded-md mb-2 cursor-pointer"
                                     onClick={() => setShowImageModal(true)}
                                 />
-                                <p className="text-xs text-gray-500 leading-relaxed space-y-1">
-                                    <span className="block font-semibold text-[#b85b52]">📌 주차장 위치 안내</span>
+                                <span className="block font-semibold text-[#b85b52]">📌 주차장 위치 안내</span>
+                                <div className="mt-1 text-gray-500 leading-relaxed space-y-1">
                                     <span className="block text-sm">
                                         상가협의회 주차장
                                         <span className="text-gray-700 font-semibold"> 주소: "장재리 1770번지"</span>
@@ -176,7 +134,7 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                                         와이몰 주차장
                                         <span className="text-gray-700 font-semibold"> 주소: "장재리 2023번지"</span>
                                     </span>
-                                </p>
+                                </div>
                             </Accordion.Content>
                         </Accordion.Panel>
                     </Accordion>
@@ -211,10 +169,11 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                                         className="rounded-md max-h-[80vh] object-contain"
                                     />
                                 </div>
+
                             </div>
                         </div>
                     )}
-                    <div className="mt-4 flex items-center justify-center">
+                    <div className="mt-2 flex items-center justify-center">
                         <label
                             className="flex cursor-pointer items-center gap-2 text-xs text-gray-400"
                             onClick={handleHideToday}
