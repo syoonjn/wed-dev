@@ -59,6 +59,23 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
         return () => enableBodyScroll(target); // 언마운트 시 복구
     }, [showModal, showImageModal]);
 
+    useEffect(() => {
+        if (!showModal) return;
+
+        const target = modalRef.current;
+        if (!target) return;
+
+        const headings = target.querySelectorAll('[data-testid="flowbite-accordion-heading"]');
+        const mapHeading = Array.from(headings).find((heading) =>
+            heading.textContent?.includes("CA웨딩 주차장 안내도")
+        );
+        const mapButton = mapHeading?.closest("button") as HTMLButtonElement | null;
+
+        if (mapButton && mapButton.getAttribute("aria-expanded") !== "true") {
+            mapButton.click();
+        }
+    }, [showModal]);
+
 
     const handleHideToday = () => {
         const expire = new Date();
@@ -91,8 +108,9 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                 </div>
                 <div className="text-center">
                     <p className="mb-4 text-sm text-gray-600">
-                        오시는 길이 번거로우시지 않도록 미리 안내드려요.<br />
-                        차량 이용 시 인근 주차장 정보를 참고해 주세요.
+                        예식 당일 KTX 이용객과 함께 사용되어<br />
+                        주차가 다소 혼잡할 수 있습니다.<br />
+                        CA웨딩컨벤션 안내 주차장 이용을 권장드립니다.
                     </p>
 
                     <hr className="my-4" />
@@ -102,7 +120,7 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                     <div className="mb-5 text-sm text-gray-700">📍 CA 웨딩컨벤션 루체홀</div>
 
                     {/* 아코디언 */}
-                    <Accordion>
+                    <Accordion collapseAll>
                         <Accordion.Panel>
                             <Accordion.Title className="text-sm font-medium text-gray-700 py-2 px-3 leading-tight">
                                 📹 주차 위치 가이드 영상
@@ -128,6 +146,10 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                                         와이몰 주차장
                                         <span className="text-gray-700 font-medium"> 주소: "장재리 2023번지"</span>
                                     </span>
+                                    <span className="block">
+                                        광장1,2 주차장
+                                        <span className="text-gray-700 font-medium"> 주소: "천안아산역 광장1 주차장"</span>
+                                    </span>
                                 </p>
 
 
@@ -148,13 +170,17 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                                 />
                                 <p className="text-xs text-gray-500 leading-relaxed space-y-1">
                                     <span className="block font-semibold text-[#b85b52]">📌 주차장 위치 안내</span>
-                                    <span className="block">
+                                    <span className="block text-sm">
                                         상가협의회 주차장
-                                        <span className="text-gray-700 font-medium"> 주소: "장재리 1770번지"</span>
+                                        <span className="text-gray-700 font-semibold"> 주소: "장재리 1770번지"</span>
                                     </span>
-                                    <span className="block">
+                                    <span className="block text-sm">
                                         와이몰 주차장
-                                        <span className="text-gray-700 font-medium"> 주소: "장재리 2023번지"</span>
+                                        <span className="text-gray-700 font-semibold"> 주소: "장재리 2023번지"</span>
+                                    </span>
+                                    <span className="block text-sm">
+                                        광장1,2주차장
+                                        <span className="text-gray-700 font-semibold"> 주소: "천안아산역 광장1 주차장"</span>
                                     </span>
                                 </p>
                             </Accordion.Content>
@@ -194,7 +220,7 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                             </div>
                         </div>
                     )}
-                    {!externalTrigger && <div className="mt-4 flex items-center justify-center">
+                    <div className="mt-4 flex items-center justify-center">
                         <label
                             className="flex cursor-pointer items-center gap-2 text-xs text-gray-400"
                             onClick={handleHideToday}
@@ -203,7 +229,6 @@ export default function AttendanceModal({ externalTrigger = false, onClose }: At
                             오늘 하루 보지 않기
                         </label>
                     </div>
-                    }
                 </div>
             </div>
         </div>

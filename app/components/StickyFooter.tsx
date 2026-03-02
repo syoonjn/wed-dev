@@ -150,8 +150,7 @@ const StickyFooter = ({
                     </div>
                 </footer>
             )}
-
-
+            <AttendanceModal />
             {showModal && <AttendanceModal externalTrigger={true} onClose={() => setShowModal(false)} />}
         </>
     );
